@@ -1,15 +1,31 @@
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  * Imports
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Pub Dev Imports
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+// Flutter Components Imports
+import './src/dashboard.dart';
+
+// Dark mode imports
 import './theme/theme.dart';
 import './theme/theme_service.dart';
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  * main()
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 void main() async {
   await GetStorage.init();
   runApp(MyApp());
 }
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  * InitApp
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,7 +39,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// * Home screen with dark mode switch
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  * Home screen with dark mode switch
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class DarkModeHome extends StatefulWidget {
   DarkModeHome({Key key}) : super(key: key);
 
@@ -37,10 +55,16 @@ class _DarkModeHomeState extends State<DarkModeHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      //  * Appbar
+      //  * Appbar + Dark mode switch
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       appBar: AppBar(
-        title: Text('Health App'),
+        toolbarHeight: 100,
+        title: Text(
+          'Health App',
+          style: TextStyle(
+            fontSize: 24,
+          ),
+        ),
         actions: [
           CupertinoSwitch(
               value: value,
@@ -52,8 +76,9 @@ class _DarkModeHomeState extends State<DarkModeHome> {
       ),
 
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      //  * Homepage -> List of modules
+      //  * Homepage // Imported: ./src/dashboard
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      body: Dashboard(),
     );
   }
 }
