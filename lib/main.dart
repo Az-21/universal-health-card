@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-// Flutter Components Imports
+// Flutter Components Imports for Navigation
 import './src/dashboard.dart';
 
 // Dark mode imports

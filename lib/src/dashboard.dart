@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Flutter Components Imports
-import './health_cards.dart';
+import 'healthCard/health_cards.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Statess dashboard

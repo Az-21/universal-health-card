@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:awesome_card/awesome_card.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+// Flutter Components Imports for Navigation
+import 'package:health_app/src/healthCard/new_health_card.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Health Card UI
@@ -28,8 +32,27 @@ class _HealthCardPageState extends State<HealthCardPage> {
         title: Text('Health Cards'),
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
+        padding: EdgeInsets.fromLTRB(0, 30, 0, 90),
         child: _buildHealthCardList(),
+      ),
+      floatingActionButton: SizedBox(
+        width: 300,
+        height: 60,
+        child: FloatingActionButton.extended(
+          icon: IconButton(
+            iconSize: 48,
+            icon: Icon(Icons.post_add_outlined),
+            onPressed: () {
+              Get.to(() => NewHealthCard()); // navigate to new_health_card
+            },
+          ),
+          label: Text('Add Health Card'),
+          splashColor: Colors.white,
+          backgroundColor: Colors.green,
+          onPressed: () {
+            Get.to(() => NewHealthCard()); // navigate to new_health_card
+          },
+        ),
       ),
     );
   }
@@ -75,6 +98,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
     //  * Health card generator + divider (.separated)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return ListView.separated(
+      clipBehavior: Clip.none,
       itemCount: cardNumbers.length,
       itemBuilder: (_, index) {
         return GestureDetector(
