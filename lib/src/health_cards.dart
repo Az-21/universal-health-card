@@ -64,6 +64,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
       '0015',
     ];
     // * For animating front and back of card
+    initShowBack();
     List showBack = _getStorage.read('cardOrientation').length ==
             cardNumbers.length // if equal
         ? _getStorage.read('cardOrientation') // then use saved state
@@ -117,5 +118,14 @@ class _HealthCardPageState extends State<HealthCardPage> {
         );
       },
     );
+  }
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  * Initialize for first time install -> prevent null error
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  void initShowBack() {
+    if (_getStorage.read('cardOrientation') == null) {
+      _getStorage.write('cardOrientation', [false]);
+    }
   }
 }
