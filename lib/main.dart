@@ -51,6 +51,7 @@ class DarkModeHome extends StatefulWidget {
 
 class _DarkModeHomeState extends State<DarkModeHome> {
   bool value = ThemeServie().isSavedDarkMode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +77,9 @@ class _DarkModeHomeState extends State<DarkModeHome> {
       ),
 
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      //  * Homepage // Imported: ./src/dashboard
+      //  * Homepage
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      body: Dashboard(),
+      body: Dashboard(), // Imported: ./src/dashboard
     );
   }
 }
