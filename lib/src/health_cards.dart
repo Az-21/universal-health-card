@@ -76,7 +76,6 @@ class _HealthCardPageState extends State<HealthCardPage> {
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return ListView.separated(
       itemCount: cardNumbers.length,
-      clipBehavior: Clip.none,
       itemBuilder: (_, index) {
         return GestureDetector(
           // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
