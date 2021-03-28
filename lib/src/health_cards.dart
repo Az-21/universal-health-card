@@ -110,8 +110,10 @@ class _HealthCardPageState extends State<HealthCardPage> {
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       separatorBuilder: (context, index) {
         return Divider(
-          thickness: 0,
-          height: 30,
+          thickness: 2,
+          height: 40,
+          indent: 20,
+          endIndent: 20,
         );
       },
     );
