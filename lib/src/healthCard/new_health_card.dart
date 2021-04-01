@@ -24,10 +24,7 @@ class NewHealthCard extends StatelessWidget {
         toolbarHeight: 100,
         title: Text('Create Health Card'),
       ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        child: HealthCardCreateForm(),
-      ),
+      body: HealthCardCreateForm(),
     );
   }
 }
