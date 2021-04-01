@@ -102,6 +102,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  getwidget:
+    dependency: "direct main"
+    description:
+      name: getwidget
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.4"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   matcher:
     dependency: transitive
     description:
@@ -155,6 +169,13 @@ packages:
     dependency: transitive
     description:
       name: path_provider_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  pattern_formatter:
+    dependency: "direct main"
+    description:
+      name: pattern_formatter
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"

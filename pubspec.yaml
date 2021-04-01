@@ -27,6 +27,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.1.1
   get_storage: ^2.0.2
+  getwidget: ^1.2.4
+  pattern_formatter: ^2.0.0
   salomon_bottom_bar: ^3.0.0
 
 dev_dependencies:

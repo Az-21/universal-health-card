@@ -38,16 +38,16 @@ class _HealthCardPageState extends State<HealthCardPage> {
     //  TODO: implement firebase
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     List<String> cardNumbers = [
-      'xxxx xxxx xxxx 0002',
-      'xxxx xxxx xxxx 0003',
-      'xxxx xxxx xxxx 0009',
-      'xxxx xxxx xxxx 0015',
+      'xxxx xxxx 0002',
+      'xxxx xxxx 0003',
+      'xxxx xxxx 0009',
+      'xxxx xxxx 0015',
     ];
     List<String> holderInfo = [
-      'A+ | No allergies',
+      'A+ | High BP',
       'B+ | Allergic to X',
       'AB+ | Allergic to Y',
-      'AB+ | Allergic to Z',
+      'AB+ | Anemic',
     ];
     List<String> cardHolder = [
       'Abhijit Sahoo',
@@ -101,7 +101,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
             showShadow: true,
             textExpDate: 'Holder Info',
             textName: 'Name',
-            textExpiry: 'MM/YY',
+            textExpiry: 'Health Info',
           ),
         );
       },
