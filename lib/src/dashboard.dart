@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
+import 'package:health_app/src/appointment/appointment_ui.dart';
+import 'package:health_app/src/notes/notes_ui.dart';
+import 'package:health_app/src/prescription/prescription_ui.dart';
 
 // Flutter Components Imports
 import 'healthCard/health_cards_ui.dart';
@@ -64,16 +67,14 @@ class Dashboard extends StatelessWidget {
                     HealthCardWelcomePage()); // Imported ./health_cards.dart
                 break;
               case 1:
-                //Get.to(() => __Module());
+                Get.to(() => AppointmentWelcomePage());
                 break;
               case 2:
-                //Get.to(() => __Module());
+                Get.to(() => PrescriptionWelcomePage());
                 break;
               case 3:
-                //Get.to(() => __Module());
+                Get.to(() => NotesWelcomePage());
                 break;
-              default:
-                print('Error in routing. Uncaught index.');
             }
           },
         );

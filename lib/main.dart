@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Health Card',
+      title: 'Digital Health Card',
       theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
       themeMode: ThemeServie().getThemeMode(),
