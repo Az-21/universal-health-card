@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Flutter Components Imports
-import 'healthCard/health_cards.dart';
+import 'healthCard/health_cards_ui.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Statess dashboard
@@ -60,7 +60,8 @@ class Dashboard extends StatelessWidget {
           onTap: () {
             switch (index) {
               case 0:
-                Get.to(() => HealthCardPage()); // Imported ./health_cards.dart
+                Get.to(() =>
+                    HealthCardWelcomePage()); // Imported ./health_cards.dart
                 break;
               case 1:
                 //Get.to(() => __Module());

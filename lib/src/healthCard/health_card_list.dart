@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:awesome_card/awesome_card.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 // Flutter Components Imports for Navigation
-import 'package:health_app/src/healthCard/new_health_card.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  * Health Card UI
+//  * Health Card List
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class HealthCardPage extends StatefulWidget {
   HealthCardPage({Key key}) : super(key: key);
@@ -32,27 +30,8 @@ class _HealthCardPageState extends State<HealthCardPage> {
         title: Text('Health Cards'),
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 30, 0, 90),
+        padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
         child: _buildHealthCardList(),
-      ),
-      floatingActionButton: SizedBox(
-        width: 300,
-        height: 60,
-        child: FloatingActionButton.extended(
-          icon: IconButton(
-            iconSize: 48,
-            icon: Icon(Icons.post_add_outlined),
-            onPressed: () {
-              Get.to(() => NewHealthCard()); // navigate to new_health_card
-            },
-          ),
-          label: Text('Add Health Card'),
-          splashColor: Colors.white,
-          backgroundColor: Colors.green,
-          onPressed: () {
-            Get.to(() => NewHealthCard()); // navigate to new_health_card
-          },
-        ),
       ),
     );
   }
@@ -68,11 +47,11 @@ class _HealthCardPageState extends State<HealthCardPage> {
       'xxxx xxxx xxxx 0009',
       'xxxx xxxx xxxx 0015',
     ];
-    List<String> cardExpiry = [
-      'January 1, 2021',
-      'January 21, 2021',
-      'March 7, 2021',
-      'March 26, 2021',
+    List<String> holderInfo = [
+      'A+ | No allergies',
+      'B+ | Allergic to X',
+      'AB+ | Allergic to Y',
+      'AB+ | Allergic to Z',
     ]; // TODO: find a better use for this field
     List<String> cardHolder = [
       'Abhijit Sahoo',
@@ -115,7 +94,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
           // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           child: CreditCard(
             cardNumber: '${cardNumbers[index]}',
-            cardExpiry: '${cardExpiry[index]}',
+            cardExpiry: '${holderInfo[index]}',
             cardHolderName: '${cardHolder[index]}',
             cvv: '${cvv[index]}',
             bankName: 'Universal Health Card',
@@ -124,7 +103,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
             frontBackground: CardBackgrounds.black,
             backBackground: CardBackgrounds.white,
             showShadow: true,
-            textExpDate: 'Issued on',
+            textExpDate: 'Holder Info',
             textName: 'Name',
             textExpiry: 'MM/YY',
           ),
