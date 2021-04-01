@@ -2,6 +2,7 @@
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/material.dart';
+import 'package:health_app/src/healthCard/sync_health_card.dart';
 
 // Pub Dev Imports
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -28,7 +29,7 @@ class _HealthCardWelcomePageState extends State<HealthCardWelcomePage> {
     Container(), // home conatiner -> this is never displayed -> goto home
     HealthCardPage(),
     NewHealthCard(),
-    Container(color: Colors.purple),
+    SyncHealthCard(),
   ];
 
   @override

@@ -78,6 +78,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
 
   @override
   Widget build(BuildContext context) {
+    final focus = FocusScope.of(context); // next focus
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -128,6 +129,8 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                     });
                   },
                   focusNode: _focusNode,
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: () => focus.nextFocus(),
                 ),
               ),
 
@@ -136,6 +139,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
                   controller: formName,
+                  textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
                     labelText: 'Name',
                     counterText: '',
@@ -147,6 +151,8 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                       cardHolderName = formName;
                     });
                   },
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: () => focus.nextFocus(),
                 ),
               ),
 
@@ -171,6 +177,8 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                       aadharNumber = formAadhar;
                     });
                   },
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: () => focus.nextFocus(),
                 ),
               ),
 
@@ -192,6 +200,8 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                       healthInfo = '$bloodGroup | $healthCondition';
                     });
                   },
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: () => focus.nextFocus(),
                 ),
               ),
 
@@ -204,7 +214,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                     border: OutlineInputBorder(),
                     counterText: '',
                     labelText: 'Health Condition',
-                    hintText: 'Allergic to X',
+                    hintText: 'Allergic to X | Normal | High BP',
                   ),
                   maxLength: 20,
                   onChanged: (formHealthCondition) {
@@ -213,6 +223,8 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                       healthInfo = '$bloodGroup | $healthCondition';
                     });
                   },
+                  textInputAction: TextInputAction.done,
+                  onEditingComplete: () => focus.unfocus(),
                 ),
               ),
 
@@ -232,6 +244,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                     color: Colors.white,
                   ),
                   onPressed: () {
+                    // TODO: validator here -> 4 digit key, 12 digit aadhar...
                     // TODO: firebase push here
                     isFirebaseSuccess = true;
                     if (isFirebaseSuccess) {
@@ -239,8 +252,14 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                         'Success',
                         'Your health card has been created',
                         icon: Icon(Icons.cloud_done_sharp),
-                        backgroundColor: Colors.greenAccent,
+                        backgroundColor: Colors.blue,
                       );
+                      // Reset all text fields
+                      formSecurityKey.text = '';
+                      formName.text = '';
+                      formAadhar.text = '';
+                      formBloodGroup.text = '';
+                      formHealthCondition.text = '';
                     } else {
                       Get.snackbar(
                         'Failed',
