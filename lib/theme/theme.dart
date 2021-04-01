@@ -9,6 +9,7 @@ class Themes {
       color: Colors.green,
     ),
     brightness: Brightness.light,
+    hintColor: Colors.grey[400],
   );
 
   final darkTheme = ThemeData.dark().copyWith(
@@ -17,5 +18,6 @@ class Themes {
       color: Colors.green,
     ),
     brightness: Brightness.dark,
+    hintColor: Colors.grey[600],
   );
 }
