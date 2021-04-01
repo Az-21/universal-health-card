@@ -38,6 +38,8 @@ class _HealthCardWelcomePageState extends State<HealthCardWelcomePage> {
       body: healthCardPages[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
+        selectedColorOpacity: 0.1,
+        unselectedItemColor: Colors.grey[400],
         onTap: (index) {
           if (index == 0) {
             Get.back(); // goto home

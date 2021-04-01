@@ -25,15 +25,11 @@ class _HealthCardPageState extends State<HealthCardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 100,
-        title: Text('Health Cards'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-        child: _buildHealthCardList(),
-      ),
-    );
+        appBar: AppBar(
+          toolbarHeight: 100,
+          title: Text('Health Cards'),
+        ),
+        body: _buildHealthCardList());
   }
 
   ListView _buildHealthCardList() {
@@ -52,7 +48,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
       'B+ | Allergic to X',
       'AB+ | Allergic to Y',
       'AB+ | Allergic to Z',
-    ]; // TODO: find a better use for this field
+    ];
     List<String> cardHolder = [
       'Abhijit Sahoo',
       'Abhishek Choudhary',
@@ -77,7 +73,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
     //  * Health card generator + divider (.separated)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return ListView.separated(
-      clipBehavior: Clip.none,
+      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
       itemCount: cardNumbers.length,
       itemBuilder: (_, index) {
         return GestureDetector(
