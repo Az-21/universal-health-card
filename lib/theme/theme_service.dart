@@ -7,8 +7,16 @@ import 'package:get_storage/get_storage.dart';
 class ThemeServie {
   final _getStorage = GetStorage();
 
+  bool isStatusHidden() {
+    return _getStorage.read('isStatusHidden') ?? true;
+  }
+
+  void saveStatusBarMode(bool isStatusHidden) {
+    _getStorage.write('isStatusHidden', isStatusHidden);
+  }
+
   bool isSavedDarkMode() {
-    return _getStorage.read('isDarkMode') ?? false;
+    return _getStorage.read('isDarkMode') ?? true;
   }
 
   ThemeMode getThemeMode() {

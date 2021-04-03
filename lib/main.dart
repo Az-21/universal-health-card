@@ -3,10 +3,12 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:health_app/src/settings.dart';
 
 // Flutter Components Imports for Navigation
 import './src/dashboard.dart';
@@ -50,7 +52,15 @@ class DarkModeHome extends StatefulWidget {
 }
 
 class _DarkModeHomeState extends State<DarkModeHome> {
-  bool value = ThemeServie().isSavedDarkMode();
+  @override
+  void initState() {
+    bool isNavHidden = ThemeServie().isStatusHidden();
+    if (isNavHidden) {
+      SystemChrome.setEnabledSystemUIOverlays([]);
+    } else {
+      SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +77,14 @@ class _DarkModeHomeState extends State<DarkModeHome> {
           ),
         ),
         actions: [
-          CupertinoSwitch(
-              value: value,
-              onChanged: (value) => setState(() {
-                    this.value = value;
-                    ThemeServie().changeThemeMode(value);
-                  })),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Get.to(() => SettingsPage());
+            },
+            iconSize: 32,
+          ),
+          SizedBox(width: 20),
         ],
       ),
 
