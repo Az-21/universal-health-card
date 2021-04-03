@@ -21,7 +21,7 @@ class NewHealthCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
+        toolbarHeight: 72,
         title: Text('Create Health Card'),
       ),
       body: HealthCardCreateForm(),

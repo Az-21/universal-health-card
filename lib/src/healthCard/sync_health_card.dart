@@ -17,7 +17,7 @@ class SyncHealthCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
+        toolbarHeight: 72,
         title: Text('Sync Health Card'),
       ),
       body: FetchHealthCardForm(),
