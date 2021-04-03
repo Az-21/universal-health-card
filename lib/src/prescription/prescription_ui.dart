@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
 
+// Imports from other .dart files
+import 'add_prescription.dart';
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Navigation UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -26,10 +29,7 @@ class _PrescriptionWelcomePageState extends State<PrescriptionWelcomePage> {
       padding: EdgeInsets.all(50),
       child: Text('Add prescription here // classified by health card'),
     ),
-    Container(
-      padding: EdgeInsets.all(50),
-      child: Text('Add prescription adder here // classified by health card'),
-    ),
+    PrescriptionCardAdder(),
     Container(
       padding: EdgeInsets.all(50),
       child: Text('Add pharmacy locator here // optional'),
