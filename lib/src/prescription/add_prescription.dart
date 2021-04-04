@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:getwidget/getwidget.dart';
+import 'package:intl/intl.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Stateful Card UI
@@ -244,10 +245,83 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
 // April 2, 2021
 String formattedDate() {
   var now = DateTime.now();
-
+  String month = '', day = '', DoW = '';
+  switch (now.month) {
+    case 1:
+      {
+        month = 'January';
+      }
+      break;
+    case 2:
+      {
+        month = 'February';
+      }
+      break;
+    case 3:
+      {
+        month = 'March';
+      }
+      break;
+    case 4:
+      {
+        month = 'April';
+      }
+      break;
+    case 5:
+      {
+        month = 'May';
+      }
+      break;
+    case 6:
+      {
+        month = 'June';
+      }
+      break;
+    case 7:
+      {
+        month = 'July';
+      }
+      break;
+    case 8:
+      {
+        month = 'August';
+      }
+      break;
+    case 9:
+      {
+        month = 'September';
+      }
+      break;
+    case 10:
+      {
+        month = 'October';
+      }
+      break;
+    case 11:
+      {
+        month = 'November';
+      }
+      break;
+    case 12:
+      {
+        month = 'December';
+      }
+      break;
+    default:
+  }
   // Task: format the output like
   // April 02, 2021
 
   // Hint: use switch()
-  return '${now.day} ${now.month} ${now.year}';
+  if (now.day > 10)
+    ;
+  else
+    ;
+  {
+    day =
+        now.day.toString().padLeft(2, '0'); //adds the zero infront of the date
+  }
+  day = day + ',';
+  DoW = DateFormat('EEEE').format(now) + ' | ';
+  return '${DoW} ${month} ${day} ${now.year}';
 }

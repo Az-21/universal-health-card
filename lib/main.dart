@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:health_app/src/settings.dart';
+import 'package:intl/intl.dart';
 
 // Flutter Components Imports for Navigation
 import './src/dashboard.dart';
