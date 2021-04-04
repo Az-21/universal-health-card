@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 // Pub Dev Imports
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Stateful Card UI
@@ -24,10 +25,13 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   bool isSubmitterDoctor = true;
 
   //* Vars for checkbox
-  List<bool> _bfafToggleList = [true];
-  List<bool> isCheckedMList = [true];
-  List<bool> isCheckedAList = [true];
-  List<bool> isCheckedNList = [true];
+  List<List<bool>> medicineStats = [
+    [true, true, true, true]
+  ]; // [before and after food toggle, morning, afternoon, night] :: [[0,1,2,3]]
+  // List<bool> _bfafToggleList = [true];
+  // List<bool> isCheckedMList = [true];
+  // List<bool> isCheckedAList = [true];
+  // List<bool> isCheckedNList = [true];
 
   // * Var for textfield
   List<TextEditingController> medicineList = [TextEditingController()];
@@ -39,10 +43,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   _addItem() {
     setState(() {
       // * Increase length of list
-      _bfafToggleList.add(true);
-      isCheckedMList.add(true);
-      isCheckedAList.add(true);
-      isCheckedNList.add(true);
+      medicineStats.add([true, true, true, true]);
       medicineList.add(TextEditingController());
       _countMedicine++;
     });
@@ -53,10 +54,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   // ⸻⸻⸻⸻⸻⸻⸻⸻
   _removeItem() {
     setState(() {
-      _bfafToggleList.removeLast();
-      isCheckedMList.removeLast();
-      isCheckedAList.removeLast();
-      isCheckedNList.removeLast();
+      medicineStats.removeLast();
       medicineList.removeLast();
       _countMedicine--;
     });
@@ -73,7 +71,16 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
             child: Icon(Icons.delete_forever),
             onPressed: () {
               if (_countMedicine == 1) {
-                // TODO: add toast message when called
+                Get.snackbar(
+                  'Warning',
+                  'Atleast one medicine is required',
+                  barBlur: 20,
+                  shouldIconPulse: true,
+                  icon: Icon(Icons.warning),
+                  colorText: Colors.white,
+                  backgroundColor: Colors.redAccent,
+                  snackPosition: SnackPosition.TOP,
+                );
               } else {
                 _removeItem();
               }
@@ -149,10 +156,10 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                             Transform.scale(
                               scale: 1.2,
                               child: CupertinoSwitch(
-                                value: _bfafToggleList[index],
+                                value: medicineStats[index][0],
                                 onChanged: (bool value) {
                                   setState(() {
-                                    _bfafToggleList[index] = value;
+                                    medicineStats[index][0] = value;
                                   });
                                 },
                               ),
@@ -173,10 +180,10 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                                 activeBgColor: Colors.green,
                                 onChanged: (value) {
                                   setState(() {
-                                    isCheckedMList[index] = value;
+                                    medicineStats[index][1] = value;
                                   });
                                 },
-                                value: isCheckedMList[index],
+                                value: medicineStats[index][1],
                               ),
                             ),
 
@@ -195,10 +202,10 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                                 activeBgColor: Colors.orange,
                                 onChanged: (value) {
                                   setState(() {
-                                    isCheckedAList[index] = value;
+                                    medicineStats[index][2] = value;
                                   });
                                 },
-                                value: isCheckedAList[index],
+                                value: medicineStats[index][2],
                               ),
                             ),
 
@@ -217,10 +224,10 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                                 activeBgColor: Colors.indigo,
                                 onChanged: (value) {
                                   setState(() {
-                                    isCheckedNList[index] = value;
+                                    medicineStats[index][3] = value;
                                   });
                                 },
-                                value: isCheckedNList[index],
+                                value: medicineStats[index][3],
                               ),
                             ),
                           ],
