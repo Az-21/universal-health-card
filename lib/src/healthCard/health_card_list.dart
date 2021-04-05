@@ -24,12 +24,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 72,
-          title: Text('Health Cards'),
-        ),
-        body: _buildHealthCardList());
+    return Scaffold(body: _buildHealthCardList());
   }
 
   ListView _buildHealthCardList() {
