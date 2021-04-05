@@ -26,11 +26,11 @@ class _AppointmentWelcomePageState extends State<AppointmentWelcomePage> {
     Container(), // home conatiner -> this is never displayed -> goto home
     Container(
       padding: EdgeInsets.all(50),
-      child: Text('Add prescription here // classified by category'),
+      child: Text('Add appointments here // classified by category'),
     ),
     Container(
       padding: EdgeInsets.all(50),
-      child: Text('Add prescription adder here // classified by category'),
+      child: Text('Add appointment adder here // classified by category'),
     ),
     HospitalLocator(),
   ];
@@ -64,21 +64,21 @@ class _AppointmentWelcomePageState extends State<AppointmentWelcomePage> {
           /// Health Cards
           SalomonBottomBarItem(
             icon: Icon(Icons.article_rounded),
-            title: Text("Prescription"),
+            title: Text("Appointments"),
             selectedColor: Colors.blue,
           ),
 
           /// Create Health Card
           SalomonBottomBarItem(
             icon: Icon(Icons.post_add_outlined),
-            title: Text("New Prescription"),
+            title: Text("New Appointment"),
             selectedColor: Colors.green,
           ),
 
           /// Add Health Card
           SalomonBottomBarItem(
             icon: Icon(Icons.local_pharmacy),
-            title: Text("Nearest Pharmacy"),
+            title: Text("Nearest Hospital"),
             selectedColor: Colors.pink,
           ),
         ],
