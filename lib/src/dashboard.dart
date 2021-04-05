@@ -5,12 +5,54 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
-import 'package:health_app/src/appointment/appointment_ui.dart';
-import 'package:health_app/src/notes/notes_ui.dart';
-import 'package:health_app/src/prescription/prescription_ui.dart';
+import 'package:getwidget/getwidget.dart';
 
 // Flutter Components Imports
 import 'healthCard/health_cards_ui.dart';
+import 'package:health_app/src/functions.dart';
+import 'package:health_app/src/notes/notes_ui.dart';
+import 'package:health_app/src/appointment/appointment_ui.dart';
+import 'package:health_app/src/prescription/prescription_ui.dart';
+
+// ⸻⸻⸻⸻⸻⸻⸻⸻
+// * Stateful welcome message
+// ⸻⸻⸻⸻⸻⸻⸻⸻
+class WelcomeCard extends StatefulWidget {
+  WelcomeCard({Key key}) : super(key: key);
+
+  @override
+  _WelcomeCardState createState() => _WelcomeCardState();
+}
+
+class _WelcomeCardState extends State<WelcomeCard> {
+  @override
+  Widget build(BuildContext context) {
+    return GFCard(
+      color: Colors.green,
+      title: GFListTile(
+        title: GFTypography(
+          text: 'Welcome User',
+          showDivider: false,
+          textColor: Colors.white,
+          type: GFTypographyType.typo3,
+          icon: Icon(
+            Icons.person_pin_rounded,
+            color: Colors.white,
+            size: 32,
+          ),
+          dividerColor: Colors.white,
+          dividerWidth: 100,
+        ),
+        subtitle: GFTypography(
+          text: '${formattedDate()}',
+          textColor: Colors.white,
+          type: GFTypographyType.typo5,
+          showDivider: false,
+        ),
+      ),
+    );
+  }
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Statess dashboard
@@ -20,10 +62,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (Padding(
-      padding: EdgeInsets.all(16),
-      child: _buildListView(),
-    ));
+    return _buildListView();
   }
 
   ListView _buildListView() {
@@ -53,6 +92,7 @@ class Dashboard extends StatelessWidget {
     //  * Listview generator + divider (.separated)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return ListView.separated(
+      shrinkWrap: true,
       itemCount: titles.length,
       itemBuilder: (_, index) {
         return ListTile(

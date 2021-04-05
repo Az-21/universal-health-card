@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 // Imports from other .dart files
 import 'add_prescription.dart';
+import 'package:health_app/src/prescription/locate_pharma.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Navigation UI
@@ -30,10 +31,7 @@ class _PrescriptionWelcomePageState extends State<PrescriptionWelcomePage> {
       child: Text('Add prescription here // classified by health card'),
     ),
     PrescriptionCardAdder(),
-    Container(
-      padding: EdgeInsets.all(50),
-      child: Text('Add pharmacy locator here // optional'),
-    ),
+    PharmaLocator(),
   ];
 
   @override

@@ -38,6 +38,7 @@ class FetchHealthCardForm extends StatelessWidget {
           title: GFListTile(
             title: GFTypography(
               text: 'Fetch Health Card',
+              showDivider: false,
               textColor: Colors.white,
               type: GFTypographyType.typo3,
               icon: Icon(

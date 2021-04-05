@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:health_app/src/settings.dart';
-import 'package:intl/intl.dart';
 
 // Flutter Components Imports for Navigation
 import './src/dashboard.dart';
@@ -92,7 +91,14 @@ class _DarkModeHomeState extends State<DarkModeHome> {
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       //  * Homepage
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      body: Dashboard(), // Imported: ./src/dashboard
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        shrinkWrap: true,
+        children: [
+          WelcomeCard(),
+          Dashboard(),
+        ],
+      ), // Imported: ./src/dashboard
     );
   }
 }
