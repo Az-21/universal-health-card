@@ -4,8 +4,11 @@
 import 'package:flutter/material.dart';
 
 // Pub Dev Imports
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+// Other pages
+import 'package:health_app/src/appointment/locate_hospital.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Navigation UI
@@ -31,11 +34,7 @@ class _NotesWelcomePageState extends State<NotesWelcomePage> {
       child: Text(
           'Add symptoms + info cards adder here // classified by health card'),
     ),
-    Container(
-      padding: EdgeInsets.all(50),
-      child: Text(
-          'Add hospital locator here // optional // also called in appointment'),
-    ),
+    HospitalLocator(),
   ];
 
   @override
