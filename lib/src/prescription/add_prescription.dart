@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:getwidget/getwidget.dart';
-import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:health_app/src/functions.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Stateful Card UI
@@ -28,10 +28,6 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   List<List<bool>> medicineStats = [
     [true, true, true, true]
   ]; // [before and after food toggle, morning, afternoon, night] :: [[0,1,2,3]]
-  // List<bool> _bfafToggleList = [true];
-  // List<bool> isCheckedMList = [true];
-  // List<bool> isCheckedAList = [true];
-  // List<bool> isCheckedNList = [true];
 
   // * Var for textfield
   List<TextEditingController> medicineList = [TextEditingController()];
@@ -246,17 +242,4 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
       ),
     );
   }
-}
-
-// April 2, 2021
-String formattedDate() {
-  var now = DateTime.now();
-  String date = '';
-
-  // Task: format the output like
-  // April 02, 2021
-
-  date = DateFormat('EEEE | dd MMMM, yyyy').format(
-      now); // EEEE gives the day of the week, dd gives the day, MMMM dives the month and yyyy gives the year
-  return '${date}';
 }
