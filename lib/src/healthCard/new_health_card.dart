@@ -111,6 +111,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                 child: TextFormField(
                   controller: formSecurityKey,
                   decoration: InputDecoration(
+                    icon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
                     counterText: '',
                     labelText: 'Security Key',
@@ -137,6 +138,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                   controller: formName,
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
+                    icon: Icon(Icons.person),
                     labelText: 'Name',
                     counterText: '',
                     hintText: 'First Last',
@@ -160,6 +162,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                   maxLength: 14, // input formatter will add 12 + 2 = 14
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
+                    icon: Icon(Icons.qr_code),
                     border: OutlineInputBorder(),
                     counterText: '',
                     labelText: 'Aadhar UID',
@@ -184,6 +187,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                 child: TextFormField(
                   controller: formBloodGroup,
                   decoration: InputDecoration(
+                    icon: Icon(Icons.invert_colors),
                     border: OutlineInputBorder(),
                     counterText: '',
                     labelText: 'Blood Group',
@@ -207,6 +211,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                 child: TextFormField(
                   controller: formHealthCondition,
                   decoration: InputDecoration(
+                    icon: Icon(Icons.healing),
                     border: OutlineInputBorder(),
                     counterText: '',
                     labelText: 'Health Condition',
