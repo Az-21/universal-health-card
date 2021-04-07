@@ -3,6 +3,7 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Pub Dev Imports
 import 'package:getwidget/getwidget.dart';
@@ -123,6 +124,12 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                       Expanded(
                         flex: 3,
                         child: TextField(
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'(^\-?\d*\.?\d*)')),
+                          ],
                           controller: textTemp,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -154,6 +161,12 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                     children: [
                       Expanded(
                         child: TextField(
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'(^\-?\d*\.?\d*)')),
+                          ],
                           controller: weight,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -165,6 +178,12 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                       SizedBox(width: 10),
                       Expanded(
                         child: TextField(
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'(^\-?\d*\.?\d*)')),
+                          ],
                           controller: height,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -192,6 +211,12 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                     children: [
                       Expanded(
                         child: TextField(
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'(^\-?\d*\.?\d*)')),
+                          ],
                           controller: bpS,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -203,6 +228,12 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                       SizedBox(width: 10),
                       Expanded(
                         child: TextField(
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'(^\-?\d*\.?\d*)')),
+                          ],
                           controller: bpD,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -265,7 +296,7 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
