@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
+import 'package:health_app/src/notes/add_notes.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 // Other pages
@@ -29,11 +30,7 @@ class _NotesWelcomePageState extends State<NotesWelcomePage> {
       child:
           Text('Add symptoms + info cards here // classified by health card'),
     ),
-    Container(
-      padding: EdgeInsets.all(50),
-      child: Text(
-          'Add symptoms + info cards adder here // classified by health card'),
-    ),
+    CreateNotesPage(),
     HospitalLocator(),
   ];
 

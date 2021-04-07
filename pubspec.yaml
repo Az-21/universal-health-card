@@ -25,14 +25,16 @@ dependencies:
     sdk: flutter
   awesome_card: ^1.1.5
   cupertino_icons: ^1.0.2
+  flutter_markdown: ^0.6.1
   get: ^4.1.1
   get_storage: ^2.0.2
   getwidget: ^1.2.4
+  markdown_editable_textinput: ^2.0.0
   maps_launcher: ^2.0.0
   pattern_formatter: ^2.0.0
   salomon_bottom_bar: ^3.0.0
+  syncfusion_flutter_gauges: ^19.1.55
   url_launcher: ^6.0.3
-  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
