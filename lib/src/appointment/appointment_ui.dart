@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 // Other pages
+import 'package:health_app/src/appointment/new_appointment.dart';
 import 'package:health_app/src/appointment/locate_hospital.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -28,10 +29,7 @@ class _AppointmentWelcomePageState extends State<AppointmentWelcomePage> {
       padding: EdgeInsets.all(50),
       child: Text('Add appointments here // classified by category'),
     ),
-    Container(
-      padding: EdgeInsets.all(50),
-      child: Text('Add appointment adder here // classified by category'),
-    ),
+    CreateAppointmentPage(),
     HospitalLocator(),
   ];
 

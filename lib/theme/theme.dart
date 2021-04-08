@@ -1,5 +1,6 @@
 // * Theme data
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Themes {
@@ -10,6 +11,16 @@ class Themes {
     ),
     brightness: Brightness.light,
     hintColor: Colors.grey[400],
+    cupertinoOverrideTheme: CupertinoThemeData(
+      textTheme: CupertinoTextThemeData(
+        pickerTextStyle: TextStyle(
+          color: Colors.black,
+        ),
+        dateTimePickerTextStyle: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+    ),
   );
 
   final darkTheme = ThemeData.dark().copyWith(
@@ -19,5 +30,15 @@ class Themes {
     ),
     brightness: Brightness.dark,
     hintColor: Colors.grey[600],
+    cupertinoOverrideTheme: CupertinoThemeData(
+      textTheme: CupertinoTextThemeData(
+        pickerTextStyle: TextStyle(
+          color: Colors.white,
+        ),
+        dateTimePickerTextStyle: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    ),
   );
 }
