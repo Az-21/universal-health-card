@@ -20,6 +20,14 @@ class PrescriptionCardAdder extends StatefulWidget {
 }
 
 class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
+  // * List of cards
+  List<String> cardList = [
+    'Abhijit | xxxx xxxx 0002',
+    'Abhishek | xxxx xxxx 0003',
+    'Amogh | xxxx xxxx 0009',
+    'Dhruv | xxxx xxxx 0015',
+  ];
+
   //* Details of submitter
   String nameOfSubmitter = 'Dr. Prem';
   bool isSubmitterDoctor = true;
@@ -96,6 +104,36 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
       ),
       body: ListView(
         children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Select Health Card',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                Divider(thickness: 2),
+                SizedBox(
+                  height: 90,
+                  child: CupertinoPicker(
+                    squeeze: 0.9,
+                    itemExtent: 36,
+                    looping: true,
+                    diameterRatio: 2,
+                    onSelectedItemChanged: (index) {},
+                    children: [
+                      for (String cardNumber in cardList)
+                        Center(child: Text(cardNumber)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
           // ⸻⸻⸻⸻⸻⸻⸻⸻
           // * Child #1: Card
           // ⸻⸻⸻⸻⸻⸻⸻⸻

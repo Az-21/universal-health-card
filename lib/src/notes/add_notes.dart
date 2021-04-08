@@ -33,7 +33,13 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
   String description = '# Symptoms\n---\n* \n* \n\n# Notes\n---\n* \n* \n';
   final String _markdownURL = 'https://www.markdownguide.org/cheat-sheet/';
 
-  @override
+  List<String> cardList = [
+    'Abhijit | xxxx xxxx 0002',
+    'Abhishek | xxxx xxxx 0003',
+    'Amogh | xxxx xxxx 0009',
+    'Dhruv | xxxx xxxx 0015',
+  ];
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
@@ -43,9 +49,34 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                /// * Cupertino Picker: Pick Card
+                Text(
+                  'Select Health Card',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                Divider(thickness: 2),
+                SizedBox(
+                  height: 90,
+                  child: CupertinoPicker(
+                    squeeze: 0.9,
+                    itemExtent: 36,
+                    looping: true,
+                    diameterRatio: 2,
+                    onSelectedItemChanged: (index) {},
+                    children: [
+                      for (String cardNumber in cardList)
+                        Center(child: Text(cardNumber)),
+                    ],
+                  ),
+                ),
+
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
                 // * Child: Temperature Slider + Text
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
+                SizedBox(height: 32),
                 Text(
                   'Temperature',
                   style: TextStyle(
