@@ -60,7 +60,7 @@ class HospitalLocator extends StatelessWidget {
                   ),
                   subtitle: GFTypography(
                     text:
-                        'Locate the nearby hospitals using your default map application.\n\nDefaults to Google Maps.',
+                        '\nLocate the nearby hospitals using your default map application.\n\nDefaults to Google Maps.',
                     textColor: Colors.white,
                     type: GFTypographyType.typo6,
                     showDivider: false,
@@ -100,7 +100,7 @@ class HospitalLocator extends StatelessWidget {
                 color: Colors.green,
                 title: GFListTile(
                   title: GFTypography(
-                    text: 'Google Hospital',
+                    text: 'Search Hospital',
                     showDivider: false,
                     textColor: Colors.white,
                     type: GFTypographyType.typo3,
@@ -113,7 +113,7 @@ class HospitalLocator extends StatelessWidget {
                     dividerWidth: 100,
                   ),
                   subtitle: GFTypography(
-                    text: 'Google the nearby hospitals.',
+                    text: '\nSearch hospitals near you using Google.',
                     textColor: Colors.white,
                     type: GFTypographyType.typo6,
                     showDivider: false,
