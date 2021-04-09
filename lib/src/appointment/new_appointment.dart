@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:getwidget/getwidget.dart';
-import 'package:health_app/theme/theme_service.dart';
 
 class CreateAppointmentPage extends StatefulWidget {
   CreateAppointmentPage({Key key}) : super(key: key);

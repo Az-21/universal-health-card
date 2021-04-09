@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
-import 'package:getwidget/getwidget.dart';
 
 // Flutter Components Imports
 import 'healthCard/health_cards_ui.dart';
@@ -27,27 +26,52 @@ class WelcomeCard extends StatefulWidget {
 class _WelcomeCardState extends State<WelcomeCard> {
   @override
   Widget build(BuildContext context) {
-    return GFCard(
+    return Card(
       color: Colors.green,
-      title: GFListTile(
-        title: GFTypography(
-          text: 'Welcome User',
-          showDivider: false,
-          textColor: Colors.white,
-          type: GFTypographyType.typo3,
-          icon: Icon(
-            Icons.person_pin_rounded,
-            color: Colors.white,
-            size: 32,
-          ),
-          dividerColor: Colors.white,
-          dividerWidth: 100,
-        ),
-        subtitle: GFTypography(
-          text: '${formattedDate()}',
-          textColor: Colors.white,
-          type: GFTypographyType.typo5,
-          showDivider: false,
+      elevation: 5,
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // * Title
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Icon(
+                    Icons.api,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'Welcome User',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
+            ),
+
+            SizedBox(height: 10),
+
+            // * Subtitle
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                formattedDate(),
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
         ),
       ),
     );
