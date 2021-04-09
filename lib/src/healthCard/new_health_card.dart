@@ -5,11 +5,10 @@
 import 'package:flutter/material.dart';
 
 // Pub Dev Imports
-import 'package:awesome_card/awesome_card.dart';
-import 'package:flutter/services.dart';
-import 'package:pattern_formatter/pattern_formatter.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:get/get.dart';
+import 'package:flutter/services.dart';
+import 'package:awesome_card/awesome_card.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Formfield UI
@@ -233,17 +232,15 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: GFButton(
-                  text: "Create New Health Card",
-                  size: GFSize.LARGE,
-                  elevation: 5,
-                  color: Colors.green,
-                  splashColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  icon: Icon(
-                    Icons.post_add_outlined,
-                    color: Colors.white,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.white,
+                    primary: Colors.green,
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    // minimumSize: Size(200, 100),
                   ),
+                  icon: Icon(Icons.post_add),
+                  label: Text('Create New Health Card'),
                   onPressed: () {
                     // TODO: validator here -> 4 digit key, 12 digit aadhar...
                     // TODO: firebase push here

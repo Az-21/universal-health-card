@@ -54,6 +54,7 @@ class DarkModeHome extends StatefulWidget {
 class _DarkModeHomeState extends State<DarkModeHome> {
   @override
   void initState() {
+    super.initState();
     bool isNavHidden = ThemeServie().isStatusHidden();
     if (isNavHidden) {
       SystemChrome.setEnabledSystemUIOverlays([]);

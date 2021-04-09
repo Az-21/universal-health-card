@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Pub Dev Imports
-import 'package:pattern_formatter/pattern_formatter.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:get/get.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class SyncHealthCard extends StatelessWidget {
   const SyncHealthCard({Key key}) : super(key: key);
@@ -28,33 +27,56 @@ class FetchHealthCardForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        /// Info Card
-        GFCard(
+        /// * Info Card
+        Card(
           color: Colors.green,
-          title: GFListTile(
-            title: GFTypography(
-              text: 'Fetch Health Card',
-              showDivider: false,
-              textColor: Colors.white,
-              type: GFTypographyType.typo3,
-              icon: Icon(
-                Icons.file_download,
-                color: Colors.white,
-                size: 32,
-              ),
-              dividerColor: Colors.white,
-              dividerWidth: 100,
-            ),
-            subtitle: GFTypography(
-              text: 'Add an existing health card to your device.',
-              textColor: Colors.white,
-              type: GFTypographyType.typo5,
-              showDivider: false,
+          elevation: 5,
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // * Title
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.system_update_alt,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Fetch Health Card',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 10),
+
+                // * Subtitle
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    'Add an existing health card to your device.',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
 
-        /// Input Form
+        /// * Input Form
         HealthCardSyncForm(),
       ],
     );
@@ -125,17 +147,14 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
         Container(
           alignment: Alignment.center,
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: GFButton(
-            text: "Fetch Health Card",
-            size: GFSize.LARGE,
-            elevation: 5,
-            color: Colors.blue,
-            splashColor: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            icon: Icon(
-              Icons.cloud_download_sharp,
-              color: Colors.white,
+          child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              onPrimary: Colors.white,
+              primary: Colors.blue,
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             ),
+            icon: Icon(Icons.cloud_download),
+            label: Text('Fetch health card'),
             onPressed: () {
               // TODO: validator here -> 4 digit key, 12 digit aadhar...
               // TODO: firebase push here
