@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Pub Dev Imports
-import 'package:getwidget/getwidget.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown_editable_textinput/markdown_text_input.dart';
@@ -292,11 +291,15 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                       ),
                     ),
                     Expanded(
-                      flex: 5,
-                      child: GFButton(
+                      flex: 4,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          onPrimary: Colors.white,
+                          primary: Colors.blue,
+                        ),
+                        icon: Icon(Icons.code),
+                        label: Text('Syntax'),
                         onPressed: _launchURL,
-                        child: Text('Syntax'),
-                        icon: Icon(Icons.code, color: Colors.white),
                       ),
                     ),
                   ],
@@ -307,39 +310,45 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                     MarkdownTextInput(
                       (String value) => setState(() => description = value),
                       description,
-                      label: 'Description',
+                      label: 'Click on `< > Syntax` button for help',
                       maxLines: 14,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      '✨ Live Preview ✨',
+                      '📑 Live Preview',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    GFCard(
-                      elevation: 20,
-                      content: Markdown(
-                        data: description,
-                        shrinkWrap: true,
+                    Card(
+                      elevation: 10,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Markdown(
+                          data: description,
+                          shrinkWrap: true,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 Center(
-                  child: GFButton(
-                    text: 'Save Health Note',
-                    size: GFSize.LARGE,
-                    elevation: 5,
-                    color: Colors.green,
-                    splashColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    icon: Icon(
-                      Icons.cloud_upload,
-                      color: Colors.white,
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      onPrimary: Colors.white,
+                      primary: Colors.green,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      // minimumSize: Size(200, 100),
                     ),
-                    // TODO: add logic
+                    icon: Icon(Icons.save),
+                    label: Text('Save Health Note'),
                     onPressed: () {},
                   ),
                 ),
