@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:awesome_card/awesome_card.dart';
+import 'package:health_app/src/functions.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -244,14 +245,10 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                   onPressed: () {
                     // TODO: validator here -> 4 digit key, 12 digit aadhar...
                     // TODO: firebase push here
-                    isFirebaseSuccess = true;
+                    isFirebaseSuccess = false;
                     if (isFirebaseSuccess) {
-                      Get.snackbar(
-                        'Success',
-                        'Your health card has been created',
-                        icon: Icon(Icons.cloud_done_sharp),
-                        backgroundColor: Colors.blue,
-                      );
+                      infoSnackbar(
+                          'Success', 'Your health card has been created', true);
                       // Reset all text fields
                       formSecurityKey.text = '';
                       formName.text = '';
@@ -259,12 +256,10 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                       formBloodGroup.text = '';
                       formHealthCondition.text = '';
                     } else {
-                      Get.snackbar(
-                        'Failed',
-                        'Failed to create health card. Please check your internet connection.',
-                        icon: Icon(Icons.signal_wifi_off_sharp),
-                        backgroundColor: Colors.redAccent,
-                      );
+                      infoSnackbar(
+                          'Failed',
+                          'Unable to create card. Please check your internet connection.',
+                          false);
                     }
                   },
                 ),

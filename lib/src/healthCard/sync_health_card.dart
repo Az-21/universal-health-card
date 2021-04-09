@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
+import 'package:health_app/src/functions.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
 class SyncHealthCard extends StatelessWidget {
@@ -29,7 +30,7 @@ class FetchHealthCardForm extends StatelessWidget {
       children: <Widget>[
         /// * Info Card
         Card(
-          color: Colors.green,
+          color: Colors.blue,
           elevation: 5,
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
           shape: RoundedRectangleBorder(
@@ -158,24 +159,17 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
             onPressed: () {
               // TODO: validator here -> 4 digit key, 12 digit aadhar...
               // TODO: firebase push here
-              isFirebaseSuccess = false;
+              isFirebaseSuccess = true;
               if (isFirebaseSuccess) {
-                Get.snackbar(
-                  'Success',
-                  'Health card has been added',
-                  icon: Icon(Icons.cloud_done_sharp),
-                  backgroundColor: Colors.blue,
-                );
+                infoSnackbar('Success',
+                    'Health card has been added to your device', true);
+
                 // Reset all text fields
                 formSecurityKey.text = '';
                 formAadhar.text = '';
               } else {
-                Get.snackbar(
-                  'Failed',
-                  'Failed to fetch health card. Please check your internet connection. Ensure health card with specified security key exists.',
-                  icon: Icon(Icons.signal_wifi_off_sharp),
-                  backgroundColor: Colors.redAccent,
-                );
+                infoSnackbar(
+                    'Failed', 'Please check your internet connection', false);
               }
             },
           ),
