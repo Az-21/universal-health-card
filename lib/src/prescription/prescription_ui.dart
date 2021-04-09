@@ -15,7 +15,7 @@ import 'package:health_app/src/prescription/locate_pharma.dart';
 //  * Navigation UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class PrescriptionWelcomePage extends StatefulWidget {
-  PrescriptionWelcomePage({Key key}) : super(key: key);
+  PrescriptionWelcomePage({Key? key}) : super(key: key);
 
   @override
   _PrescriptionWelcomePageState createState() =>

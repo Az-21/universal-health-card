@@ -15,7 +15,7 @@ import 'package:pattern_formatter/pattern_formatter.dart';
 //  * Formfield UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class NewHealthCard extends StatelessWidget {
-  const NewHealthCard({Key key}) : super(key: key);
+  const NewHealthCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class NewHealthCard extends StatelessWidget {
 //  * Stateful Health Form
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class HealthCardCreateForm extends StatefulWidget {
-  HealthCardCreateForm({Key key}) : super(key: key);
+  HealthCardCreateForm({Key? key}) : super(key: key);
 
   @override
   _HealthCardCreateFormState createState() => _HealthCardCreateFormState();
@@ -44,7 +44,7 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
   String cvv = '';
   bool showBack = false;
 
-  FocusNode _focusNode; // for card animation
+  FocusNode? _focusNode; // for card animation
 
   bool isFirebaseSuccess = false; // for firebase integration
 
@@ -59,16 +59,16 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    _focusNode.addListener(() {
+    _focusNode!.addListener(() {
       setState(() {
-        _focusNode.hasFocus ? showBack = true : showBack = false;
+        _focusNode!.hasFocus ? showBack = true : showBack = false;
       });
     });
   }
 
   @override
   void dispose() {
-    _focusNode.dispose();
+    _focusNode!.dispose();
     super.dispose();
   }
 

@@ -11,7 +11,7 @@ import 'package:maps_launcher/maps_launcher.dart';
 // * Stateless URL Launcher
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class HospitalLocator extends StatelessWidget {
-  const HospitalLocator({Key key}) : super(key: key);
+  const HospitalLocator({Key? key}) : super(key: key);
 
   final String _url = 'https://www.google.com/search?q=hospital+near+me';
 

@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
 //  * Home screen with dark mode switch
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class DarkModeHome extends StatefulWidget {
-  DarkModeHome({Key key}) : super(key: key);
+  DarkModeHome({Key? key}) : super(key: key);
 
   @override
   _DarkModeHomeState createState() => _DarkModeHomeState();

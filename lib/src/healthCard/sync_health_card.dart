@@ -11,7 +11,7 @@ import 'package:health_app/src/functions.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
 class SyncHealthCard extends StatelessWidget {
-  const SyncHealthCard({Key key}) : super(key: key);
+  const SyncHealthCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SyncHealthCard extends StatelessWidget {
 }
 
 class FetchHealthCardForm extends StatelessWidget {
-  const FetchHealthCardForm({Key key}) : super(key: key);
+  const FetchHealthCardForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class FetchHealthCardForm extends StatelessWidget {
 }
 
 class HealthCardSyncForm extends StatefulWidget {
-  HealthCardSyncForm({Key key}) : super(key: key);
+  HealthCardSyncForm({Key? key}) : super(key: key);
 
   @override
   _HealthCardSyncFormState createState() => _HealthCardSyncFormState();

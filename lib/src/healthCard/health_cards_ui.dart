@@ -17,7 +17,7 @@ import 'health_card_list.dart';
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 class HealthCardWelcomePage extends StatefulWidget {
-  HealthCardWelcomePage({Key key}) : super(key: key);
+  HealthCardWelcomePage({Key? key}) : super(key: key);
 
   @override
   _HealthCardWelcomePageState createState() => _HealthCardWelcomePageState();

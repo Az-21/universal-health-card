@@ -15,7 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 //  * Stateful Notes Creator
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class CreateNotesPage extends StatefulWidget {
-  CreateNotesPage({Key key}) : super(key: key);
+  CreateNotesPage({Key? key}) : super(key: key);
 
   @override
   _CreateNotesPageState createState() => _CreateNotesPageState();
@@ -23,7 +23,7 @@ class CreateNotesPage extends StatefulWidget {
 
 class _CreateNotesPageState extends State<CreateNotesPage> {
   // * Variables
-  double temp = 36.5;
+  double? temp = 36.5;
   TextEditingController textTemp = TextEditingController();
   TextEditingController weight = TextEditingController();
   TextEditingController height = TextEditingController();
@@ -98,7 +98,7 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                         // * Triangle Marker + Text Display
                         markerPointers: [
                           LinearShapePointer(
-                            value: temp,
+                            value: temp!,
                             onValueChanged: (value) {
                               setState(() {
                                 temp = value;
@@ -107,7 +107,7 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                             color: Colors.blue[800],
                           ),
                           LinearWidgetPointer(
-                            value: temp,
+                            value: temp!,
                             onValueChanged: (value) {
                               setState(() {
                                 temp = value;
@@ -120,13 +120,13 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                               height: 60,
                               child: Center(
                                 child: Text(
-                                  '${temp.toStringAsFixed(1)} °C',
+                                  '${temp!.toStringAsFixed(1)} °C',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 11,
-                                      color: temp < 36.1
+                                      color: temp! < 36.1
                                           ? Colors.blue
-                                          : temp < 37.2
+                                          : temp! < 37.2
                                               ? Colors.green
                                               : Colors.red),
                                 ),

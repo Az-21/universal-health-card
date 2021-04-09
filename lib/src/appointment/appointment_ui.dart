@@ -15,7 +15,7 @@ import 'package:health_app/src/appointment/locate_hospital.dart';
 //  * Navigation UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class AppointmentWelcomePage extends StatefulWidget {
-  AppointmentWelcomePage({Key key}) : super(key: key);
+  AppointmentWelcomePage({Key? key}) : super(key: key);
 
   @override
   _AppointmentWelcomePageState createState() => _AppointmentWelcomePageState();

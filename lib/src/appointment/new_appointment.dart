@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class CreateAppointmentPage extends StatefulWidget {
-  CreateAppointmentPage({Key key}) : super(key: key);
+  CreateAppointmentPage({Key? key}) : super(key: key);
 
   @override
   _CreateAppointmentPageState createState() => _CreateAppointmentPageState();
@@ -42,7 +42,7 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
   ];
 
   DateTime now = DateTime.now();
-  DateTime _selectedTime;
+  DateTime? _selectedTime;
 
   @override
   Widget build(BuildContext context) {

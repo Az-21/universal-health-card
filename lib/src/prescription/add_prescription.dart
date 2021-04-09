@@ -11,7 +11,7 @@ import 'package:health_app/src/functions.dart';
 // * Stateful Card UI
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class PrescriptionCardAdder extends StatefulWidget {
-  PrescriptionCardAdder({Key key}) : super(key: key);
+  PrescriptionCardAdder({Key? key}) : super(key: key);
 
   @override
   _PrescriptionCardAdderState createState() => _PrescriptionCardAdderState();

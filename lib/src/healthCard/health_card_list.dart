@@ -13,7 +13,7 @@ import 'package:get_storage/get_storage.dart';
 //  * Health Card List
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class HealthCardPage extends StatefulWidget {
-  HealthCardPage({Key key}) : super(key: key);
+  HealthCardPage({Key? key}) : super(key: key);
 
   @override
   _HealthCardPageState createState() => _HealthCardPageState();
@@ -58,7 +58,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
     ];
     // * For animating front and back of card
     initShowBack();
-    List showBack = _getStorage.read('cardOrientation').length ==
+    List? showBack = _getStorage.read('cardOrientation').length ==
             cardNumbers.length // if equal
         ? _getStorage.read('cardOrientation') // then use saved state
         : List<bool>.filled(cardNumbers.length, false,
@@ -76,7 +76,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
           //  * Rebuild card on tap -> animate
           // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           onTap: () {
-            showBack[index] = !showBack[index];
+            showBack![index] = !showBack[index];
             _getStorage.write('cardOrientation', showBack);
             setState(() {});
           },
@@ -90,7 +90,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
             cvv: '${cvv[index]}',
             bankName: 'Universal Health Card',
             cardType: CardType.other,
-            showBackSide: showBack[index],
+            showBackSide: showBack![index],
             frontBackground: CardBackgrounds.black,
             backBackground: CardBackgrounds.white,
             showShadow: true,

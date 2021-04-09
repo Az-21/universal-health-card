@@ -17,7 +17,7 @@ import 'package:health_app/src/prescription/prescription_ui.dart';
 // * Stateful welcome message
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class WelcomeCard extends StatefulWidget {
-  WelcomeCard({Key key}) : super(key: key);
+  WelcomeCard({Key? key}) : super(key: key);
 
   @override
   _WelcomeCardState createState() => _WelcomeCardState();
@@ -82,7 +82,7 @@ class _WelcomeCardState extends State<WelcomeCard> {
 //  * Statess dashboard
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class Dashboard extends StatelessWidget {
-  const Dashboard({Key key}) : super(key: key);
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

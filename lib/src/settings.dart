@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import '../theme/theme_service.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage({Key key}) : super(key: key);
+  SettingsPage({Key? key}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
