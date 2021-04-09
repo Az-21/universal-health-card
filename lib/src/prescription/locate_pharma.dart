@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 
 // Pub Dev Imports
-import 'package:getwidget/getwidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
@@ -27,121 +26,183 @@ class PharmaLocator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            // * Top padding
-            SizedBox(height: 100),
-
-            // * Launch Map
-            GestureDetector(
-              onTap: () {
-                _launchMaps();
-              },
-              child: GFCard(
-                elevation: 10,
-                boxFit: BoxFit.cover,
-                imageOverlay: AssetImage('assets/image/map.jpg'),
-                color: Colors.green,
-                title: GFListTile(
-                  title: GFTypography(
-                    text: 'Locate Pharmacy',
-                    showDivider: false,
-                    textColor: Colors.white,
-                    type: GFTypographyType.typo3,
-                    icon: Icon(
-                      Icons.map_sharp,
-                      color: Colors.white,
-                      size: 32,
+      body: ListView(
+        children: [
+          SizedBox(height: 32),
+          // * Launch Map (refactor)
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              elevation: 10,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      'assets/image/map.jpg',
                     ),
-                    dividerColor: Colors.white,
-                    dividerWidth: 100,
-                  ),
-                  subtitle: GFTypography(
-                    text:
-                        '\nLocate the nearby pharmacies using your default map application.\n\nDefaults to Google Maps.',
-                    textColor: Colors.white,
-                    type: GFTypographyType.typo6,
-                    showDivider: false,
                   ),
                 ),
-                buttonBar: GFButtonBar(
-                  children: <Widget>[
-                    GFButton(
-                      text: "Launch",
-                      size: GFSize.LARGE,
-                      elevation: 5,
-                      color: Colors.green,
-                      splashColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      icon: Icon(
-                        Icons.launch,
-                        color: Colors.white,
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // * Title
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.map,
+                              color: Colors.white,
+                              size: 32,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Locate Pharmacy',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      onPressed: () {
-                        _launchMaps();
-                      },
-                    ),
-                  ],
+
+                      SizedBox(height: 10),
+
+                      // * Subtitle
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          '\nLocate the nearby pharmacies using your default map application.\n\nDefaults to Google Maps.',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+
+                      SizedBox(height: 32),
+
+                      // * Action
+                      Container(
+                        alignment: Alignment.center,
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            onPrimary: Colors.white,
+                            primary: Colors.green,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            // minimumSize: Size(200, 100),
+                          ),
+                          icon: Icon(Icons.launch),
+                          label: Text('Launch'),
+                          onPressed: () {
+                            _launchMaps();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
+          ),
 
-            // * Launch search
-            GestureDetector(
-              onTap: () {
-                _launchGoogleSearch();
-              },
-              child: GFCard(
-                elevation: 10,
-                boxFit: BoxFit.cover,
-                imageOverlay: AssetImage('assets/image/search.jpg'),
-                color: Colors.green,
-                title: GFListTile(
-                  title: GFTypography(
-                    text: 'Search Pharmacy',
-                    showDivider: false,
-                    textColor: Colors.white,
-                    type: GFTypographyType.typo3,
-                    icon: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: 32,
+          SizedBox(height: 32),
+
+          // * Launch Search (refactor)
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              elevation: 10,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      'assets/image/search.jpg',
                     ),
-                    dividerColor: Colors.white,
-                    dividerWidth: 100,
-                  ),
-                  subtitle: GFTypography(
-                    text: '\nSearch pharmacies near you using Google.',
-                    textColor: Colors.white,
-                    type: GFTypographyType.typo6,
-                    showDivider: false,
                   ),
                 ),
-                buttonBar: GFButtonBar(
-                  children: <Widget>[
-                    GFButton(
-                      text: "Launch",
-                      size: GFSize.LARGE,
-                      elevation: 5,
-                      color: Colors.green,
-                      splashColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      icon: Icon(
-                        Icons.launch,
-                        color: Colors.white,
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // * Title
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.map,
+                              color: Colors.white,
+                              size: 32,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Search Pharmacy',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      onPressed: () {
-                        _launchGoogleSearch();
-                      },
-                    ),
-                  ],
+
+                      SizedBox(height: 10),
+
+                      // * Subtitle
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          '\nSearch pharmacies near you using Google.',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+
+                      SizedBox(height: 32),
+
+                      // * Action
+                      Container(
+                        alignment: Alignment.center,
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            onPrimary: Colors.white,
+                            primary: Colors.green,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            // minimumSize: Size(200, 100),
+                          ),
+                          icon: Icon(Icons.launch),
+                          label: Text('Launch'),
+                          onPressed: () {
+                            _launchGoogleSearch();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
