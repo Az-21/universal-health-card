@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Pub Dev Imports
-import 'package:getwidget/getwidget.dart';
-import 'package:get/get.dart';
 import 'package:health_app/src/functions.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
@@ -29,7 +27,8 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   ];
 
   //* Details of submitter
-  String nameOfSubmitter = 'Dr. Prem';
+  String nameOfSubmitter = 'Dr. XYZ';
+  String orgOfSubmitter = 'ABC Hospital';
   bool isSubmitterDoctor = true;
 
   //* Vars for checkbox
@@ -67,6 +66,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /// * 2xFAB with logic
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -75,16 +75,8 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
             child: Icon(Icons.delete_forever),
             onPressed: () {
               if (_countMedicine == 1) {
-                Get.snackbar(
-                  'Warning',
-                  'Atleast one medicine is required',
-                  barBlur: 20,
-                  shouldIconPulse: true,
-                  icon: Icon(Icons.warning),
-                  colorText: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  snackPosition: SnackPosition.TOP,
-                );
+                infoSnackbar(
+                    'Warning', 'At least one medicine is required', false);
               } else {
                 _removeItem();
               }
@@ -102,8 +94,13 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
           )
         ],
       ),
+
+      /// * Body
       body: ListView(
         children: [
+          // ⸻⸻⸻⸻⸻⸻⸻⸻
+          // * Child: Health card selector
+          // ⸻⸻⸻⸻⸻⸻⸻⸻
           Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Column(
@@ -134,146 +131,138 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
               ],
             ),
           ),
+
           // ⸻⸻⸻⸻⸻⸻⸻⸻
-          // * Child #1: Card
+          // * Child: Medication
           // ⸻⸻⸻⸻⸻⸻⸻⸻
-          GFCard(
-            title: GFListTile(
-              // * Title
-              title: Text(
-                formattedDate(),
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-              // * Subtitle
-              subtitle: Text(
-                nameOfSubmitter,
-                style: TextStyle(fontSize: 24),
-              ),
-              icon: isSubmitterDoctor
-                  ? Icon(Icons.verified)
-                  : Icon(Icons.do_not_disturb_on),
-            ),
-            // ⸻⸻⸻⸻⸻⸻⸻⸻
-            // * List of medicines in one unique prescription
-            // ⸻⸻⸻⸻⸻⸻⸻⸻
-            content: ListView(
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
+          /// * Title
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: _countMedicine,
-                  itemBuilder: (_, int index) {
-                    return Column(
-                      children: [
-                        // * Text
-                        TextField(
-                            controller: medicineList[index],
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Name Of Medicine',
-                              hintText: 'Asprin 500mg',
-                            ),
-                            onSubmitted: (value) {
-                              print('Medicine Name: $value');
-                            }),
-                        // * Vertical padding
-                        SizedBox(height: 10),
-
-                        // * Row below textfield conaining toggles
-                        Row(
-                          children: [
-                            // * Before/after food toggle
-                            Transform.scale(
-                              scale: 1.2,
-                              child: CupertinoSwitch(
-                                value: medicineStats[index][0],
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    medicineStats[index][0] = value;
-                                  });
-                                },
-                              ),
-                            ),
-
-                            // * Horizontal padding
-                            SizedBox(width: 100),
-
-                            /// * Morning checkbox
-                            Expanded(
-                              child: GFCheckbox(
-                                activeIcon: Icon(Icons.wb_sunny_outlined,
-                                    color: Colors.white),
-                                inactiveIcon: Icon(Icons.wb_sunny_outlined,
-                                    color: Colors.grey[500]),
-                                // type: GFCheckboxType.circle,
-                                size: GFSize.LARGE,
-                                activeBgColor: Colors.green,
-                                onChanged: (value) {
-                                  setState(() {
-                                    medicineStats[index][1] = value;
-                                  });
-                                },
-                                value: medicineStats[index][1],
-                              ),
-                            ),
-
-                            // * Horizontal padding
-                            SizedBox(width: 10),
-
-                            /// * Afternoon checkbox
-                            Expanded(
-                              child: GFCheckbox(
-                                activeIcon:
-                                    Icon(Icons.wb_sunny, color: Colors.white),
-                                inactiveIcon: Icon(Icons.wb_sunny,
-                                    color: Colors.grey[500]),
-                                // type: GFCheckboxType.circle,
-                                size: GFSize.LARGE,
-                                activeBgColor: Colors.orange,
-                                onChanged: (value) {
-                                  setState(() {
-                                    medicineStats[index][2] = value;
-                                  });
-                                },
-                                value: medicineStats[index][2],
-                              ),
-                            ),
-
-                            // * Horizontal padding
-                            SizedBox(width: 10),
-
-                            /// * Night checkbox
-                            Expanded(
-                              child: GFCheckbox(
-                                activeIcon: Icon(Icons.nights_stay,
-                                    color: Colors.white),
-                                inactiveIcon: Icon(Icons.nights_stay,
-                                    color: Colors.grey[500]),
-                                // type: GFCheckboxType.circle,
-                                size: GFSize.LARGE,
-                                activeBgColor: Colors.indigo,
-                                onChanged: (value) {
-                                  setState(() {
-                                    medicineStats[index][3] = value;
-                                  });
-                                },
-                                value: medicineStats[index][3],
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return Divider(height: 20);
-                  },
+                Text(
+                  'Create Prescription',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
+                Divider(thickness: 2),
               ],
+            ),
+          ),
+
+          /// * Card Body
+          Card(
+            elevation: 5,
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // * Date
+                  Text(
+                    formattedDate(),
+                    style: TextStyle(fontSize: 12),
+                  ),
+
+                  // * Name of submitter + icon
+                  Row(
+                    children: [
+                      Text(
+                        nameOfSubmitter,
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      Spacer(),
+                      isSubmitterDoctor
+                          ? Icon(
+                              Icons.verified,
+                              size: 40,
+                              color: Colors.green,
+                            )
+                          : Icon(
+                              Icons.supervised_user_circle,
+                              size: 40,
+                              color: Colors.blue,
+                            )
+                    ],
+                  ),
+                  // * Orgnization of submitter
+                  Text(
+                    orgOfSubmitter,
+                    style: TextStyle(fontSize: 12),
+                  ),
+
+                  // ⸻⸻⸻⸻⸻⸻⸻⸻
+                  // * List of medicines in one unique prescription
+                  // ⸻⸻⸻⸻⸻⸻⸻⸻
+                  ListView(
+                    padding: EdgeInsets.only(top: 20),
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    children: [
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemCount: _countMedicine,
+                        itemBuilder: (_, int index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              // * Text
+                              TextField(
+                                  controller: medicineList[index],
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Name Of Medicine #${index + 1}',
+                                    hintText: 'Asprin 500mg',
+                                  ),
+                                  onSubmitted: (value) {
+                                    print('Medicine Name: $value');
+                                  }),
+                              // * Vertical padding
+                              SizedBox(height: 5),
+
+                              // * Row below textfield conaining toggles
+                              ToggleButtons(
+                                color: Colors.grey[500],
+                                selectedColor: Colors.white,
+                                fillColor: Colors.green,
+                                children: [
+                                  medicineStats[index][0]
+                                      ? Icon(Icons.fastfood)
+                                      : Icon(Icons.no_food),
+                                  Icon(Icons.wb_twighlight),
+                                  Icon(Icons.wb_sunny),
+                                  Icon(Icons.nights_stay),
+                                ],
+                                isSelected: medicineStats[index],
+                                onPressed: (int subindex) {
+                                  setState(() {
+                                    medicineStats[index][subindex] =
+                                        !medicineStats[index][subindex];
+                                  });
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Divider(
+                            color: Colors.grey[500],
+                            height: 20,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
