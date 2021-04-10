@@ -20,13 +20,13 @@ class HealthCardDataModel {
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class AppointmentDataModel {
   // * Variables
-  String hospital, aadharUID, specialization;
+  String hospital, identifier, specialization;
   DateTime appointmentTime;
 
   // * Constructor
   AppointmentDataModel(
     this.hospital,
-    this.aadharUID,
+    this.identifier,
     this.specialization,
     this.appointmentTime,
   );
@@ -37,14 +37,14 @@ class AppointmentDataModel {
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class PrescriptionDataModel {
   // * Variables
-  String aadharUID, timestamp, submitterName, submitterOrg;
+  String identifier, timestamp, submitterName, submitterOrg;
   bool submitterVerified;
   List<String> medicineList;
   List<List<bool>> medicineStats;
 
   // * Constructor
   PrescriptionDataModel(
-    this.aadharUID,
+    this.identifier,
     this.timestamp,
     this.submitterName,
     this.submitterOrg,
@@ -59,11 +59,11 @@ class PrescriptionDataModel {
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class NotesDataModel {
   // * Variables
-  String aadharUID, temp, weight, height, bpS, bpD, notes;
+  String identifier, temp, weight, height, bpS, bpD, notes;
 
   // * Constructor
   NotesDataModel(
-    this.aadharUID,
+    this.identifier,
     this.temp,
     this.weight,
     this.height,

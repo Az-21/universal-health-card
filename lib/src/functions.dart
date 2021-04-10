@@ -18,6 +18,18 @@ String formattedDate() {
 }
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
+// * Function: Print Time | Day | Date
+// ⸻⸻⸻⸻⸻⸻⸻⸻
+String formattedDateTime(DateTime time) {
+  // EEEE gives the day of the week
+  // dd gives the day
+  // MMMM dives the month
+  // yyyy gives the year
+
+  return DateFormat('MMMM dd  | ').add_jm().format(time);
+}
+
+// ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Function: Snackbar
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 void infoSnackbar(String title, String subtitle, bool success) {

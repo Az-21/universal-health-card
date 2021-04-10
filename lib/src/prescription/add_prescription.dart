@@ -265,6 +265,24 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
               ),
             ),
           ),
+
+          // * Create button
+          Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Colors.white,
+                primary: Colors.green,
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                // minimumSize: Size(200, 100),
+              ),
+              icon: Icon(Icons.post_add),
+              label: Text('Create Prescription'),
+              onPressed: () {},
+            ),
+          ),
+          SizedBox(height: 64),
         ],
       ),
     );

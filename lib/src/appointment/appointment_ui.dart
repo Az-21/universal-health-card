@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
+import 'package:health_app/src/appointment/appointment_list.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 // Other pages
@@ -25,10 +26,7 @@ class _AppointmentWelcomePageState extends State<AppointmentWelcomePage> {
   int _currentIndex = 1;
   List<Widget> healthCardPages = [
     Container(), // home conatiner -> this is never displayed -> goto home
-    Container(
-      padding: EdgeInsets.all(50),
-      child: Text('Add appointments here // classified by category'),
-    ),
+    AppointmentList(),
     CreateAppointmentPage(),
     HospitalLocator(),
   ];

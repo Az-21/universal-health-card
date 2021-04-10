@@ -2,6 +2,7 @@
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/material.dart';
+import 'package:health_app/src/prescription/prescription_list.dart';
 
 // Pub Dev Imports
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -26,10 +27,7 @@ class _PrescriptionWelcomePageState extends State<PrescriptionWelcomePage> {
   int _currentIndex = 1;
   List<Widget> healthCardPages = [
     Container(), // home conatiner -> this is never displayed -> goto home
-    Container(
-      padding: EdgeInsets.all(50),
-      child: Text('Add prescription here // classified by health card'),
-    ),
+    PrescriptionList(),
     PrescriptionCardAdder(),
     PharmaLocator(),
   ];
