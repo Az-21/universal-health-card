@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:get/get.dart';
+import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 
 // Flutter Components Imports
 import 'healthCard/health_cards_ui.dart';
@@ -14,143 +15,137 @@ import 'package:health_app/src/appointment/appointment_ui.dart';
 import 'package:health_app/src/prescription/prescription_ui.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
-// * Stateful welcome message
+// * Stateless Homescreen
 // ⸻⸻⸻⸻⸻⸻⸻⸻
-class WelcomeCard extends StatefulWidget {
-  WelcomeCard({Key? key}) : super(key: key);
+class HomeUI extends StatelessWidget {
+  const HomeUI({Key? key}) : super(key: key);
 
-  @override
-  _WelcomeCardState createState() => _WelcomeCardState();
-}
+  static final List<String> _title = [
+    'Health Card',
+    'Appointment',
+    'Prescription',
+    'Doctor\'s Notes',
+  ];
+  static final List<String> _subtitle = [
+    'Add or view health cards',
+    'Book and verify your doctor',
+    'View your prescription',
+    'View your medical data',
+  ];
 
-class _WelcomeCardState extends State<WelcomeCard> {
+  static final List<List<Color>> _gradientColors = [
+    [Colors.green, Colors.greenAccent],
+    [Colors.green, Colors.yellow],
+    [Colors.purple, Colors.indigo],
+    [Colors.red, Colors.orange],
+  ];
+
+  static final List<Icon> _cardIcons = [
+    Icon(Icons.dashboard_rounded),
+    Icon(Icons.qr_code_scanner_rounded),
+    Icon(Icons.healing_outlined),
+    Icon(Icons.note_add),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.green,
-      elevation: 5,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // * Title
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+    return Scaffold(
+      body: Center(
+        child: Container(
+          clipBehavior: Clip.none,
+          height: MediaQuery.of(context).size.height * 0.9,
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Swiper(
+            itemCount: 4,
+            control: new SwiperControl(
+              size: 20,
+            ),
+            itemWidth: MediaQuery.of(context).size.width * 0.75,
+            itemHeight: MediaQuery.of(context).size.height * 0.7,
+            layout: SwiperLayout.STACK,
+            duration: 200,
+            itemBuilder: (BuildContext context, int index) {
+              return Stack(
+                clipBehavior: Clip.none,
                 children: [
-                  Icon(
-                    Icons.api,
-                    color: Colors.white,
-                    size: 32,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'Welcome User',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
+                  /// * Background Card Gradient
+                  Container(
+                    decoration: new BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      gradient: new LinearGradient(
+                        colors: _gradientColors[index],
+                        begin: Alignment(1, 1),
+                        end: Alignment(-1, -1),
+                      ),
                     ),
-                  )
+                  ),
+
+                  /// * Text: title + subtitle
+                  Container(
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Spacer(),
+                        Center(
+                          child: IconButton(
+                            icon: _cardIcons[index],
+                            onPressed: () {},
+                            iconSize: MediaQuery.of(context).size.height * 0.3,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          _title[index],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          _subtitle[index],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: -MediaQuery.of(context).size.height * 0.05,
+                    right: MediaQuery.of(context).size.height * 0.05,
+                    child: Container(
+                      width: MediaQuery.of(context).size.height * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      // TODO: Add images here
+                      child: Placeholder(),
+                    ),
+                  ),
                 ],
-              ),
-            ),
-
-            SizedBox(height: 10),
-
-            // * Subtitle
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                formattedDate(),
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
+              );
+            },
+            onTap: (index) {
+              switch (index) {
+                case 0:
+                  Get.to(() =>
+                      HealthCardWelcomePage()); // Imported ./health_cards.dart
+                  break;
+                case 1:
+                  Get.to(() => AppointmentWelcomePage());
+                  break;
+                case 2:
+                  Get.to(() => PrescriptionWelcomePage());
+                  break;
+                case 3:
+                  Get.to(() => NotesWelcomePage());
+                  break;
+              }
+            },
+          ),
         ),
       ),
-    );
-  }
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  * Statess dashboard
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildListView();
-  }
-
-  ListView _buildListView() {
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    //  * ListTile Data
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    List<String> titles = [
-      'Health Cards',
-      'Appointment',
-      'Prescription',
-      'Doctor\'s Notes',
-    ];
-    List<String> subtitles = [
-      'Add or view health cards',
-      'Book and verify your doctor',
-      'View your prescription',
-      'Review your medical data',
-    ];
-    List<IconData> leadingIcons = [
-      Icons.credit_card,
-      Icons.qr_code_scanner_sharp,
-      Icons.local_hospital_outlined,
-      Icons.library_books_outlined,
-    ];
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    //  * Listview generator + divider (.separated)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    return ListView.separated(
-      shrinkWrap: true,
-      itemCount: titles.length,
-      itemBuilder: (_, index) {
-        return ListTile(
-          title: Text('${titles[index]}'),
-          leading: Icon(leadingIcons[index]),
-          subtitle: Text('${subtitles[index]}'),
-          trailing: Icon(Icons.arrow_forward_ios_sharp),
-          onTap: () {
-            switch (index) {
-              case 0:
-                Get.to(() =>
-                    HealthCardWelcomePage()); // Imported ./health_cards.dart
-                break;
-              case 1:
-                Get.to(() => AppointmentWelcomePage());
-                break;
-              case 2:
-                Get.to(() => PrescriptionWelcomePage());
-                break;
-              case 3:
-                Get.to(() => NotesWelcomePage());
-                break;
-            }
-          },
-        );
-      },
-      separatorBuilder: (context, index) {
-        return Divider(
-          thickness: 2,
-          height: 40,
-          indent: 12,
-          endIndent: 12,
-        );
-      },
     );
   }
 }

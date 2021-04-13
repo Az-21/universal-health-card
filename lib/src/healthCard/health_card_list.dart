@@ -68,7 +68,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
     //  * Health card generator + divider (.separated)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return ListView.separated(
-      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+      padding: EdgeInsets.symmetric(vertical: 20),
       itemCount: cardNumbers.length,
       itemBuilder: (_, index) {
         return GestureDetector(
@@ -97,6 +97,14 @@ class _HealthCardPageState extends State<HealthCardPage> {
             textExpDate: 'Holder Info',
             textName: 'Name',
             textExpiry: 'Health Info',
+            height: MediaQuery.of(context).size.height >
+                    MediaQuery.of(context).size.width
+                ? MediaQuery.of(context).size.height * 0.3
+                : MediaQuery.of(context).size.width * 0.3,
+            width: MediaQuery.of(context).size.height >
+                    MediaQuery.of(context).size.width
+                ? MediaQuery.of(context).size.width * 0.9
+                : MediaQuery.of(context).size.width * 0.6,
           ),
         );
       },

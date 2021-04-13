@@ -1,6 +1,8 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,40 +68,20 @@ class _DarkModeHomeState extends State<DarkModeHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      //  * Appbar + Dark mode switch
-      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      appBar: AppBar(
-        toolbarHeight: 100,
-        title: Text(
-          'Health App',
-          style: TextStyle(
-            fontSize: 24,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Get.to(() => SettingsPage());
-            },
-            iconSize: 32,
-          ),
-          SizedBox(width: 20),
-        ],
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.to(() => SettingsPage());
+        },
+        label: Text('Settings'),
+        icon: Icon(Icons.settings),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.green,
       ),
 
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       //  * Homepage
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        shrinkWrap: true,
-        children: [
-          WelcomeCard(),
-          Dashboard(),
-        ],
-      ), // Imported: ./src/dashboard
+      body: HomeUI(),
     );
   }
 }
