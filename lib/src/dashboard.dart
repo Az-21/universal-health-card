@@ -41,10 +41,10 @@ class HomeUI extends StatelessWidget {
   ];
 
   static final List<Icon> _cardIcons = [
-    Icon(Icons.dashboard_rounded),
-    Icon(Icons.qr_code_scanner_rounded),
-    Icon(Icons.healing_outlined),
-    Icon(Icons.note_add),
+    Icon(Icons.dashboard_rounded, color: Colors.white),
+    Icon(Icons.qr_code_scanner_rounded, color: Colors.white),
+    Icon(Icons.healing_outlined, color: Colors.white),
+    Icon(Icons.note_add, color: Colors.white),
   ];
 
   @override
@@ -80,7 +80,7 @@ class HomeUI extends StatelessWidget {
                     ),
                   ),
 
-                  /// * Text: title + subtitle
+                  /// * Card body: icon + title + subtitle
                   Container(
                     padding: EdgeInsets.all(30),
                     child: Column(
@@ -90,7 +90,7 @@ class HomeUI extends StatelessWidget {
                         Center(
                           child: IconButton(
                             icon: _cardIcons[index],
-                            onPressed: () {},
+                            onPressed: () => _pageLauncher(index),
                             iconSize: MediaQuery.of(context).size.height * 0.3,
                           ),
                         ),
@@ -126,26 +126,30 @@ class HomeUI extends StatelessWidget {
                 ],
               );
             },
-            onTap: (index) {
-              switch (index) {
-                case 0:
-                  Get.to(() =>
-                      HealthCardWelcomePage()); // Imported ./health_cards.dart
-                  break;
-                case 1:
-                  Get.to(() => AppointmentWelcomePage());
-                  break;
-                case 2:
-                  Get.to(() => PrescriptionWelcomePage());
-                  break;
-                case 3:
-                  Get.to(() => NotesWelcomePage());
-                  break;
-              }
-            },
+            onTap: (index) => _pageLauncher(index),
           ),
         ),
       ),
     );
+  }
+}
+
+// ⸻⸻⸻⸻⸻⸻⸻⸻
+// * Dashboard page launcher
+// ⸻⸻⸻⸻⸻⸻⸻⸻
+void _pageLauncher(int index) {
+  switch (index) {
+    case 0:
+      Get.to(() => HealthCardWelcomePage()); // Imported ./health_cards.dart
+      break;
+    case 1:
+      Get.to(() => AppointmentWelcomePage());
+      break;
+    case 2:
+      Get.to(() => PrescriptionWelcomePage());
+      break;
+    case 3:
+      Get.to(() => NotesWelcomePage());
+      break;
   }
 }
