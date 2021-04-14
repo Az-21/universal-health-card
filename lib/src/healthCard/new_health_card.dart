@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 
 // Pub Dev Imports
-import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:awesome_card/awesome_card.dart';
 import 'package:health_app/src/functions.dart';
@@ -19,7 +18,7 @@ class NewHealthCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: HealthCardCreateForm(),
     );
   }
@@ -29,7 +28,7 @@ class NewHealthCard extends StatelessWidget {
 //  * Stateful Health Form
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class HealthCardCreateForm extends StatefulWidget {
-  HealthCardCreateForm({Key? key}) : super(key: key);
+  const HealthCardCreateForm({Key? key}) : super(key: key);
 
   @override
   _HealthCardCreateFormState createState() => _HealthCardCreateFormState();
@@ -77,10 +76,9 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
     final focus = FocusScope.of(context); // next focus
     return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           CreditCard(
@@ -106,19 +104,19 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                 ? MediaQuery.of(context).size.width * 0.9
                 : MediaQuery.of(context).size.width * 0.6,
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               /// Security Key / CVV
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
                   controller: formSecurityKey,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
                     counterText: '',
@@ -141,11 +139,12 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
 
               /// Name
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
                   controller: formName,
                   textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(Icons.person),
                     labelText: 'Name',
                     counterText: '',
@@ -164,12 +163,13 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
 
               /// Aadhar ID
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
                   controller: formAadhar,
                   maxLength: 14, // input formatter will add 12 + 2 = 14
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(Icons.qr_code),
                     border: OutlineInputBorder(),
                     counterText: '',
@@ -191,10 +191,11 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
 
               /// Blood Group
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
                   controller: formBloodGroup,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(Icons.invert_colors),
                     border: OutlineInputBorder(),
                     counterText: '',
@@ -215,10 +216,11 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
 
               /// Health Condition
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
                   controller: formHealthCondition,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(Icons.healing),
                     border: OutlineInputBorder(),
                     counterText: '',
@@ -240,16 +242,18 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
               /// Submit Button
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     onPrimary: Colors.white,
                     primary: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
                     // minimumSize: Size(200, 100),
                   ),
-                  icon: Icon(Icons.post_add),
-                  label: Text('Create New Health Card'),
+                  icon: const Icon(Icons.post_add),
+                  label: const Text('Create New Health Card'),
                   onPressed: () {
                     // TODO: validator here -> 4 digit key, 12 digit aadhar...
                     // TODO: firebase push here

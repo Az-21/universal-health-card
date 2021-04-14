@@ -15,7 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 //  * Stateful Notes Creator
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class CreateNotesPage extends StatefulWidget {
-  CreateNotesPage({Key? key}) : super(key: key);
+  const CreateNotesPage({Key? key}) : super(key: key);
 
   @override
   _CreateNotesPageState createState() => _CreateNotesPageState();
@@ -23,7 +23,7 @@ class CreateNotesPage extends StatefulWidget {
 
 class _CreateNotesPageState extends State<CreateNotesPage> {
   // * Variables
-  double? temp = 36.5;
+  double temp = 36.5;
   TextEditingController textTemp = TextEditingController();
   TextEditingController weight = TextEditingController();
   TextEditingController height = TextEditingController();
@@ -39,24 +39,25 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
     'Dhruv | xxxx xxxx 0015',
   ];
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// * Cupertino Picker: Pick Card
-                Text(
+                const Text(
                   'Select Health Card',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
                 SizedBox(
                   height: 90,
                   child: CupertinoPicker(
@@ -75,15 +76,15 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
                 // * Child: Temperature Slider + Text
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
-                SizedBox(height: 32),
-                Text(
+                const SizedBox(height: 32),
+                const Text(
                   'Temperature',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -98,52 +99,49 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                         // * Triangle Marker + Text Display
                         markerPointers: [
                           LinearShapePointer(
-                            value: temp!,
+                            value: temp,
                             onValueChanged: (value) {
                               setState(() {
-                                temp = value;
+                                temp = double.parse(value.toString());
                               });
                             },
                             color: Colors.blue[800],
                           ),
                           LinearWidgetPointer(
-                            value: temp!,
+                            value: temp,
                             onValueChanged: (value) {
                               setState(() {
-                                temp = value;
+                                temp = double.parse(value.toString());
                               });
                               // Update textfield with slider
-                              textTemp.text = value.toStringAsFixed(1);
+                              textTemp.text = value.toString();
                             },
-                            child: Container(
+                            position: LinearElementPosition.outside,
+                            child: SizedBox(
                               width: 40,
                               height: 60,
                               child: Center(
                                 child: Text(
-                                  '${temp!.toStringAsFixed(1)} °C',
+                                  '${temp.toStringAsFixed(1)} °C',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 11,
-                                      color: temp! < 36.1
+                                      color: temp < 36.1
                                           ? Colors.blue
-                                          : temp! < 37.2
+                                          : temp < 37.2
                                               ? Colors.green
                                               : Colors.red),
                                 ),
                               ),
                             ),
-                            position: LinearElementPosition.outside,
                           ),
                         ],
 
                         // * Gradient Axis
                         axisTrackStyle: LinearAxisTrackStyle(
                           thickness: 18,
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [Colors.blue, Colors.green, Colors.red],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            tileMode: TileMode.clamp,
                           ),
                         ),
                       ),
@@ -153,20 +151,21 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                     Expanded(
                       flex: 3,
                       child: TextField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        /// ! TODO: catch null errors!!!
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'(^\-?\d*\.?\d*)')),
                         ],
                         controller: textTemp,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: '°C',
                           hintText: '36.5',
                         ),
                         onSubmitted: (value) {
-                          temp = double.tryParse(value);
+                          temp = double.parse(value);
                           setState(() {});
                         },
                       ),
@@ -177,44 +176,44 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
                 // * Child: Weight and Height
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
-                SizedBox(height: 32),
-                Text(
+                const SizedBox(height: 32),
+                const Text(
                   'Weight and Height',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
                 Row(
                   children: [
                     Expanded(
                       child: TextField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'(^\-?\d*\.?\d*)')),
                         ],
                         controller: weight,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Weight (kg)',
                           hintText: '70',
                         ),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'(^\-?\d*\.?\d*)')),
                         ],
                         controller: height,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Height (cm)',
                           hintText: '160',
@@ -227,44 +226,44 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
                 // * Child: Blood Pressure
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
-                SizedBox(height: 32),
-                Text(
+                const SizedBox(height: 32),
+                const Text(
                   'Blood Pressure',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
                 Row(
                   children: [
                     Expanded(
                       child: TextField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'(^\-?\d*\.?\d*)')),
                         ],
                         controller: bpS,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Systolic (mmHg)',
                           hintText: '120',
                         ),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'(^\-?\d*\.?\d*)')),
                         ],
                         controller: bpD,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Diastolic (mmHg)',
                           hintText: '80',
@@ -277,10 +276,10 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
                 // * Child: Notes
                 // ⸻⸻⸻⸻⸻⸻⸻⸻
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       flex: 9,
                       child: Text(
                         'Symptoms and Notes',
@@ -297,14 +296,14 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                           onPrimary: Colors.white,
                           primary: Colors.blue,
                         ),
-                        icon: Icon(Icons.code),
-                        label: Text('Syntax'),
+                        icon: const Icon(Icons.code),
+                        label: const Text('Syntax'),
                         onPressed: _launchURL,
                       ),
                     ),
                   ],
                 ),
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
                 Column(
                   children: [
                     MarkdownTextInput(
@@ -313,8 +312,8 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                       label: 'Click on `< > Syntax` button for help',
                       maxLines: 14,
                     ),
-                    SizedBox(height: 16),
-                    Text(
+                    const SizedBox(height: 16),
+                    const Text(
                       '📑 Live Preview',
                       style: TextStyle(
                         fontSize: 18,
@@ -323,13 +322,13 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                     ),
                     Card(
                       elevation: 10,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 32),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         child: Markdown(
                           data: description,
                           shrinkWrap: true,
@@ -343,12 +342,12 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                     style: ElevatedButton.styleFrom(
                       onPrimary: Colors.white,
                       primary: Colors.green,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
                       // minimumSize: Size(200, 100),
                     ),
-                    icon: Icon(Icons.save),
-                    label: Text('Save Health Note'),
+                    icon: const Icon(Icons.save),
+                    label: const Text('Save Health Note'),
                     onPressed: () {},
                   ),
                 ),
@@ -361,7 +360,10 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
   }
 
   // * Launch Markdown Guide
-  void _launchURL() async => await canLaunch(_markdownURL)
-      ? await launch(_markdownURL)
-      : throw 'Could not launch $_markdownURL';
+  // ignore: avoid_void_async
+  void _launchURL() async {
+    await canLaunch(_markdownURL)
+        ? await launch(_markdownURL)
+        : throw 'Could not launch $_markdownURL';
+  }
 }

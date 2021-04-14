@@ -20,6 +20,7 @@ import './theme/theme_service.dart';
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * main()
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ignore: avoid_void_async
 void main() async {
   await GetStorage.init();
   runApp(MyApp());
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
       themeMode: ThemeServie().getThemeMode(),
-      home: DarkModeHome(),
+      home: const DarkModeHome(),
     );
   }
 }
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
 //  * Home screen with dark mode switch
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class DarkModeHome extends StatefulWidget {
-  DarkModeHome({Key? key}) : super(key: key);
+  const DarkModeHome({Key? key}) : super(key: key);
 
   @override
   _DarkModeHomeState createState() => _DarkModeHomeState();
@@ -55,7 +56,7 @@ class _DarkModeHomeState extends State<DarkModeHome> {
   @override
   void initState() {
     super.initState();
-    bool isNavHidden = ThemeServie().isStatusHidden();
+    final bool isNavHidden = ThemeServie().isStatusHidden();
     if (isNavHidden) {
       SystemChrome.setEnabledSystemUIOverlays([]);
     } else {
@@ -70,8 +71,8 @@ class _DarkModeHomeState extends State<DarkModeHome> {
         onPressed: () {
           Get.to(() => SettingsPage());
         },
-        label: Text('Settings'),
-        icon: Icon(Icons.settings),
+        label: const Text('Settings'),
+        icon: const Icon(Icons.settings),
         foregroundColor: Colors.white,
         backgroundColor: Colors.green,
       ),
@@ -79,7 +80,7 @@ class _DarkModeHomeState extends State<DarkModeHome> {
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       //  * Homepage
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      body: HomeUI(),
+      body: const HomeUI(),
     );
   }
 }

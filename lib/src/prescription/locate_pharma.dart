@@ -15,10 +15,10 @@ class PharmaLocator extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // * Launch map
-          ImageFunctionCard(
+          const ImageFunctionCard(
             title: 'Locate Pharmacy',
             subtitle:
                 '\nLocate the nearby pharmacies using your default map application.\n\nDefaults to Google Maps.',
@@ -28,10 +28,10 @@ class PharmaLocator extends StatelessWidget {
             isMap: true,
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // * Launch search
-          ImageFunctionCard(
+          const ImageFunctionCard(
             title: 'Search Pharmacy',
             subtitle: '\nSearch pharmacies near you using Google',
             icon: Icons.search,

@@ -15,9 +15,9 @@ class HospitalLocator extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           // * Launch map
-          ImageFunctionCard(
+          const ImageFunctionCard(
             title: 'Locate Hospital',
             subtitle:
                 '\nLocate the nearby hospitals using your default map application.\n\nDefaults to Google Maps.',
@@ -27,10 +27,10 @@ class HospitalLocator extends StatelessWidget {
             isMap: true,
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // * Launch search
-          ImageFunctionCard(
+          const ImageFunctionCard(
             title: 'Search Hospital',
             subtitle: '\nSearch hospitals near you using Google',
             icon: Icons.search,

@@ -11,7 +11,7 @@ import 'package:health_app/src/functions.dart';
 // * Stateful Card UI
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class PrescriptionCardAdder extends StatefulWidget {
-  PrescriptionCardAdder({Key? key}) : super(key: key);
+  const PrescriptionCardAdder({Key? key}) : super(key: key);
 
   @override
   _PrescriptionCardAdderState createState() => _PrescriptionCardAdderState();
@@ -43,7 +43,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   // * Function: Add Medicine Item
   // ⸻⸻⸻⸻⸻⸻⸻⸻
   int _countMedicine = 1;
-  _addItem() {
+  void _addItem() {
     setState(() {
       // * Increase length of list
       medicineStats.add([true, true, true, true]);
@@ -55,7 +55,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   // ⸻⸻⸻⸻⸻⸻⸻⸻
   // * Function: Delete Medicine Item
   // ⸻⸻⸻⸻⸻⸻⸻⸻
-  _removeItem() {
+  void _removeItem() {
     setState(() {
       medicineStats.removeLast();
       medicineList.removeLast();
@@ -72,7 +72,6 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
         children: [
           FloatingActionButton(
             backgroundColor: Colors.red,
-            child: Icon(Icons.delete_forever),
             onPressed: () {
               if (_countMedicine == 1) {
                 infoSnackbar(
@@ -81,16 +80,17 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                 _removeItem();
               }
             },
+            child: const Icon(Icons.delete_forever),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           FloatingActionButton(
             backgroundColor: Colors.green,
-            child: Icon(Icons.playlist_add),
             onPressed: () {
               _addItem();
             },
+            child: const Icon(Icons.playlist_add),
           )
         ],
       ),
@@ -102,18 +102,18 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
           // * Child: Health card selector
           // ⸻⸻⸻⸻⸻⸻⸻⸻
           Container(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Select Health Card',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
                 SizedBox(
                   height: 90,
                   child: CupertinoPicker(
@@ -137,18 +137,18 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
           // ⸻⸻⸻⸻⸻⸻⸻⸻
           /// * Title
           Container(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Create Prescription',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
               ],
             ),
           ),
@@ -156,19 +156,19 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
           /// * Card Body
           Card(
             elevation: 5,
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // * Date
                   Text(
                     formattedDate(),
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
 
                   // * Name of submitter + icon
@@ -176,39 +176,40 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                     children: [
                       Text(
                         nameOfSubmitter,
-                        style: TextStyle(fontSize: 24),
+                        style: const TextStyle(fontSize: 24),
                       ),
-                      Spacer(),
-                      isSubmitterDoctor
-                          ? Icon(
-                              Icons.verified,
-                              size: 40,
-                              color: Colors.green,
-                            )
-                          : Icon(
-                              Icons.supervised_user_circle,
-                              size: 40,
-                              color: Colors.blue,
-                            )
+                      const Spacer(),
+                      if (isSubmitterDoctor)
+                        const Icon(
+                          Icons.verified,
+                          size: 40,
+                          color: Colors.green,
+                        )
+                      else
+                        const Icon(
+                          Icons.supervised_user_circle,
+                          size: 40,
+                          color: Colors.blue,
+                        )
                     ],
                   ),
                   // * Orgnization of submitter
                   Text(
                     orgOfSubmitter,
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
 
                   // ⸻⸻⸻⸻⸻⸻⸻⸻
                   // * List of medicines in one unique prescription
                   // ⸻⸻⸻⸻⸻⸻⸻⸻
                   ListView(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 20),
                     shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     children: [
                       ListView.separated(
                         shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
+                        physics: const ClampingScrollPhysics(),
                         itemCount: _countMedicine,
                         itemBuilder: (_, int index) {
                           return Column(
@@ -218,29 +219,19 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                               TextField(
                                   controller: medicineList[index],
                                   decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
+                                    border: const OutlineInputBorder(),
                                     labelText: 'Name Of Medicine #${index + 1}',
                                     hintText: 'Asprin 500mg',
                                   ),
-                                  onSubmitted: (value) {
-                                    print('Medicine Name: $value');
-                                  }),
+                                  onSubmitted: (value) {}),
                               // * Vertical padding
-                              SizedBox(height: 5),
+                              const SizedBox(height: 5),
 
                               // * Row below textfield conaining toggles
                               ToggleButtons(
                                 color: Colors.grey[500],
                                 selectedColor: Colors.white,
                                 fillColor: Colors.green,
-                                children: [
-                                  medicineStats[index][0]
-                                      ? Icon(Icons.fastfood)
-                                      : Icon(Icons.no_food),
-                                  Icon(Icons.wb_twighlight),
-                                  Icon(Icons.wb_sunny),
-                                  Icon(Icons.nights_stay),
-                                ],
                                 isSelected: medicineStats[index],
                                 onPressed: (int subindex) {
                                   setState(() {
@@ -248,6 +239,15 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                                         !medicineStats[index][subindex];
                                   });
                                 },
+                                children: [
+                                  if (medicineStats[index][0])
+                                    const Icon(Icons.fastfood)
+                                  else
+                                    const Icon(Icons.no_food),
+                                  const Icon(Icons.wb_twighlight),
+                                  const Icon(Icons.wb_sunny),
+                                  const Icon(Icons.nights_stay),
+                                ],
                               ),
                             ],
                           );
@@ -269,20 +269,21 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
           // * Create button
           Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 onPrimary: Colors.white,
                 primary: Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 // minimumSize: Size(200, 100),
               ),
-              icon: Icon(Icons.post_add),
-              label: Text('Create Prescription'),
+              icon: const Icon(Icons.post_add),
+              label: const Text('Create Prescription'),
               onPressed: () {},
             ),
           ),
-          SizedBox(height: 64),
+          const SizedBox(height: 64),
         ],
       ),
     );

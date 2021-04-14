@@ -2,22 +2,18 @@
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/material.dart';
-import 'package:health_app/src/healthCard/sync_health_card.dart';
-
-// Pub Dev Imports
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
-
-// Flutter Components Imports for Navigation
-import 'new_health_card.dart';
+import 'package:health_app/src/healthCard/sync_health_card.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'health_card_list.dart';
+import 'new_health_card.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Navigation UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 class HealthCardWelcomePage extends StatefulWidget {
-  HealthCardWelcomePage({Key? key}) : super(key: key);
+  const HealthCardWelcomePage({Key? key}) : super(key: key);
 
   @override
   _HealthCardWelcomePageState createState() => _HealthCardWelcomePageState();
@@ -27,9 +23,9 @@ class _HealthCardWelcomePageState extends State<HealthCardWelcomePage> {
   int _currentIndex = 1;
   List<Widget> healthCardPages = [
     Container(), // home conatiner -> this is never displayed -> goto home
-    HealthCardPage(),
-    NewHealthCard(),
-    SyncHealthCard(),
+    const HealthCardPage(),
+    const NewHealthCard(),
+    const SyncHealthCard(),
   ];
 
   @override
@@ -53,29 +49,29 @@ class _HealthCardWelcomePageState extends State<HealthCardWelcomePage> {
         items: [
           /// Go to Home
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
+            icon: const Icon(Icons.home),
+            title: const Text("Home"),
             selectedColor: Colors.purple,
           ),
 
           /// Health Cards
           SalomonBottomBarItem(
-            icon: Icon(Icons.dashboard),
-            title: Text("Health Cards"),
+            icon: const Icon(Icons.dashboard),
+            title: const Text("Health Cards"),
             selectedColor: Colors.blue,
           ),
 
           /// Create Health Card
           SalomonBottomBarItem(
-            icon: Icon(Icons.dashboard_customize),
-            title: Text("Create Health Card"),
+            icon: const Icon(Icons.dashboard_customize),
+            title: const Text("Create Health Card"),
             selectedColor: Colors.green,
           ),
 
           /// Add Health Card
           SalomonBottomBarItem(
-            icon: Icon(Icons.sync),
-            title: Text("Sync Health Card"),
+            icon: const Icon(Icons.sync),
+            title: const Text("Sync Health Card"),
             selectedColor: Colors.pink,
           ),
         ],

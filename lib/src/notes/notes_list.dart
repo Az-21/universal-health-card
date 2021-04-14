@@ -41,24 +41,24 @@ class NotesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         elevation: 3,
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 identifier,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
-              Divider(),
+              const Divider(),
               // * Date
               Text(
                 timestamp,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
 
               // * Name of submitter + icon
@@ -66,29 +66,30 @@ class NotesCard extends StatelessWidget {
                 children: [
                   Text(
                     submitterName,
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
-                  Spacer(),
-                  submitterVerified
-                      ? Icon(
-                          Icons.verified,
-                          size: 40,
-                          color: Colors.green,
-                        )
-                      : Icon(
-                          Icons.supervised_user_circle,
-                          size: 40,
-                          color: Colors.blue,
-                        )
+                  const Spacer(),
+                  if (submitterVerified)
+                    const Icon(
+                      Icons.verified,
+                      size: 40,
+                      color: Colors.green,
+                    )
+                  else
+                    const Icon(
+                      Icons.supervised_user_circle,
+                      size: 40,
+                      color: Colors.blue,
+                    )
                 ],
               ),
               // * Orgnization of submitter
               Text(
                 submitterOrg,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
 
-              Divider(height: 30),
+              const Divider(height: 30),
 
               MarkdownBody(
                 data:
@@ -104,7 +105,7 @@ class NotesCard extends StatelessWidget {
 // * Appointment Card List
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class NotesList extends StatefulWidget {
-  NotesList({Key? key}) : super(key: key);
+  const NotesList({Key? key}) : super(key: key);
 
   @override
   _NotesListState createState() => _NotesListState();
@@ -116,12 +117,11 @@ class _NotesListState extends State<NotesList> {
     return Scaffold(
       body: Center(
         child: Container(
-          clipBehavior: Clip.none,
           height: MediaQuery.of(context).size.height * 0.9,
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Swiper(
             itemCount: 3,
-            control: new SwiperControl(
+            control: SwiperControl(
                 color: ThemeServie().isSavedDarkMode()
                     ? Colors.white
                     : Colors.blue),

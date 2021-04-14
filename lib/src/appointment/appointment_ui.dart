@@ -16,7 +16,7 @@ import 'package:health_app/src/appointment/locate_hospital.dart';
 //  * Navigation UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class AppointmentWelcomePage extends StatefulWidget {
-  AppointmentWelcomePage({Key? key}) : super(key: key);
+  const AppointmentWelcomePage({Key? key}) : super(key: key);
 
   @override
   _AppointmentWelcomePageState createState() => _AppointmentWelcomePageState();
@@ -26,9 +26,9 @@ class _AppointmentWelcomePageState extends State<AppointmentWelcomePage> {
   int _currentIndex = 1;
   List<Widget> healthCardPages = [
     Container(), // home conatiner -> this is never displayed -> goto home
-    AppointmentList(),
-    CreateAppointmentPage(),
-    HospitalLocator(),
+    const AppointmentList(),
+    const CreateAppointmentPage(),
+    const HospitalLocator(),
   ];
 
   @override
@@ -52,29 +52,29 @@ class _AppointmentWelcomePageState extends State<AppointmentWelcomePage> {
         items: [
           /// Go to Home
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
+            icon: const Icon(Icons.home),
+            title: const Text("Home"),
             selectedColor: Colors.purple,
           ),
 
           /// Health Cards
           SalomonBottomBarItem(
-            icon: Icon(Icons.article_rounded),
-            title: Text("Appointments"),
+            icon: const Icon(Icons.article_rounded),
+            title: const Text("Appointments"),
             selectedColor: Colors.blue,
           ),
 
           /// Create Health Card
           SalomonBottomBarItem(
-            icon: Icon(Icons.post_add_outlined),
-            title: Text("New Appointment"),
+            icon: const Icon(Icons.post_add_outlined),
+            title: const Text("New Appointment"),
             selectedColor: Colors.green,
           ),
 
           /// Add Health Card
           SalomonBottomBarItem(
-            icon: Icon(Icons.local_pharmacy),
-            title: Text("Nearest Hospital"),
+            icon: const Icon(Icons.local_pharmacy),
+            title: const Text("Nearest Hospital"),
             selectedColor: Colors.pink,
           ),
         ],

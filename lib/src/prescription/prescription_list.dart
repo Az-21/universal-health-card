@@ -29,24 +29,24 @@ class PrescriptionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         elevation: 3,
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 identifier,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
-              Divider(),
+              const Divider(),
               // * Date
               Text(
                 timestamp,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
 
               // * Name of submitter + icon
@@ -54,39 +54,40 @@ class PrescriptionCard extends StatelessWidget {
                 children: [
                   Text(
                     submitterName,
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
-                  Spacer(),
-                  submitterVerified
-                      ? Icon(
-                          Icons.verified,
-                          size: 40,
-                          color: Colors.green,
-                        )
-                      : Icon(
-                          Icons.supervised_user_circle,
-                          size: 40,
-                          color: Colors.blue,
-                        )
+                  const Spacer(),
+                  if (submitterVerified)
+                    const Icon(
+                      Icons.verified,
+                      size: 40,
+                      color: Colors.green,
+                    )
+                  else
+                    const Icon(
+                      Icons.supervised_user_circle,
+                      size: 40,
+                      color: Colors.blue,
+                    )
                 ],
               ),
               // * Orgnization of submitter
               Text(
                 submitterOrg,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
 
               // ⸻⸻⸻⸻⸻⸻⸻⸻
               // * List of medicines in one unique prescription
               // ⸻⸻⸻⸻⸻⸻⸻⸻
               ListView(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 children: [
                   ListView.separated(
                     shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     itemCount: medicineList.length,
                     itemBuilder: (_, int index) {
                       return Column(
@@ -97,28 +98,29 @@ class PrescriptionCard extends StatelessWidget {
                             initialValue: medicineList[index],
                             enabled: false,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               labelText: 'Name Of Medicine #${index + 1}',
                             ),
                           ),
                           // * Vertical padding
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
 
                           // * Row below textfield conaining toggles
                           ToggleButtons(
                             color: Colors.grey[500],
                             selectedColor: Colors.white,
                             fillColor: Colors.green,
-                            children: [
-                              medicineStats[index][0]
-                                  ? Icon(Icons.fastfood)
-                                  : Icon(Icons.no_food),
-                              Icon(Icons.wb_twighlight),
-                              Icon(Icons.wb_sunny),
-                              Icon(Icons.nights_stay),
-                            ],
                             isSelected: medicineStats[index],
                             onPressed: (int i) {},
+                            children: [
+                              if (medicineStats[index][0])
+                                const Icon(Icons.fastfood)
+                              else
+                                const Icon(Icons.no_food),
+                              const Icon(Icons.wb_twighlight),
+                              const Icon(Icons.wb_sunny),
+                              const Icon(Icons.nights_stay),
+                            ],
                             // ^ widget becomes inactive without this line
                           ),
                         ],
@@ -143,7 +145,7 @@ class PrescriptionCard extends StatelessWidget {
 // * Appointment Card List
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class PrescriptionList extends StatefulWidget {
-  PrescriptionList({Key? key}) : super(key: key);
+  const PrescriptionList({Key? key}) : super(key: key);
 
   @override
   _PrescriptionListState createState() => _PrescriptionListState();
@@ -156,10 +158,10 @@ class _PrescriptionListState extends State<PrescriptionList> {
       body: Center(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.9,
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Swiper(
             itemCount: 3,
-            control: new SwiperControl(
+            control: SwiperControl(
                 color: ThemeServie().isSavedDarkMode()
                     ? Colors.white
                     : Colors.blue),

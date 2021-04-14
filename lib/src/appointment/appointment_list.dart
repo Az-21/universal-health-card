@@ -10,6 +10,7 @@ import 'package:health_app/theme/theme_service.dart';
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Reusable widget skeleton
 // ⸻⸻⸻⸻⸻⸻⸻⸻
+@immutable
 class AppointmentCard extends StatelessWidget {
   const AppointmentCard({
     Key? key,
@@ -26,63 +27,55 @@ class AppointmentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // * Title
-            Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Icon(
-                    Icons.arrow_forward_ios_sharp,
-                    size: 32,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'Appointment Details',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
+
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Icon(Icons.arrow_forward_ios_sharp, size: 32),
+                const SizedBox(width: 10),
+                const Text('Appointment Details',
+                    style: TextStyle(fontSize: 20)),
+              ],
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // * Subtitle
-            Container(
-                child: Column(
+            Column(
               children: [
                 ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text('$identifier'),
-                  subtitle: Text('Booked user'),
+                  leading: const Icon(Icons.person),
+                  title: Text(identifier),
+                  subtitle: const Text('Booked user'),
                 ),
                 ListTile(
-                  leading: Icon(Icons.local_hospital),
-                  title: Text('$hospital'),
-                  subtitle: Text('Name of hospital'),
+                  leading: const Icon(Icons.local_hospital),
+                  title: Text(hospital),
+                  subtitle: const Text('Name of hospital'),
                 ),
                 ListTile(
-                  leading: Icon(Icons.medical_services),
-                  title: Text('$specialization'),
-                  subtitle: Text('Specialist requested'),
+                  leading: const Icon(Icons.medical_services),
+                  title: Text(specialization),
+                  subtitle: const Text('Specialist requested'),
                 ),
                 ListTile(
-                  leading: Icon(Icons.access_time),
+                  leading: const Icon(Icons.access_time),
                   title: Text(formattedDateTime(appointmentTime)),
-                  subtitle: Text('Time slot'),
+                  subtitle: const Text('Time slot'),
                 ),
               ],
-            )),
+            ),
           ],
         ),
       ),
@@ -94,7 +87,7 @@ class AppointmentCard extends StatelessWidget {
 // * Appointment Card List
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 class AppointmentList extends StatefulWidget {
-  AppointmentList({Key? key}) : super(key: key);
+  const AppointmentList({Key? key}) : super(key: key);
 
   @override
   _AppointmentListState createState() => _AppointmentListState();
@@ -106,12 +99,11 @@ class _AppointmentListState extends State<AppointmentList> {
     return Scaffold(
       body: Center(
         child: Container(
-          clipBehavior: Clip.none,
           height: MediaQuery.of(context).size.height * 0.9,
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Swiper(
             itemCount: 3,
-            control: new SwiperControl(
+            control: SwiperControl(
                 color: ThemeServie().isSavedDarkMode()
                     ? Colors.white
                     : Colors.blue),

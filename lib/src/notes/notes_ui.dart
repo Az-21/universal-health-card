@@ -16,7 +16,7 @@ import 'package:health_app/src/appointment/locate_hospital.dart';
 //  * Navigation UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class NotesWelcomePage extends StatefulWidget {
-  NotesWelcomePage({Key? key}) : super(key: key);
+  const NotesWelcomePage({Key? key}) : super(key: key);
 
   @override
   _NotesWelcomePageState createState() => _NotesWelcomePageState();
@@ -26,9 +26,9 @@ class _NotesWelcomePageState extends State<NotesWelcomePage> {
   int _currentIndex = 1;
   List<Widget> healthCardPages = [
     Container(), // home conatiner -> this is never displayed -> goto home
-    NotesList(),
-    CreateNotesPage(),
-    HospitalLocator(),
+    const NotesList(),
+    const CreateNotesPage(),
+    const HospitalLocator(),
   ];
 
   @override
@@ -52,29 +52,29 @@ class _NotesWelcomePageState extends State<NotesWelcomePage> {
         items: [
           /// Go to Home
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
+            icon: const Icon(Icons.home),
+            title: const Text("Home"),
             selectedColor: Colors.purple,
           ),
 
           /// Health Details
           SalomonBottomBarItem(
-            icon: Icon(Icons.notes_sharp),
-            title: Text("Health Notes"),
+            icon: const Icon(Icons.notes_sharp),
+            title: const Text("Health Notes"),
             selectedColor: Colors.blue,
           ),
 
           /// Create Health Card
           SalomonBottomBarItem(
-            icon: Icon(Icons.note_add_sharp),
-            title: Text("New Health Note"),
+            icon: const Icon(Icons.note_add_sharp),
+            title: const Text("New Health Note"),
             selectedColor: Colors.green,
           ),
 
           /// Nearest Hospital
           SalomonBottomBarItem(
-            icon: Icon(Icons.local_hospital_outlined),
-            title: Text("Nearest Hospital"),
+            icon: const Icon(Icons.local_hospital_outlined),
+            title: const Text("Nearest Hospital"),
             selectedColor: Colors.pink,
           ),
         ],

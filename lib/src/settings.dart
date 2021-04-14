@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import '../theme/theme_service.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -27,25 +27,25 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings and About'),
+        title: const Text('Settings and About'),
         toolbarHeight: 72,
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children: [
-          Text(
+          const Text(
             'UI Settings',
             style: TextStyle(fontSize: 20),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
           ListView(
             shrinkWrap: true,
             children: [
               // * Dark Mode Toggle
               ListTile(
-                leading: Icon(Icons.color_lens_sharp),
-                title: Text('Dark Mode'),
-                subtitle: Text('Enable dark mode'),
+                leading: const Icon(Icons.color_lens_sharp),
+                title: const Text('Dark Mode'),
+                subtitle: const Text('Enable dark mode'),
                 trailing: CupertinoSwitch(
                   value: isDarkMode,
                   onChanged: (isDarkMode) => setState(
@@ -58,9 +58,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               // * Status Bar Hide Toggle
               ListTile(
-                leading: Icon(Icons.padding),
-                title: Text('Hide Status Bar'),
-                subtitle: Text('Go fullscreen'),
+                leading: const Icon(Icons.padding),
+                title: const Text('Hide Status Bar'),
+                subtitle: const Text('Go fullscreen'),
                 trailing: CupertinoSwitch(
                   value: isStatusHidden,
                   onChanged: (isStatusHidden) => setState(
@@ -79,20 +79,20 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ],
           ),
-          SizedBox(height: 32),
-          Text(
+          const SizedBox(height: 32),
+          const Text(
             'User Settings',
             style: TextStyle(fontSize: 20),
           ),
-          Divider(thickness: 2),
-          Text(
+          const Divider(thickness: 2),
+          const Text(
             'This data will appear in prescription cards and health notes to indicate which person created them.',
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
           ),
 
           // * Name
-          SizedBox(height: 20),
-          TextField(
+          const SizedBox(height: 20),
+          const TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Name',
@@ -101,8 +101,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
 
           // * Orgnazitaion
-          SizedBox(height: 20),
-          TextField(
+          const SizedBox(height: 20),
+          const TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Orgnization',
@@ -111,11 +111,11 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
 
           // * Bool Medical Professional
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListTile(
-            leading: Icon(Icons.medical_services_outlined),
-            title: Text('Medical Professional'),
-            subtitle: Text('Are you a medical professional'),
+            leading: const Icon(Icons.medical_services_outlined),
+            title: const Text('Medical Professional'),
+            subtitle: const Text('Are you a medical professional'),
             trailing: CupertinoSwitch(
               value: isDoctor,
               onChanged: (isDoctor) => setState(
@@ -127,15 +127,15 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
 
           // * About Section
-          SizedBox(height: 32),
-          Text(
+          const SizedBox(height: 32),
+          const Text(
             'About',
             style: TextStyle(fontSize: 20),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
           Text(
             aboutUs,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w300,
             ),
           ),

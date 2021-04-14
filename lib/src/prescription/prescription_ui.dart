@@ -2,21 +2,17 @@
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/material.dart';
-import 'package:health_app/src/prescription/prescription_list.dart';
-
-// Pub Dev Imports
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
-
-// Imports from other .dart files
-import 'add_prescription.dart';
 import 'package:health_app/src/prescription/locate_pharma.dart';
+import 'package:health_app/src/prescription/prescription_list.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'add_prescription.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Navigation UI
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class PrescriptionWelcomePage extends StatefulWidget {
-  PrescriptionWelcomePage({Key? key}) : super(key: key);
+  const PrescriptionWelcomePage({Key? key}) : super(key: key);
 
   @override
   _PrescriptionWelcomePageState createState() =>
@@ -27,9 +23,9 @@ class _PrescriptionWelcomePageState extends State<PrescriptionWelcomePage> {
   int _currentIndex = 1;
   List<Widget> healthCardPages = [
     Container(), // home conatiner -> this is never displayed -> goto home
-    PrescriptionList(),
-    PrescriptionCardAdder(),
-    PharmaLocator(),
+    const PrescriptionList(),
+    const PrescriptionCardAdder(),
+    const PharmaLocator(),
   ];
 
   @override
@@ -53,29 +49,29 @@ class _PrescriptionWelcomePageState extends State<PrescriptionWelcomePage> {
         items: [
           /// Go to Home
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
+            icon: const Icon(Icons.home),
+            title: const Text("Home"),
             selectedColor: Colors.purple,
           ),
 
           /// Prescription
           SalomonBottomBarItem(
-            icon: Icon(Icons.article_rounded),
-            title: Text("Prescription"),
+            icon: const Icon(Icons.article_rounded),
+            title: const Text("Prescription"),
             selectedColor: Colors.blue,
           ),
 
           /// Prescription adder
           SalomonBottomBarItem(
-            icon: Icon(Icons.post_add_outlined),
-            title: Text("New Prescription"),
+            icon: const Icon(Icons.post_add_outlined),
+            title: const Text("New Prescription"),
             selectedColor: Colors.green,
           ),
 
           /// Pharma locator
           SalomonBottomBarItem(
-            icon: Icon(Icons.local_pharmacy),
-            title: Text("Nearest Pharmacy"),
+            icon: const Icon(Icons.local_pharmacy),
+            title: const Text("Nearest Pharmacy"),
             selectedColor: Colors.pink,
           ),
         ],

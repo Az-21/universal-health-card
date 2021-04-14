@@ -13,7 +13,7 @@ import 'package:get_storage/get_storage.dart';
 //  * Health Card List
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 class HealthCardPage extends StatefulWidget {
-  HealthCardPage({Key? key}) : super(key: key);
+  const HealthCardPage({Key? key}) : super(key: key);
 
   @override
   _HealthCardPageState createState() => _HealthCardPageState();
@@ -32,25 +32,25 @@ class _HealthCardPageState extends State<HealthCardPage> {
     //  * Health Card Data
     //  TODO: implement firebase
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    List<String> cardNumbers = [
+    final List<String> cardNumbers = [
       'xxxx xxxx 0002',
       'xxxx xxxx 0003',
       'xxxx xxxx 0009',
       'xxxx xxxx 0015',
     ];
-    List<String> holderInfo = [
+    final List<String> holderInfo = [
       'A+ | High BP',
       'B+ | Allergic to X',
       'AB+ | Allergic to Y',
       'AB+ | Anemic',
     ];
-    List<String> cardHolder = [
+    final List<String> cardHolder = [
       'Abhijit Sahoo',
       'Abhishek Choudhary',
       'Amogh Mishra',
       'Dhruv Kanthaliya',
     ];
-    List<String> cvv = [
+    final List<String> cvv = [
       '0002',
       '0003',
       '0009',
@@ -58,7 +58,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
     ];
     // * For animating front and back of card
     initShowBack();
-    List? showBack = _getStorage.read('cardOrientation').length ==
+    final List<bool>? showBack = _getStorage.read('cardOrientation').length ==
             cardNumbers.length // if equal
         ? _getStorage.read('cardOrientation') // then use saved state
         : List<bool>.filled(cardNumbers.length, false,
@@ -68,7 +68,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
     //  * Health card generator + divider (.separated)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return ListView.separated(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       itemCount: cardNumbers.length,
       itemBuilder: (_, index) {
         return GestureDetector(
@@ -84,10 +84,10 @@ class _HealthCardPageState extends State<HealthCardPage> {
           //  * Core health card
           // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           child: CreditCard(
-            cardNumber: '${cardNumbers[index]}',
-            cardExpiry: '${holderInfo[index]}',
-            cardHolderName: '${cardHolder[index]}',
-            cvv: '${cvv[index]}',
+            cardNumber: cardNumbers[index],
+            cardExpiry: holderInfo[index],
+            cardHolderName: cardHolder[index],
+            cvv: cvv[index],
             bankName: 'Universal Health Card',
             cardType: CardType.other,
             showBackSide: showBack![index],
@@ -112,7 +112,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
       //  * Separator
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       separatorBuilder: (context, index) {
-        return Divider(
+        return const Divider(
           thickness: 2,
           height: 40,
           indent: 20,

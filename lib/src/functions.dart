@@ -8,7 +8,7 @@ import 'package:maps_launcher/maps_launcher.dart';
 // * Function: Print Day | Date
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 String formattedDate() {
-  DateTime now = DateTime.now();
+  final DateTime now = DateTime.now();
   // EEEE gives the day of the week
   // dd gives the day
   // MMMM dives the month
@@ -32,19 +32,20 @@ String formattedDateTime(DateTime time) {
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Function: Snackbar
 // ⸻⸻⸻⸻⸻⸻⸻⸻
+// ignore: avoid_positional_boolean_parameters
 void infoSnackbar(String title, String subtitle, bool success) {
   Get.snackbar(
-    '$title',
-    '$subtitle',
+    title,
+    subtitle,
     icon: success
-        ? Icon(Icons.done_all, color: Colors.white)
-        : Icon(Icons.error_outline, color: Colors.white),
+        ? const Icon(Icons.done_all, color: Colors.white)
+        : const Icon(Icons.error_outline, color: Colors.white),
     shouldIconPulse: true,
     colorText: Colors.white,
     barBlur: 2,
     backgroundColor: success ? Colors.green : Colors.redAccent,
     isDismissible: true,
-    duration: Duration(seconds: 5),
+    duration: const Duration(seconds: 5),
   );
 }
 
@@ -72,7 +73,7 @@ class ImageFunctionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
@@ -89,13 +90,13 @@ class ImageFunctionCard extends StatelessWidget {
             ),
           ),
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 // * Title
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -104,10 +105,10 @@ class ImageFunctionCard extends StatelessWidget {
                         color: Colors.white,
                         size: 32,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
                         ),
@@ -116,33 +117,34 @@ class ImageFunctionCard extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 // * Subtitle
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     subtitle,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
 
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
 
                 // * Action
                 Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       onPrimary: Colors.white,
                       primary: Colors.green,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
                       // minimumSize: Size(200, 100),
                     ),
-                    icon: Icon(Icons.launch),
-                    label: Text('Launch'),
+                    icon: const Icon(Icons.launch),
+                    label: const Text('Launch'),
                     onPressed: () {
                       _launchURL(url, isMap);
                     },

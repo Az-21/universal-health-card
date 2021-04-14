@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class CreateAppointmentPage extends StatefulWidget {
-  CreateAppointmentPage({Key? key}) : super(key: key);
+  const CreateAppointmentPage({Key? key}) : super(key: key);
 
   @override
   _CreateAppointmentPageState createState() => _CreateAppointmentPageState();
@@ -35,28 +35,28 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        child: Icon(
+        onPressed: () {},
+        child: const Icon(
           Icons.post_add_rounded,
           color: Colors.white,
         ),
-        onPressed: () {},
       ),
       body: ListView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         children: [
           /// * TextField: Name of Hospital
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Select Hospital',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
           TextField(
             // controller: myController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Name of Hospital',
               hintText: 'MS Ramaiah Hospital',
@@ -68,15 +68,15 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
           ),
 
           /// * Cupertino Picker: Pick Card
-          SizedBox(height: 32),
-          Text(
+          const SizedBox(height: 32),
+          const Text(
             'Select Health Card',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
           SizedBox(
             height: 90,
             child: CupertinoPicker(
@@ -93,15 +93,15 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
           ),
 
           /// * Cupertino Picker: Specialist
-          SizedBox(height: 32),
-          Text(
+          const SizedBox(height: 32),
+          const Text(
             'Select Specialization',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
           SizedBox(
             height: 90,
             child: CupertinoPicker(
@@ -120,15 +120,15 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
           ),
 
           /// * Cupertino Date Picker: Date and Time
-          SizedBox(height: 32),
-          Text(
+          const SizedBox(height: 32),
+          const Text(
             'Select Appointment Time',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
-          Divider(thickness: 2),
+          const Divider(thickness: 2),
           SizedBox(
             height: 120,
             child: CupertinoDatePicker(

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Pub Dev Imports
-import 'package:get/get.dart';
 import 'package:health_app/src/functions.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
@@ -15,7 +14,7 @@ class SyncHealthCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: FetchHealthCardForm(),
     );
   }
@@ -32,12 +31,12 @@ class FetchHealthCardForm extends StatelessWidget {
         Card(
           color: Colors.blue,
           elevation: 5,
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -46,15 +45,15 @@ class FetchHealthCardForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.system_update_alt,
                       color: Colors.white,
                       size: 32,
                     ),
-                    SizedBox(width: 10),
-                    Text(
+                    const SizedBox(width: 10),
+                    const Text(
                       'Fetch Health Card',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                       ),
@@ -62,12 +61,12 @@ class FetchHealthCardForm extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 // * Subtitle
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text(
                     'Add an existing health card to your device.',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -78,14 +77,14 @@ class FetchHealthCardForm extends StatelessWidget {
         ),
 
         /// * Input Form
-        HealthCardSyncForm(),
+        const HealthCardSyncForm(),
       ],
     );
   }
 }
 
 class HealthCardSyncForm extends StatefulWidget {
-  HealthCardSyncForm({Key? key}) : super(key: key);
+  const HealthCardSyncForm({Key? key}) : super(key: key);
 
   @override
   _HealthCardSyncFormState createState() => _HealthCardSyncFormState();
@@ -101,17 +100,16 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
   Widget build(BuildContext context) {
     final focus = FocusScope.of(context); // next focus
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         /// Aadhar ID
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: TextFormField(
             controller: formAadhar,
             maxLength: 14, // input formatter will add 12 + 2 = 14
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               counterText: '',
               labelText: 'Aadhar UID',
@@ -127,10 +125,10 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
 
         /// Security Key / CVV
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: TextFormField(
             controller: formSecurityKey,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               counterText: '',
               labelText: 'Security Key',
@@ -147,15 +145,15 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
         /// Submit Button
         Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               onPrimary: Colors.white,
               primary: Colors.blue,
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             ),
-            icon: Icon(Icons.cloud_download),
-            label: Text('Fetch health card'),
+            icon: const Icon(Icons.cloud_download),
+            label: const Text('Fetch health card'),
             onPressed: () {
               // TODO: validator here -> 4 digit key, 12 digit aadhar...
               // TODO: firebase push here
