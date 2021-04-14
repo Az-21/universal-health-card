@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "915839677020",
+    "project_id": "health-card-app",
+    "storage_bucket": "health-card-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915839677020:android:4ddc1da17f30ce4e5d6c99",
+        "android_client_info": {
+          "package_name": "com.flutterDevAz21.health_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915839677020-484qgq8184hnt7njnn9t5m22gs4b5950.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterDevAz21.health_app",
+            "certificate_hash": "540a0db70e13931ffb967fe030a5923a8015dbbd"
+          }
+        },
+        {
+          "client_id": "915839677020-p59cbvt7k65m40da3faeuen2d51vsl66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKFmzv1s-Q7ZFdlzjLXvLspjS0guzKT6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915839677020-p59cbvt7k65m40da3faeuen2d51vsl66.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
