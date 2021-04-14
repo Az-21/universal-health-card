@@ -2,7 +2,9 @@
 // * Imports
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:health_app/theme/theme_service.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Reusable widget skeleton
@@ -38,10 +40,10 @@ class NotesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 10,
+        elevation: 3,
         margin: EdgeInsets.symmetric(vertical: 10),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
           padding: EdgeInsets.all(20),
@@ -112,28 +114,37 @@ class _NotesListState extends State<NotesList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        // rename to ListView.builder if separator isn't required
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        itemCount: 2,
-        shrinkWrap: true,
-        // Widget children
-        itemBuilder: (_, index) {
-          return NotesCard(
-            identifier: 'Firstname | 0001',
-            timestamp: 'Saturday | April 10, 2021',
-            submitterName: 'Dr. XYZ',
-            submitterOrg: 'ABC Hospital',
-            submitterVerified: true,
-            temp: '36.5',
-            height: '180',
-            weight: '80',
-            bpS: '120',
-            bpD: '80',
-            message:
-                '# Symptoms\n---\n* Body pain \n* Sore eyes \n\n# Notes\n---\n* Diagnosis <//> \n* <Medical reference for other doctors>\n# Instructions\n---\n* Eight hours of sleep\n* Regularly apply eyedrops',
-          );
-        },
+      body: Center(
+        child: Container(
+          clipBehavior: Clip.none,
+          height: MediaQuery.of(context).size.height * 0.9,
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Swiper(
+            itemCount: 3,
+            control: new SwiperControl(
+                color: ThemeServie().isSavedDarkMode()
+                    ? Colors.white
+                    : Colors.blue),
+            itemBuilder: (_, index) {
+              return SingleChildScrollView(
+                child: NotesCard(
+                  identifier: 'Firstname | 000${index + 1}',
+                  timestamp: 'Saturday | April 10, 2021',
+                  submitterName: 'Dr. XYZ',
+                  submitterOrg: 'ABC Hospital',
+                  submitterVerified: true,
+                  temp: '36.5',
+                  height: '180',
+                  weight: '80',
+                  bpS: '120',
+                  bpD: '80',
+                  message:
+                      '# Symptoms\n---\n* Body pain \n* Sore eyes \n\n# Notes\n---\n* Diagnosis <//> \n* <Medical reference for other doctors>\n# Instructions\n---\n* Eight hours of sleep\n* Regularly apply eyedrops\n* Lorem\n* Ipsum\n',
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

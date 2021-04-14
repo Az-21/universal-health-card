@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 // Pub Dev Imports
 import 'package:get/get.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+import 'package:health_app/theme/theme_service.dart';
 
 // Flutter Components Imports
 import 'healthCard/health_cards_ui.dart';
-import 'package:health_app/src/functions.dart';
 import 'package:health_app/src/notes/notes_ui.dart';
 import 'package:health_app/src/appointment/appointment_ui.dart';
 import 'package:health_app/src/prescription/prescription_ui.dart';
@@ -58,12 +58,12 @@ class HomeUI extends StatelessWidget {
           child: Swiper(
             itemCount: 4,
             control: new SwiperControl(
-              size: 20,
-            ),
+                color: ThemeServie().isSavedDarkMode()
+                    ? Colors.white
+                    : Colors.black),
             itemWidth: MediaQuery.of(context).size.width * 0.75,
             itemHeight: MediaQuery.of(context).size.height * 0.7,
             layout: SwiperLayout.STACK,
-            duration: 200,
             itemBuilder: (BuildContext context, int index) {
               return Stack(
                 clipBehavior: Clip.none,
@@ -71,7 +71,7 @@ class HomeUI extends StatelessWidget {
                   /// * Background Card Gradient
                   Container(
                     decoration: new BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       gradient: new LinearGradient(
                         colors: _gradientColors[index],
                         begin: Alignment(1, 1),

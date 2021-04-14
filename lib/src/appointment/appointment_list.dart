@@ -4,6 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:health_app/src/functions.dart';
+import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+import 'package:health_app/theme/theme_service.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Reusable widget skeleton
@@ -23,10 +25,10 @@ class AppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
+      elevation: 2,
       margin: EdgeInsets.only(top: 20),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
         padding: EdgeInsets.all(20),
@@ -102,20 +104,29 @@ class _AppointmentListState extends State<AppointmentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        // rename to ListView.builder if separator isn't required
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        itemCount: 4,
-        shrinkWrap: true,
-        // Widget children
-        itemBuilder: (_, index) {
-          return AppointmentCard(
-            hospital: 'ABC Hospital',
-            identifier: 'Firstname | 0001',
-            specialization: 'General Practitioner',
-            appointmentTime: DateTime.now(),
-          );
-        },
+      body: Center(
+        child: Container(
+          clipBehavior: Clip.none,
+          height: MediaQuery.of(context).size.height * 0.9,
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Swiper(
+            itemCount: 3,
+            control: new SwiperControl(
+                color: ThemeServie().isSavedDarkMode()
+                    ? Colors.white
+                    : Colors.blue),
+            itemBuilder: (_, index) {
+              return SingleChildScrollView(
+                child: AppointmentCard(
+                  hospital: 'ABC Hospital',
+                  identifier: 'Firstname | 00${(index + 1) * 10}',
+                  specialization: 'General Practitioner',
+                  appointmentTime: DateTime.now(),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
