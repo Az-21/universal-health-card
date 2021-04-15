@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:health_app/src/functions.dart';
 
 class CreateAppointmentPage extends StatefulWidget {
   const CreateAppointmentPage({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class CreateAppointmentPage extends StatefulWidget {
 }
 
 class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
-  // * Vars
+  TextEditingController hospital = TextEditingController();
 
   List<String> cardList = [
     'Abhijit | xxxx xxxx 0002',
@@ -17,128 +18,388 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
     'Amogh | xxxx xxxx 0009',
     'Dhruv | xxxx xxxx 0015',
   ];
+  int _selectedCard = 0;
 
   List<String> fieldSpl = [
-    'GP',
-    'ENT',
+    'General Practitioner',
+    'ENT Specialist',
     'Pediatrist',
     'Cardiologist',
     'Opthamologist',
     'Neurologist',
   ];
+  int _selectedSpecialist = 0;
 
   DateTime now = DateTime.now();
+  DateTime _selectedTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        onPressed: () {},
-        child: const Icon(
-          Icons.post_add_rounded,
-          color: Colors.white,
-        ),
-      ),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(5),
         children: [
           /// * TextField: Name of Hospital
           const SizedBox(height: 20),
-          const Text(
-            'Select Hospital',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+          Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-          ),
-          const Divider(thickness: 2),
-          TextField(
-            // controller: myController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Name of Hospital',
-              hintText: 'MS Ramaiah Hospital',
-              icon: Icon(Icons.local_hospital_outlined),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // * Title
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Icon(Icons.local_hospital, size: 32),
+                        const SizedBox(width: 10),
+                        const Text('Hospital', style: TextStyle(fontSize: 20))
+                      ],
+                    ),
+                  ),
+
+                  // * Subtitle
+                  const SizedBox(height: 5),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Text('Appointment will be scheduled at'),
+                  ),
+
+                  // * Content
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: hospital,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Name of Hospital',
+                      hintText: 'MS Ramaiah Hospital',
+                    ),
+                    onSubmitted: (value) {
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
             ),
-            onSubmitted: (value) {
-              //setState(() {});
-            },
           ),
 
           /// * Cupertino Picker: Pick Card
-          const SizedBox(height: 32),
-          const Text(
-            'Select Health Card',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+          Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-          ),
-          const Divider(thickness: 2),
-          SizedBox(
-            height: 90,
-            child: CupertinoPicker(
-              squeeze: 0.9,
-              itemExtent: 36,
-              looping: true,
-              diameterRatio: 2,
-              onSelectedItemChanged: (index) {},
-              children: [
-                for (String cardNumber in cardList)
-                  Center(child: Text(cardNumber)),
-              ],
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // * Title
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Icon(Icons.credit_card, size: 32),
+                        const SizedBox(width: 10),
+                        const Text('Health Card',
+                            style: TextStyle(fontSize: 20))
+                      ],
+                    ),
+                  ),
+
+                  // * Subtitle
+                  const SizedBox(height: 5),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Text('Appointment will be made for'),
+                  ),
+
+                  // * Content
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 90,
+                    child: CupertinoPicker(
+                      squeeze: 0.9,
+                      itemExtent: 36,
+                      looping: true,
+                      diameterRatio: 2,
+                      onSelectedItemChanged: (index) {
+                        _selectedCard = index;
+                        setState(() {});
+                      },
+                      children: [
+                        for (String cardNumber in cardList)
+                          Center(child: Text(cardNumber)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
           /// * Cupertino Picker: Specialist
-          const SizedBox(height: 32),
-          const Text(
-            'Select Specialization',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+          Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-          ),
-          const Divider(thickness: 2),
-          SizedBox(
-            height: 90,
-            child: CupertinoPicker(
-              squeeze: 0.9,
-              itemExtent: 36,
-              looping: true,
-              diameterRatio: 2,
-              onSelectedItemChanged: (index) {},
-              children: [
-                for (String specialist in fieldSpl)
-                  Center(child: Text(specialist)),
-              ],
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // * Title
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Icon(Icons.auto_awesome, size: 32),
+                        const SizedBox(width: 10),
+                        const Text('Specialization',
+                            style: TextStyle(fontSize: 20))
+                      ],
+                    ),
+                  ),
+
+                  // * Subtitle
+                  const SizedBox(height: 5),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Text('Appointment will be requested for a'),
+                  ),
+
+                  // * Content
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 90,
+                    child: CupertinoPicker(
+                      squeeze: 0.9,
+                      itemExtent: 36,
+                      looping: true,
+                      diameterRatio: 2,
+                      onSelectedItemChanged: (index) {
+                        _selectedSpecialist = index;
+                        setState(() {});
+                      },
+                      children: [
+                        for (String specialist in fieldSpl)
+                          Center(child: Text(specialist)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
           /// * Cupertino Date Picker: Date and Time
-          const SizedBox(height: 32),
-          const Text(
-            'Select Appointment Time',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+          Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // * Title
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Icon(Icons.schedule, size: 32),
+                        const SizedBox(width: 10),
+                        const Text('Date and Time',
+                            style: TextStyle(fontSize: 20))
+                      ],
+                    ),
+                  ),
+
+                  // * Subtitle
+                  const SizedBox(height: 5),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Text('Appointment will scheduled at'),
+                  ),
+
+                  // * Content
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 120,
+                    child: CupertinoDatePicker(
+                      use24hFormat: true,
+                      minuteInterval: 15,
+                      initialDateTime:
+                          now.add(Duration(minutes: 15 - now.minute % 15)),
+                      onDateTimeChanged: (value) {
+                        setState(
+                          () {
+                            _selectedTime = value;
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          const Divider(thickness: 2),
-          SizedBox(
-            height: 120,
-            child: CupertinoDatePicker(
-              use24hFormat: true,
-              minuteInterval: 15,
-              initialDateTime: now.add(Duration(minutes: 15 - now.minute % 15)),
-              onDateTimeChanged: (value) {
-                setState(
-                  () {
-                    // TODO: DateTime _selectedTime = value;
-                  },
-                );
-              },
+
+          /// * Finalize and submit
+          Card(
+            color: Colors.blue,
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // * Title
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Icon(
+                          Icons.check_circle_outline,
+                          size: 32,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(width: 10),
+                        const Text(
+                          'Finalize and Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // * Content
+                  const SizedBox(height: 10),
+                  Column(
+                    children: [
+                      /// Hospital
+                      ListTile(
+                        leading: const Icon(
+                          Icons.local_hospital,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          hospital.text,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        subtitle: const Text(
+                          'Hospital',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+
+                      /// Health Card
+                      ListTile(
+                        leading: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          cardList[_selectedCard],
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        subtitle: const Text(
+                          'Appointee',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+
+                      /// Specialization
+                      ListTile(
+                        leading: const Icon(
+                          Icons.auto_awesome,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          fieldSpl[_selectedSpecialist],
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        subtitle: const Text(
+                          'Specialist',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+
+                      /// Health Card
+                      ListTile(
+                        leading: const Icon(
+                          Icons.schedule,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          formattedDateTime(_selectedTime),
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        subtitle: const Text(
+                          'Date and Time',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  /// Submit button
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        onPrimary: Colors.black,
+                        primary: Colors.white,
+                        elevation: 3,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 30,
+                          vertical: 15,
+                        ),
+                      ),
+                      icon: const Icon(Icons.post_add),
+                      label: const Text('Create Appointment'),
+                      onPressed: () {},
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
