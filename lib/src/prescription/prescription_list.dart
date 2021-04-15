@@ -162,9 +162,11 @@ class _PrescriptionListState extends State<PrescriptionList> {
           child: Swiper(
             itemCount: 3,
             control: SwiperControl(
-                color: ThemeServie().isSavedDarkMode()
-                    ? Colors.white
-                    : Colors.blue),
+              color:
+                  ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
+            ),
+            layout: SwiperLayout.STACK,
+            itemWidth: MediaQuery.of(context).size.width * 0.9,
             itemBuilder: (_, index) {
               return SingleChildScrollView(
                 child: PrescriptionCard(

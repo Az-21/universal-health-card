@@ -104,9 +104,11 @@ class _AppointmentListState extends State<AppointmentList> {
           child: Swiper(
             itemCount: 3,
             control: SwiperControl(
-                color: ThemeServie().isSavedDarkMode()
-                    ? Colors.white
-                    : Colors.blue),
+              color:
+                  ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
+            ),
+            layout: SwiperLayout.STACK,
+            itemWidth: MediaQuery.of(context).size.width * 0.9,
             itemBuilder: (_, index) {
               return SingleChildScrollView(
                 child: AppointmentCard(
