@@ -114,7 +114,7 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                                 temp = double.parse(value.toString());
                               });
                               // Update textfield with slider
-                              textTemp.text = value.toString();
+                              textTemp.text = temp.toStringAsFixed(1);
                             },
                             position: LinearElementPosition.outside,
                             child: SizedBox(
@@ -151,7 +151,6 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                     Expanded(
                       flex: 3,
                       child: TextField(
-                        /// ! TODO: catch null errors!!!
                         keyboardType: const TextInputType.numberWithOptions(
                             decimal: true),
                         inputFormatters: [
@@ -165,8 +164,13 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                           hintText: '36.5',
                         ),
                         onSubmitted: (value) {
-                          temp = double.parse(value);
-                          setState(() {});
+                          if (value == '' || value == '-') {
+                            textTemp.text = '36.0';
+                            setState(() => temp = 36.0);
+                          } else {
+                            temp = double.parse(value);
+                            setState(() {});
+                          }
                         },
                       ),
                     ),
