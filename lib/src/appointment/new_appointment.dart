@@ -112,9 +112,7 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
               onSelectedItemChanged: (index) {},
               children: [
                 for (String specialist in fieldSpl)
-                  Center(
-                    child: Text(specialist),
-                  ),
+                  Center(child: Text(specialist)),
               ],
             ),
           ),

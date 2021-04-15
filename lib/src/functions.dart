@@ -68,7 +68,7 @@ class ImageFunctionCard extends StatelessWidget {
   final IconData icon;
   final String imagePath;
   final String url;
-  final bool isMap; // 1 = map, 0 = search
+  final bool isMap;
 
   @override
   Widget build(BuildContext context) {

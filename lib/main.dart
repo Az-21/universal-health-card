@@ -69,7 +69,7 @@ class _DarkModeHomeState extends State<DarkModeHome> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.to(() => SettingsPage());
+          Get.to(() => const SettingsPage());
         },
         label: const Text('Settings'),
         icon: const Icon(Icons.settings),
