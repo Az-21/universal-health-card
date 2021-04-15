@@ -28,7 +28,6 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
   ];
 
   DateTime now = DateTime.now();
-  DateTime? _selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +135,7 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
               onDateTimeChanged: (value) {
                 setState(
                   () {
-                    _selectedTime = value;
+                    // TODO: DateTime _selectedTime = value;
                   },
                 );
               },

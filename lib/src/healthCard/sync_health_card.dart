@@ -53,7 +53,7 @@ class FetchHealthCardForm extends StatelessWidget {
                     const SizedBox(width: 10),
                     const Text(
                       'Fetch Health Card',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                       ),

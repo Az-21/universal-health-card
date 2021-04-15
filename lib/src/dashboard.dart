@@ -142,7 +142,7 @@ void _pageLauncher(int index) {
       Get.to(() => const AppointmentWelcomePage());
       break;
     case 2:
-      Get.to(() => PrescriptionWelcomePage());
+      Get.to(() => const PrescriptionWelcomePage());
       break;
     case 3:
       Get.to(() => const NotesWelcomePage());
