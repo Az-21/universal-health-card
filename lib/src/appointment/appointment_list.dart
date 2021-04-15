@@ -26,8 +26,8 @@ class AppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
-      margin: const EdgeInsets.only(top: 20),
+      color: Colors.blue,
+      elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -37,44 +37,133 @@ class AppointmentCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // * Title
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Icon(
+                    Icons.check_circle_outline,
+                    size: 32,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(width: 10),
+                  const Text(
+                    'Appointment Details',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              // ignore: prefer_const_literals_to_create_immutables
+            // * Content
+            const SizedBox(height: 10),
+            Column(
               children: [
-                const Icon(Icons.arrow_forward_ios_sharp, size: 32),
-                const SizedBox(width: 10),
-                const Text('Appointment Details',
-                    style: TextStyle(fontSize: 20)),
+                /// Hospital
+                ListTile(
+                  leading: const Icon(
+                    Icons.local_hospital,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    hospital,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    'Hospital',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
+                /// Health Card
+                ListTile(
+                  leading: const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    identifier,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    'Appointee',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
+                /// Specialization
+                ListTile(
+                  leading: const Icon(
+                    Icons.auto_awesome,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    specialization,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    'Specialist',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
+                /// Health Card
+                ListTile(
+                  leading: const Icon(
+                    Icons.schedule,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    formattedDateTime(appointmentTime),
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    'Date and Time',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ],
             ),
 
-            const SizedBox(height: 10),
-
-            // * Subtitle
-            Column(
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.person),
-                  title: Text(identifier),
-                  subtitle: const Text('Booked user'),
+            /// Submit button
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  onPrimary: Colors.black,
+                  primary: Colors.white,
+                  elevation: 3,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 15,
+                  ),
                 ),
-                ListTile(
-                  leading: const Icon(Icons.local_hospital),
-                  title: Text(hospital),
-                  subtitle: const Text('Name of hospital'),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.medical_services),
-                  title: Text(specialization),
-                  subtitle: const Text('Specialist requested'),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.access_time),
-                  title: Text(formattedDateTime(appointmentTime)),
-                  subtitle: const Text('Time slot'),
-                ),
-              ],
+                icon: const Icon(Icons.contacts),
+                label: const Text('Contact Details'),
+                onPressed: () {},
+              ),
             ),
           ],
         ),
@@ -97,29 +186,27 @@ class _AppointmentListState extends State<AppointmentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.9,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: Swiper(
-            itemCount: 3,
-            control: SwiperControl(
-              color:
-                  ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
-            ),
-            layout: SwiperLayout.STACK,
-            itemWidth: MediaQuery.of(context).size.width * 0.9,
-            itemBuilder: (_, index) {
-              return SingleChildScrollView(
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        child: Swiper(
+          itemCount: 3,
+          control: SwiperControl(
+            color: ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
+          ),
+          layout: SwiperLayout.STACK,
+          itemWidth: MediaQuery.of(context).size.width * 0.9,
+          itemBuilder: (_, index) {
+            return Center(
+              child: SingleChildScrollView(
                 child: AppointmentCard(
                   hospital: 'ABC Hospital',
                   identifier: 'Firstname | 00${(index + 1) * 10}',
                   specialization: 'General Practitioner',
                   appointmentTime: DateTime.now(),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
