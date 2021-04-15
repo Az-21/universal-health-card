@@ -52,7 +52,11 @@ class NotesCard extends StatelessWidget {
             children: [
               Text(
                 identifier,
-                style: const TextStyle(fontSize: 16),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
               ),
               const Divider(),
               // * Date
@@ -93,7 +97,7 @@ class NotesCard extends StatelessWidget {
 
               MarkdownBody(
                 data:
-                    '# Vitals\n---\n* Temperature: $temp °C\n* Height: $height cm\n* Weight: $weight kg\n* Blood pressure: $bpS / $bpD mmH\n\n $message',
+                    '## Vitals\n---\n* Temperature: $temp °C\n* Height: $height cm\n* Weight: $weight kg\n* Blood pressure: $bpS / $bpD mmH\n\n $message',
               )
             ],
           ),
@@ -141,7 +145,7 @@ class _NotesListState extends State<NotesList> {
                   bpS: '120',
                   bpD: '80',
                   message:
-                      '# Symptoms\n---\n* Body pain \n* Sore eyes \n\n# Notes\n---\n* Diagnosis <//> \n* <Medical reference for other doctors>\n# Instructions\n---\n* Eight hours of sleep\n* Regularly apply eyedrops\n* Lorem\n* Ipsum\n',
+                      '## Symptoms\n---\n* Body pain \n* Sore eyes \n\n## Notes\n---\n* Diagnosis <//> \n* <Medical reference for other doctors>\n## Instructions\n---\n* Eight hours of sleep\n* Regularly apply eyedrops\n* Lorem\n* Ipsum\n',
                 ),
               );
             },
