@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:awesome_card/awesome_card.dart';
-import 'package:get_storage/get_storage.dart';
-
-// Flutter Components Imports for Navigation
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Health Card List
@@ -20,7 +17,52 @@ class HealthCardPage extends StatefulWidget {
 }
 
 class _HealthCardPageState extends State<HealthCardPage> {
-  final _getStorage = GetStorage();
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  * Health Card Data
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  List<String> cardNumbers = [];
+  List<String> holderInfo = [];
+  List<String> cardHolder = [];
+  List<String> cvv = [];
+  List<bool> showBack = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    cardNumbers = [
+      'xxxx xxxx 0002',
+      'xxxx xxxx 0003',
+      'xxxx xxxx 0009',
+      'xxxx xxxx 0015',
+    ];
+
+    holderInfo = [
+      'A+ | High BP',
+      'B+ | Allergic to X',
+      'AB+ | Allergic to Y',
+      'AB+ | Anemic',
+    ];
+
+    cardHolder = [
+      'Abhijit Sahoo',
+      'Abhishek Choudhary',
+      'Amogh Mishra',
+      'Dhruv Kanthaliya',
+    ];
+    cvv = [
+      '0002',
+      '0003',
+      '0009',
+      '0015',
+    ];
+
+    // * For animating front and back of card
+    final List<bool> showBackInit =
+        List<bool>.filled(cardNumbers.length, false, growable: true);
+
+    showBack = showBackInit;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,42 +70,6 @@ class _HealthCardPageState extends State<HealthCardPage> {
   }
 
   ListView _buildHealthCardList() {
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    //  * Health Card Data
-    //  TODO: implement firebase
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    final List<String> cardNumbers = [
-      'xxxx xxxx 0002',
-      'xxxx xxxx 0003',
-      'xxxx xxxx 0009',
-      'xxxx xxxx 0015',
-    ];
-    final List<String> holderInfo = [
-      'A+ | High BP',
-      'B+ | Allergic to X',
-      'AB+ | Allergic to Y',
-      'AB+ | Anemic',
-    ];
-    final List<String> cardHolder = [
-      'Abhijit Sahoo',
-      'Abhishek Choudhary',
-      'Amogh Mishra',
-      'Dhruv Kanthaliya',
-    ];
-    final List<String> cvv = [
-      '0002',
-      '0003',
-      '0009',
-      '0015',
-    ];
-    // * For animating front and back of card
-    initShowBack();
-    final List<bool>? showBack = _getStorage.read('cardOrientation').length ==
-            cardNumbers.length // if equal
-        ? _getStorage.read('cardOrientation') // then use saved state
-        : List<bool>.filled(cardNumbers.length, false,
-            growable: true); // else, create a new bool list
-
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     //  * Health card generator + divider (.separated)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -76,9 +82,9 @@ class _HealthCardPageState extends State<HealthCardPage> {
           //  * Rebuild card on tap -> animate
           // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           onTap: () {
-            showBack![index] = !showBack[index];
-            _getStorage.write('cardOrientation', showBack);
-            setState(() {});
+            setState(() {
+              showBack[index] = !showBack[index];
+            });
           },
           // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           //  * Core health card
@@ -90,7 +96,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
             cvv: cvv[index],
             bankName: 'Universal Health Card',
             cardType: CardType.other,
-            showBackSide: showBack![index],
+            showBackSide: showBack[index],
             frontBackground: CardBackgrounds.black,
             backBackground: CardBackgrounds.white,
             showShadow: true,
@@ -112,22 +118,8 @@ class _HealthCardPageState extends State<HealthCardPage> {
       //  * Separator
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       separatorBuilder: (context, index) {
-        return const Divider(
-          thickness: 2,
-          height: 40,
-          indent: 20,
-          endIndent: 20,
-        );
+        return const SizedBox(height: 32);
       },
     );
-  }
-
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //  * Initialize for first time install -> prevent null error
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  void initShowBack() {
-    if (_getStorage.read('cardOrientation') == null) {
-      _getStorage.write('cardOrientation', [false]);
-    }
   }
 }
