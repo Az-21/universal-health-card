@@ -74,7 +74,7 @@ class _DarkModeHomeState extends State<DarkModeHome> {
         label: const Text('Settings'),
         icon: const Icon(Icons.settings),
         foregroundColor: Colors.white,
-        backgroundColor: Colors.green,
+        backgroundColor: CupertinoColors.systemGreen,
       ),
 
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

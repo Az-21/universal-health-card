@@ -2,12 +2,14 @@
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:health_app/src/appointment/appointment_ui.dart';
 import 'package:health_app/src/notes/notes_ui.dart';
 import 'package:health_app/src/prescription/prescription_ui.dart';
 import 'package:health_app/theme/theme_service.dart';
+
 import 'healthCard/health_cards_ui.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
@@ -36,11 +38,11 @@ class HomeUI extends StatelessWidget {
     [Colors.red, Colors.orange],
   ];
 
-  static final List<Icon> _cardIcons = [
-    const Icon(Icons.dashboard_rounded, color: Colors.white),
-    const Icon(Icons.qr_code_scanner_rounded, color: Colors.white),
-    const Icon(Icons.healing_outlined, color: Colors.white),
-    const Icon(Icons.note_add, color: Colors.white),
+  static final List<FaIcon> _cardIcons = [
+    const FaIcon(FontAwesomeIcons.solidIdBadge, color: Colors.white),
+    const FaIcon(FontAwesomeIcons.calendarPlus, color: Colors.white),
+    const FaIcon(FontAwesomeIcons.prescriptionBottleAlt, color: Colors.white),
+    const FaIcon(FontAwesomeIcons.notesMedical, color: Colors.white),
   ];
 
   @override
