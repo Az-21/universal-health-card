@@ -150,7 +150,7 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
             style: ElevatedButton.styleFrom(
               onPrimary: Colors.white,
               primary: Colors.blue,
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
             ),
             icon: const Icon(Icons.cloud_download),
             label: const Text('Fetch health card'),

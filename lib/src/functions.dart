@@ -140,7 +140,7 @@ class ImageFunctionCard extends StatelessWidget {
                       onPrimary: Colors.white,
                       primary: Colors.green,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 10),
+                          horizontal: 30, vertical: 15),
                       // minimumSize: Size(200, 100),
                     ),
                     icon: const Icon(Icons.launch),
