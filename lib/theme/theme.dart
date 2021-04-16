@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class Themes {
   final lightTheme = ThemeData.light().copyWith(
-    primaryColor: Colors.green,
+    primaryColor: CupertinoColors.systemGreen,
     appBarTheme: const AppBarTheme(
-      color: Colors.green,
+      color: CupertinoColors.systemGreen,
     ),
     brightness: Brightness.light,
     hintColor: Colors.grey[400],
@@ -24,9 +24,9 @@ class Themes {
   );
 
   final darkTheme = ThemeData.dark().copyWith(
-    primaryColor: Colors.green,
+    primaryColor: CupertinoColors.systemGreen,
     appBarTheme: const AppBarTheme(
-      color: Colors.green,
+      color: CupertinoColors.systemGreen,
     ),
     brightness: Brightness.dark,
     hintColor: Colors.grey[600],
