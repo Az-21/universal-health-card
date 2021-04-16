@@ -8,7 +8,9 @@ import 'package:flutter/services.dart';
 // Pub Dev Imports
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:health_app/src/auth/auth.dart';
 import 'package:health_app/src/settings.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 // Flutter Components Imports for Navigation
 import './src/dashboard.dart';
@@ -21,8 +23,15 @@ import './theme/theme_service.dart';
 //  * main()
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ignore: avoid_void_async
-void main() async {
+Future main() async {
+  // Provider + Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  // Shared prefs
   await GetStorage.init();
+
+  // Run main
   runApp(MyApp());
 }
 
@@ -37,7 +46,7 @@ class MyApp extends StatelessWidget {
       theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
       themeMode: ThemeServie().getThemeMode(),
-      home: const DarkModeHome(),
+      home: const SignInUI(),
     );
   }
 }
