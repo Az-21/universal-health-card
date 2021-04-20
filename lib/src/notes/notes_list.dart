@@ -50,55 +50,108 @@ class NotesCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                identifier,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // * Identifier
+                      Text(
+                        identifier,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      const Divider(),
+                      // * Date
+                      Text(
+                        timestamp,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+
+                      // * Name of submitter + icon
+                      Row(
+                        children: [
+                          Text(
+                            submitterName,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                          const Spacer(),
+                          if (submitterVerified)
+                            const Icon(
+                              Icons.verified,
+                              size: 40,
+                              color: Colors.green,
+                            )
+                          else
+                            const Icon(
+                              Icons.supervised_user_circle,
+                              size: 40,
+                              color: Colors.blue,
+                            )
+                        ],
+                      ),
+                      // * Orgnization of submitter
+                      Text(
+                        submitterOrg,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const Divider(),
-              // * Date
-              Text(
-                timestamp,
-                style: const TextStyle(fontSize: 12),
-              ),
-
-              // * Name of submitter + icon
-              Row(
-                children: [
-                  Text(
-                    submitterName,
-                    style: const TextStyle(fontSize: 14),
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      MarkdownBody(
+                        data:
+                            '## Vitals\n---\n* Temperature: $temp °C\n* Height: $height cm\n* Weight: $weight kg\n* Blood pressure: $bpS / $bpD mmH',
+                      ),
+                    ],
                   ),
-                  const Spacer(),
-                  if (submitterVerified)
-                    const Icon(
-                      Icons.verified,
-                      size: 40,
-                      color: Colors.green,
-                    )
-                  else
-                    const Icon(
-                      Icons.supervised_user_circle,
-                      size: 40,
-                      color: Colors.blue,
-                    )
-                ],
-              ),
-              // * Orgnization of submitter
-              Text(
-                submitterOrg,
-                style: const TextStyle(fontSize: 12),
+                ),
               ),
 
-              const Divider(height: 30),
-
+              // * Actual Notes
+              const SizedBox(height: 20),
               MarkdownBody(
-                data:
-                    '## Vitals\n---\n* Temperature: $temp °C\n* Height: $height cm\n* Weight: $weight kg\n* Blood pressure: $bpS / $bpD mmH\n\n $message',
-              )
+                data: message,
+              ),
+
+              // * Contact Doctor
+              /// Submit button
+              Container(
+                alignment: Alignment.center,
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.black,
+                    primary: Colors.white,
+                    elevation: 3,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 15,
+                    ),
+                  ),
+                  icon: const Icon(Icons.contacts),
+                  label: const Text('Contact Doctor'),
+                  onPressed: () {},
+                ),
+              ),
             ],
           ),
         ));
@@ -122,7 +175,7 @@ class _NotesListState extends State<NotesList> {
       body: Center(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.9,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 5),
           child: Swiper(
             itemCount: 3,
             control: SwiperControl(
@@ -131,6 +184,7 @@ class _NotesListState extends State<NotesList> {
             ),
             itemBuilder: (_, index) {
               return SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: NotesCard(
                   identifier: 'Firstname | 000${index + 1}',
                   timestamp: 'Saturday | April 10, 2021',

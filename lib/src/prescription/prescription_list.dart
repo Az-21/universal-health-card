@@ -158,7 +158,7 @@ class _PrescriptionListState extends State<PrescriptionList> {
       body: Center(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.9,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 5),
           child: Swiper(
             itemCount: 3,
             control: SwiperControl(
@@ -167,6 +167,7 @@ class _PrescriptionListState extends State<PrescriptionList> {
             ),
             itemBuilder: (_, index) {
               return SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: PrescriptionCard(
                     identifier: 'Firstname | 000${index + 1}',
                     timestamp: 'Saturday | April 10, 2021',
