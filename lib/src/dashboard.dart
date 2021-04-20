@@ -1,6 +1,7 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,18 +32,12 @@ class HomeUI extends StatelessWidget {
     'View your medical data',
   ];
 
-  static final List<List<Color>> _gradientColors = [
-    [Colors.green, Colors.greenAccent],
-    [Colors.green, Colors.yellow],
-    [Colors.purple, Colors.indigo],
-    [Colors.red, Colors.orange],
-  ];
-
   static final List<FaIcon> _cardIcons = [
-    const FaIcon(FontAwesomeIcons.solidIdBadge, color: Colors.white),
-    const FaIcon(FontAwesomeIcons.calendarPlus, color: Colors.white),
-    const FaIcon(FontAwesomeIcons.prescriptionBottleAlt, color: Colors.white),
-    const FaIcon(FontAwesomeIcons.notesMedical, color: Colors.white),
+    const FaIcon(FontAwesomeIcons.solidIdBadge,
+        color: CupertinoColors.activeGreen),
+    const FaIcon(FontAwesomeIcons.calendarPlus, color: Colors.blue),
+    const FaIcon(FontAwesomeIcons.prescriptionBottleAlt, color: Colors.red),
+    const FaIcon(FontAwesomeIcons.notesMedical, color: Colors.blueGrey),
   ];
 
   @override
@@ -59,65 +54,62 @@ class HomeUI extends StatelessWidget {
                     ? Colors.white
                     : Colors.black),
             itemWidth: MediaQuery.of(context).size.width * 0.75,
-            itemHeight: MediaQuery.of(context).size.height * 0.7,
+            itemHeight: MediaQuery.of(context).size.height * 0.6,
             layout: SwiperLayout.STACK,
             itemBuilder: (BuildContext context, int index) {
               return Stack(
                 clipBehavior: Clip.none,
                 children: [
                   /// * Background Card Gradient
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      gradient: LinearGradient(
-                        colors: _gradientColors[index],
-                        begin: const Alignment(1, 1),
-                        end: const Alignment(-1, -1),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            // * Title
+                            Text(
+                              _title[index],
+                              style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+
+                            // * Subtitle
+                            const SizedBox(height: 5),
+                            Text(
+                              _subtitle[index],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
 
-                  /// * Card body: icon + title + subtitle
-                  Container(
-                    padding: const EdgeInsets.all(30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Spacer(),
-                        Center(
-                          child: IconButton(
-                            icon: _cardIcons[index],
-                            onPressed: () => _pageLauncher(index),
-                            iconSize: MediaQuery.of(context).size.height * 0.3,
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          _title[index],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          _subtitle[index],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   Positioned(
-                    top: -MediaQuery.of(context).size.height * 0.05,
-                    right: MediaQuery.of(context).size.height * 0.05,
+                    top: -MediaQuery.of(context).size.height * 0.049,
+                    right: MediaQuery.of(context).size.height * 0.08,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.height * 0.2,
                       height: MediaQuery.of(context).size.height * 0.2,
                       // TODO: Add images here
-                      child: const Placeholder(),
+                      child: IconButton(
+                        icon: _cardIcons[index],
+                        onPressed: () => _pageLauncher(index),
+                        iconSize: MediaQuery.of(context).size.height * 0.25,
+                      ),
                     ),
                   ),
                 ],

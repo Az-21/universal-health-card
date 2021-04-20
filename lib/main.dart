@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
       themeMode: ThemeServie().getThemeMode(),
-      home: const SignInUI(),
+      home: const DarkModeHome(),
     );
   }
 }
