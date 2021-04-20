@@ -42,9 +42,9 @@ class FetchHealthCardForm extends StatelessWidget {
               children: <Widget>[
                 // * Title
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    const SizedBox(width: 20),
                     const Icon(
                       Icons.system_update_alt,
                       color: Colors.white,
@@ -153,7 +153,7 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
             ),
             icon: const Icon(Icons.cloud_download),
-            label: const Text('Fetch health card'),
+            label: const Text('Fetch Health Card'),
             onPressed: () {
               // TODO: validator here -> 4 digit key, 12 digit aadhar...
               // TODO: firebase push here
