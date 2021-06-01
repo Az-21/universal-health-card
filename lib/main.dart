@@ -8,9 +8,11 @@ import 'package:flutter/services.dart';
 // Pub Dev Imports
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:health_app/src/auth/auth.dart';
+import 'package:health_app/src/auth/auth_home.dart';
+import 'package:health_app/src/auth/google_sign_in.dart';
 import 'package:health_app/src/settings.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 // Flutter Components Imports for Navigation
 import './src/dashboard.dart';
@@ -41,12 +43,15 @@ Future main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Digital Health Card',
-      theme: Themes().lightTheme,
-      darkTheme: Themes().darkTheme,
-      themeMode: ThemeServie().getThemeMode(),
-      home: const DarkModeHome(),
+    return ChangeNotifierProvider(
+      create: (context) => GoogleSignInProvider(),
+      child: GetMaterialApp(
+        title: 'Digital Health Card',
+        theme: Themes().lightTheme,
+        darkTheme: Themes().darkTheme,
+        themeMode: ThemeServie().getThemeMode(),
+        home: const DarkModeHome(),
+      ),
     );
   }
 }
