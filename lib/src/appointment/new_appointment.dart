@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:health_app/src/functions.dart';
@@ -11,6 +12,8 @@ class CreateAppointmentPage extends StatefulWidget {
 
 class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
   TextEditingController hospital = TextEditingController();
+  final CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('appointments');
 
   List<String> cardList = [
     'Abhijit | xxxx xxxx 0002',
@@ -395,7 +398,14 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
                       ),
                       icon: const Icon(Icons.post_add),
                       label: const Text('Create Appointment'),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await collectionReference.add({
+                          'hospital': hospital.text,
+                          'appointee': cardList[_selectedCard],
+                          'specialization': fieldSpl[_selectedSpecialist],
+                          'dateTime': _selectedTime,
+                        });
+                      },
                     ),
                   ),
                 ],

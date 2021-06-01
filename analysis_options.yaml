@@ -7,3 +7,4 @@ linter:
     avoid_positional_boolean_parameters: false
     prefer_const_literals_to_create_immutables: false
     sort_pub_dependencies: false
+    always_specify_types: false

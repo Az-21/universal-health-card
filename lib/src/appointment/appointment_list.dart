@@ -2,6 +2,7 @@
 // * Imports
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health_app/src/functions.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
@@ -183,13 +184,70 @@ class AppointmentList extends StatefulWidget {
 }
 
 class _AppointmentListState extends State<AppointmentList> {
+  CollectionReference appointments =
+      FirebaseFirestore.instance.collection('appointments');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        body: StreamBuilder(
+            stream: appointments.snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                // return ListView(
+                //   children: snapshot.data!.docs
+                //       .map((e) => ListTile(
+                //             title: Text(e['hospital'].toString()),
+                //           ))
+                //       .toList(),
+                // );
+
+                return Scaffold(
+                  body: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Swiper(
+                      itemCount: snapshot.data!.docs.length,
+                      control: SwiperControl(
+                        color: ThemeServie().isSavedDarkMode()
+                            ? Colors.white
+                            : Colors.blue,
+                      ),
+                      itemBuilder: (_, index) {
+                        return Center(
+                          child: SingleChildScrollView(
+                            child: AppointmentCard(
+                              hospital: snapshot.data!.docs[index]['hospital']
+                                  .toString(),
+                              identifier: snapshot
+                                  .data!.docs[index]['appointee']
+                                  .toString(),
+                              specialization: snapshot
+                                  .data!.docs[index]['specialization']
+                                  .toString(),
+                              appointmentTime: DateTime.parse(snapshot
+                                  .data!.docs[index]['dateTime']
+                                  .toDate()
+                                  .toString()),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            }));
+  }
+}
+/*
+
+return Scaffold(
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Swiper(
-          itemCount: 3,
+          itemCount: 1,
           control: SwiperControl(
             color: ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
           ),
@@ -208,5 +266,5 @@ class _AppointmentListState extends State<AppointmentList> {
         ),
       ),
     );
-  }
-}
+
+*/
