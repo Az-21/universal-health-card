@@ -36,7 +36,6 @@ dependencies:
   maps_launcher: ^2.0.0
   markdown_editable_textinput: ^2.0.0
   pattern_formatter: ^2.0.0
-  provider: ^5.0.0
   salomon_bottom_bar: ^3.0.0
   syncfusion_flutter_gauges: ^19.1.55
   url_launcher: ^6.0.3
@@ -44,7 +43,23 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  awesome_card: ^1.1.5
+  cupertino_icons: ^1.0.3
+  firebase_auth: ^1.2.0
+  firebase_core: ^1.2.0
+  flutter_card_swipper: ^0.4.0
+  flutter_markdown: ^0.6.2
+  font_awesome_flutter: ^9.0.0
+  get: ^4.1.4
+  get_storage: ^2.0.2
+  google_sign_in: ^5.0.4
   lint: ^1.5.3
+  maps_launcher: ^2.0.0
+  markdown_editable_textinput: ^2.0.0
+  pattern_formatter: ^2.0.0
+  salomon_bottom_bar: ^3.0.0
+  syncfusion_flutter_gauges: ^19.1.66
+  url_launcher: ^6.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
