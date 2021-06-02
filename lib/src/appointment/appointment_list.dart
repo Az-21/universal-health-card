@@ -189,8 +189,9 @@ class AppointmentList extends StatefulWidget {
 }
 
 class _AppointmentListState extends State<AppointmentList> {
-  CollectionReference appointments =
-      FirebaseFirestore.instance.collection('appointments');
+  Query<Map<String, dynamic>> appointments = FirebaseFirestore.instance
+      .collection('appointments')
+      .orderBy('dateTime', descending: true);
 
   @override
   Widget build(BuildContext context) {
