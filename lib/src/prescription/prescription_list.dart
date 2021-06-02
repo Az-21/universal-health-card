@@ -1,8 +1,10 @@
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Imports
 // ⸻⸻⸻⸻⸻⸻⸻⸻
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+import 'package:health_app/src/functions.dart';
 import 'package:health_app/theme/theme_service.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
@@ -20,7 +22,8 @@ class PrescriptionCard extends StatelessWidget {
     required this.medicineStats,
   }) : super(key: key);
 
-  final String identifier, timestamp, submitterName, submitterOrg;
+  final String identifier, submitterName, submitterOrg;
+  final DateTime timestamp;
   final bool submitterVerified;
   final List<String> medicineList;
   final List<List<bool>> medicineStats;
@@ -45,7 +48,7 @@ class PrescriptionCard extends StatelessWidget {
               const Divider(),
               // * Date
               Text(
-                timestamp,
+                formattedDateTime(timestamp),
                 style: const TextStyle(fontSize: 12),
               ),
 
@@ -53,7 +56,7 @@ class PrescriptionCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    submitterName,
+                    'Prescribed by $submitterName',
                     style: const TextStyle(fontSize: 14),
                   ),
                   const Spacer(),
@@ -73,7 +76,7 @@ class PrescriptionCard extends StatelessWidget {
               ),
               // * Orgnization of submitter
               Text(
-                submitterOrg,
+                'Orgnization: $submitterOrg',
                 style: const TextStyle(fontSize: 12),
               ),
 
@@ -99,7 +102,7 @@ class PrescriptionCard extends StatelessWidget {
                             enabled: false,
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Name Of Medicine #${index + 1}',
+                              labelText: 'Medicine #${index + 1}',
                             ),
                           ),
                           // * Vertical padding
@@ -152,6 +155,10 @@ class PrescriptionList extends StatefulWidget {
 }
 
 class _PrescriptionListState extends State<PrescriptionList> {
+  // * Firestore hook
+  CollectionReference prescriptions =
+      FirebaseFirestore.instance.collection('prescriptions');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,40 +166,84 @@ class _PrescriptionListState extends State<PrescriptionList> {
         child: Container(
           height: MediaQuery.of(context).size.height * 0.9,
           margin: const EdgeInsets.symmetric(horizontal: 5),
-          child: Swiper(
-            itemCount: 3,
-            control: SwiperControl(
-              color:
-                  ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
-            ),
-            itemBuilder: (_, index) {
-              return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: PrescriptionCard(
-                    identifier: 'Firstname | 000${index + 1}',
-                    timestamp: 'Saturday | April 10, 2021',
-                    submitterName: 'Dr. XYZ',
-                    submitterOrg: 'ABC Hospital',
-                    submitterVerified: true,
-                    medicineList: [
-                      'Asprin 500mg',
-                      'Antibiotic 650mg',
-                      'Detoxer 10mg',
-                      'ORS Solution',
-                      'Eyedrops',
-                    ],
-                    medicineStats: [
-                      [true, true, false, true],
-                      [true, true, true, true],
-                      [false, false, false, true],
-                      [false, true, true, true],
-                      [false, true, false, true],
-                    ]),
-              );
+          child: StreamBuilder(
+            stream: prescriptions.snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                return Swiper(
+                  itemCount: snapshot.data!.docs.length,
+                  control: SwiperControl(
+                    color: ThemeServie().isSavedDarkMode()
+                        ? Colors.white
+                        : Colors.blue,
+                  ),
+                  itemBuilder: (_, index) {
+                    return SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: PrescriptionCard(
+                        identifier:
+                            snapshot.data!.docs[index]['forUser'].toString(),
+                        timestamp: DateTime.parse(snapshot
+                            .data!.docs[index]['dateTime']
+                            .toDate()
+                            .toString()),
+                        submitterName:
+                            snapshot.data!.docs[index]['byUser'].toString(),
+                        submitterOrg: snapshot.data!.docs[index]['orgnization']
+                            .toString(),
+                        submitterVerified:
+                            // ignore: avoid_bool_literals_in_conditional_expressions
+                            snapshot.data!.docs[index]['isDoctor'].toString() ==
+                                    'true'
+                                ? true
+                                : false,
+                        medicineList: processedMedicineList(snapshot
+                            .data!.docs[index]['medicines'] as List<dynamic>),
+                        medicineStats: processedDosage(
+                            snapshot.data!.docs[index]['dosage'].toString()),
+                      ),
+                    );
+                  },
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
             },
           ),
         ),
       ),
     );
+  }
+
+  // * Processed medicine list
+  List<String> processedMedicineList(List<dynamic> cloudInput) {
+    final List<String> medicineList = [];
+    for (var i = 0; i < cloudInput.length; i++) {
+      medicineList.add(cloudInput[i].toString());
+    }
+
+    return medicineList;
+  }
+
+  // * Unflatten the dosage list
+  List<List<bool>> processedDosage(String flatDosageList) {
+    final List<List<bool>> dosage = [];
+    final List<String> splitDosageList = flatDosageList.split(' ');
+    splitDosageList.removeLast(); // removes last empty element
+
+    for (var i = 0; i < splitDosageList.length ~/ 4; i++) {
+      final List<bool> singleMedDosage = [];
+      for (var j = 0; j < 4; j++) {
+        if (splitDosageList[i + j] == '1') {
+          singleMedDosage.add(true);
+        } else {
+          singleMedDosage.add(false);
+        }
+      }
+
+      dosage.add(singleMedDosage);
+    }
+
+    return dosage;
   }
 }
