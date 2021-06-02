@@ -163,7 +163,12 @@ class AppointmentCard extends StatelessWidget {
                 ),
                 icon: const Icon(Icons.contacts),
                 label: const Text('Contact Details'),
-                onPressed: () {},
+                onPressed: () {
+                  infoSnackbar(
+                      'Dr. ABC',
+                      '+91-000-000-1234\nexample@domain.com\n\nThis feature will show contact details from a lookup table.',
+                      true);
+                },
               ),
             ),
           ],
@@ -190,81 +195,46 @@ class _AppointmentListState extends State<AppointmentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: StreamBuilder(
-            stream: appointments.snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                // return ListView(
-                //   children: snapshot.data!.docs
-                //       .map((e) => ListTile(
-                //             title: Text(e['hospital'].toString()),
-                //           ))
-                //       .toList(),
-                // );
-
-                return Scaffold(
-                  body: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Swiper(
-                      itemCount: snapshot.data!.docs.length,
-                      control: SwiperControl(
-                        color: ThemeServie().isSavedDarkMode()
-                            ? Colors.white
-                            : Colors.blue,
-                      ),
-                      itemBuilder: (_, index) {
-                        return Center(
-                          child: SingleChildScrollView(
-                            child: AppointmentCard(
-                              hospital: snapshot.data!.docs[index]['hospital']
-                                  .toString(),
-                              identifier: snapshot
-                                  .data!.docs[index]['appointee']
-                                  .toString(),
-                              specialization: snapshot
-                                  .data!.docs[index]['specialization']
-                                  .toString(),
-                              appointmentTime: DateTime.parse(snapshot
-                                  .data!.docs[index]['dateTime']
-                                  .toDate()
-                                  .toString()),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+      body: StreamBuilder(
+        stream: appointments.snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+              body: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: Swiper(
+                  itemCount: snapshot.data!.docs.length,
+                  control: SwiperControl(
+                    color: ThemeServie().isSavedDarkMode()
+                        ? Colors.white
+                        : Colors.blue,
                   ),
-                );
-              }
-              return const Center(child: CircularProgressIndicator());
-            }));
-  }
-}
-/*
-
-return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Swiper(
-          itemCount: 1,
-          control: SwiperControl(
-            color: ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
-          ),
-          itemBuilder: (_, index) {
-            return Center(
-              child: SingleChildScrollView(
-                child: AppointmentCard(
-                  hospital: 'ABC Hospital',
-                  identifier: 'Firstname | 00${(index + 1) * 10}',
-                  specialization: 'General Practitioner',
-                  appointmentTime: DateTime.now(),
+                  itemBuilder: (_, index) {
+                    return Center(
+                      child: SingleChildScrollView(
+                        child: AppointmentCard(
+                          hospital:
+                              snapshot.data!.docs[index]['hospital'].toString(),
+                          identifier: snapshot.data!.docs[index]['appointee']
+                              .toString(),
+                          specialization: snapshot
+                              .data!.docs[index]['specialization']
+                              .toString(),
+                          appointmentTime: DateTime.parse(snapshot
+                              .data!.docs[index]['dateTime']
+                              .toDate()
+                              .toString()),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             );
-          },
-        ),
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
       ),
     );
-
-*/
+  }
+}
