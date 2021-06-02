@@ -2,6 +2,7 @@
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // Pub Dev Imports
@@ -35,6 +36,7 @@ class HealthCardCreateForm extends StatefulWidget {
 }
 
 class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
+  // * Placeholders
   String aadharNumber = 'xxxx xxxx xxxx';
   String cardHolderName = '';
   String bloodGroup = '';
@@ -45,14 +47,16 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
 
   FocusNode? _focusNode; // for card animation
 
-  bool isFirebaseSuccess = false; // for firebase integration
-
-  // Controllers to reset text on submit
+  // * Controllers to reset text on submit
   TextEditingController formAadhar = TextEditingController();
   TextEditingController formBloodGroup = TextEditingController();
   TextEditingController formHealthCondition = TextEditingController();
   TextEditingController formName = TextEditingController();
   TextEditingController formSecurityKey = TextEditingController();
+
+  // * Firebase hook
+  final CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('cards');
 
   @override
   void initState() {
@@ -250,29 +254,22 @@ class _HealthCardCreateFormState extends State<HealthCardCreateForm> {
                     primary: Colors.green,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 15),
-                    // minimumSize: Size(200, 100),
                   ),
                   icon: const Icon(Icons.post_add),
                   label: const Text('Create New Health Card'),
-                  onPressed: () {
-                    // TODO: validator here -> 4 digit key, 12 digit aadhar...
-                    // TODO: firebase push here
-                    isFirebaseSuccess = false;
-                    if (isFirebaseSuccess) {
-                      infoSnackbar(
-                          'Success', 'Your health card has been created', true);
-                      // Reset all text fields
-                      formSecurityKey.text = '';
-                      formName.text = '';
-                      formAadhar.text = '';
-                      formBloodGroup.text = '';
-                      formHealthCondition.text = '';
-                    } else {
-                      infoSnackbar(
-                          'Failed',
-                          'Unable to create card. Please check your internet connection.',
-                          false);
-                    }
+                  onPressed: () async {
+                    await collectionReference
+                        .add({
+                          'cvv': formSecurityKey.text,
+                          'name': formName.text,
+                          'aadhar': formAadhar.text,
+                          'bloodGroup': formBloodGroup.text,
+                          'healthCondition': formHealthCondition.text,
+                        })
+                        .then((value) => infoSnackbar('Success',
+                            'Health card added to the database', true))
+                        .catchError((error) => infoSnackbar(
+                            'Failed to create health card', '$error', false));
                   },
                 ),
               ),
