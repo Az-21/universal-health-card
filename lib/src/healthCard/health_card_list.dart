@@ -1,6 +1,7 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // Pub Dev Imports
@@ -17,6 +18,11 @@ class HealthCardPage extends StatefulWidget {
 }
 
 class _HealthCardPageState extends State<HealthCardPage> {
+  // * Firestore hook
+  Query<Map<String, dynamic>> cards = FirebaseFirestore.instance
+      .collection('cards')
+      .orderBy('name', descending: false);
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   //  * Health Card Data
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -30,6 +36,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
   void initState() {
     super.initState();
 
+    // * Default placeholders
     cardNumbers = [
       'xxxx xxxx 0002',
       'xxxx xxxx 0003',
@@ -66,59 +73,57 @@ class _HealthCardPageState extends State<HealthCardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildHealthCardList());
-  }
+    return StreamBuilder(
+      stream: cards.snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasData) {
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (_, index) {
+              return GestureDetector(
+                //  * Rebuild card on tap -> animate
+                onTap: () {
+                  setState(() {
+                    showBack[index] = !showBack[index];
+                  });
+                },
 
-  ListView _buildHealthCardList() {
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    //  * Health card generator + divider (.separated)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      itemCount: cardNumbers.length,
-      itemBuilder: (_, index) {
-        return GestureDetector(
-          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          //  * Rebuild card on tap -> animate
-          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          onTap: () {
-            setState(() {
-              showBack[index] = !showBack[index];
-            });
-          },
-          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          //  * Core health card
-          // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          child: CreditCard(
-            cardNumber: cardNumbers[index],
-            cardExpiry: holderInfo[index],
-            cardHolderName: cardHolder[index],
-            cvv: cvv[index],
-            bankName: 'Universal Health Card',
-            cardType: CardType.other,
-            showBackSide: showBack[index],
-            frontBackground: CardBackgrounds.black,
-            backBackground: CardBackgrounds.white,
-            showShadow: true,
-            textExpDate: 'Holder Info',
-            textName: 'Name',
-            textExpiry: 'Health Info',
-            height: MediaQuery.of(context).size.height >
-                    MediaQuery.of(context).size.width
-                ? MediaQuery.of(context).size.height * 0.3
-                : MediaQuery.of(context).size.width * 0.3,
-            width: MediaQuery.of(context).size.height >
-                    MediaQuery.of(context).size.width
-                ? MediaQuery.of(context).size.width * 0.9
-                : MediaQuery.of(context).size.width * 0.6,
-          ),
-        );
-      },
-      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      //  * Separator
-      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      separatorBuilder: (context, index) {
-        return const SizedBox(height: 32);
+                //  * Core health card
+                child: CreditCard(
+                  cardNumber: snapshot.data!.docs[index]['aadhar'].toString(),
+                  cardExpiry:
+                      snapshot.data!.docs[index]['healthCondition'].toString(),
+                  cardHolderName: snapshot.data!.docs[index]['name'].toString(),
+                  cvv: snapshot.data!.docs[index]['cvv'].toString(),
+                  bankName: 'Universal Health Card',
+                  cardType: CardType.other,
+                  showBackSide: showBack[index],
+                  frontBackground: CardBackgrounds.black,
+                  backBackground: CardBackgrounds.white,
+                  showShadow: true,
+                  textExpDate: 'Holder Info',
+                  textName: 'Name',
+                  textExpiry: 'Health Info',
+                  height: MediaQuery.of(context).size.height >
+                          MediaQuery.of(context).size.width
+                      ? MediaQuery.of(context).size.height * 0.3
+                      : MediaQuery.of(context).size.width * 0.3,
+                  width: MediaQuery.of(context).size.height >
+                          MediaQuery.of(context).size.width
+                      ? MediaQuery.of(context).size.width * 0.9
+                      : MediaQuery.of(context).size.width * 0.6,
+                ),
+              );
+            },
+
+            //  * Separator
+            separatorBuilder: (context, index) {
+              return const SizedBox(height: 32);
+            },
+          );
+        }
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }
