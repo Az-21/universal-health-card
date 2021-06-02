@@ -1,9 +1,11 @@
 // ⸻⸻⸻⸻⸻⸻⸻⸻
 // * Imports
 // ⸻⸻⸻⸻⸻⸻⸻⸻
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:health_app/src/functions.dart';
 import 'package:health_app/theme/theme_service.dart';
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
@@ -26,7 +28,6 @@ class NotesCard extends StatelessWidget {
   }) : super(key: key);
 
   final String identifier,
-      timestamp,
       submitterName,
       submitterOrg,
       temp,
@@ -36,6 +37,7 @@ class NotesCard extends StatelessWidget {
       bpD,
       message;
   final bool submitterVerified;
+  final DateTime timestamp;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class NotesCard extends StatelessWidget {
                       const Divider(),
                       // * Date
                       Text(
-                        timestamp,
+                        formattedDateTime(timestamp),
                         style: const TextStyle(fontSize: 12),
                       ),
 
@@ -169,39 +171,64 @@ class NotesList extends StatefulWidget {
 }
 
 class _NotesListState extends State<NotesList> {
+  // * Firestore hook
+  Query<Map<String, dynamic>> notes = FirebaseFirestore.instance
+      .collection('notes')
+      .orderBy('dateTime', descending: true);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.9,
-          margin: const EdgeInsets.symmetric(horizontal: 5),
-          child: Swiper(
-            itemCount: 3,
-            control: SwiperControl(
-              color:
-                  ThemeServie().isSavedDarkMode() ? Colors.white : Colors.blue,
-            ),
-            itemBuilder: (_, index) {
-              return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: NotesCard(
-                  identifier: 'Firstname | 000${index + 1}',
-                  timestamp: 'Saturday | April 10, 2021',
-                  submitterName: 'Dr. XYZ',
-                  submitterOrg: 'ABC Hospital',
-                  submitterVerified: true,
-                  temp: '36.5',
-                  height: '180',
-                  weight: '80',
-                  bpS: '120',
-                  bpD: '80',
-                  message:
-                      '## Symptoms\n---\n* Body pain \n* Sore eyes \n\n## Notes\n---\n* Diagnosis <//> \n* <Medical reference for other doctors>\n## Instructions\n---\n* Eight hours of sleep\n* Regularly apply eyedrops\n* Lorem\n* Ipsum\n',
+        child: StreamBuilder(
+          stream: notes.snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                height: MediaQuery.of(context).size.height * 0.9,
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                child: Swiper(
+                  itemCount: 3,
+                  control: SwiperControl(
+                    color: ThemeServie().isSavedDarkMode()
+                        ? Colors.white
+                        : Colors.blue,
+                  ),
+                  itemBuilder: (_, index) {
+                    return SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: NotesCard(
+                        identifier:
+                            snapshot.data!.docs[index]['forUser'].toString(),
+                        timestamp: DateTime.parse(snapshot
+                            .data!.docs[index]['dateTime']
+                            .toDate()
+                            .toString()),
+                        submitterName:
+                            snapshot.data!.docs[index]['byUser'].toString(),
+                        submitterOrg: snapshot.data!.docs[index]['orgnization']
+                            .toString(),
+                        submitterVerified:
+                            snapshot.data!.docs[index]['isDoctor'].toString() ==
+                                    'true'
+                                ? true
+                                : false,
+                        temp: snapshot.data!.docs[index]['temperature']
+                            .toString(),
+                        height: snapshot.data!.docs[index]['height'].toString(),
+                        weight: snapshot.data!.docs[index]['weight'].toString(),
+                        bpS: snapshot.data!.docs[index]['bpS'].toString(),
+                        bpD: snapshot.data!.docs[index]['bpD'].toString(),
+                        message: snapshot.data!.docs[index]['note'].toString(),
+                      ),
+                    );
+                  },
                 ),
               );
-            },
-          ),
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
         ),
       ),
     );
