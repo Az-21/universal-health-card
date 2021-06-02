@@ -399,12 +399,19 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
                       icon: const Icon(Icons.post_add),
                       label: const Text('Create Appointment'),
                       onPressed: () async {
-                        await collectionReference.add({
-                          'hospital': hospital.text,
-                          'appointee': cardList[_selectedCard],
-                          'specialization': fieldSpl[_selectedSpecialist],
-                          'dateTime': _selectedTime,
-                        });
+                        await collectionReference
+                            .add({
+                              'hospital': hospital.text,
+                              'appointee': cardList[_selectedCard],
+                              'specialization': fieldSpl[_selectedSpecialist],
+                              'dateTime': _selectedTime,
+                            })
+                            .then((value) => infoSnackbar(
+                                'Success',
+                                'Your appointment has been added to the database',
+                                true))
+                            .catchError((error) => infoSnackbar(
+                                'Failed to add user', '$error', false));
                       },
                     ),
                   ),
