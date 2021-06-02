@@ -151,7 +151,12 @@ class NotesCard extends StatelessWidget {
                   ),
                   icon: const Icon(Icons.contacts),
                   label: const Text('Contact Doctor'),
-                  onPressed: () {},
+                  onPressed: () {
+                    infoSnackbar(
+                        'Dr. ABC',
+                        '+91-000-000-1234\nexample@domain.com\n\nThis feature will show contact details from a lookup table.',
+                        true);
+                  },
                 ),
               ),
             ],
@@ -210,6 +215,7 @@ class _NotesListState extends State<NotesList> {
                         submitterOrg: snapshot.data!.docs[index]['orgnization']
                             .toString(),
                         submitterVerified:
+                            // ignore: avoid_bool_literals_in_conditional_expressions
                             snapshot.data!.docs[index]['isDoctor'].toString() ==
                                     'true'
                                 ? true
