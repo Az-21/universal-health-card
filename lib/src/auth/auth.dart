@@ -48,6 +48,14 @@ class _AuthUIState extends State<AuthUI> {
                   if (_getStorage.read('isDoc') == null) {
                     _getStorage.write('isDoc', false);
                   }
+                  if (_getStorage.read('localCards') == null) {
+                    _getStorage.write('localCards', [
+                      'Abhijit | xxxx xxxx 0002',
+                      'Abhishek | xxxx xxxx 0003',
+                      'Amogh | xxxx xxxx 0009',
+                      'Dhruv | xxxx xxxx 0015',
+                    ]);
+                  }
                 },
               ),
             ),

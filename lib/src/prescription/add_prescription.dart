@@ -28,12 +28,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
       FirebaseFirestore.instance.collection('prescriptions');
 
   // * List of cards
-  List<String> cardList = [
-    'Abhijit | xxxx xxxx 0002',
-    'Abhishek | xxxx xxxx 0003',
-    'Amogh | xxxx xxxx 0009',
-    'Dhruv | xxxx xxxx 0015',
-  ];
+  List<String> cardList = [];
   int _selectedCard = 0;
 
   // * Details of submitter
@@ -50,6 +45,9 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
         // ignore: avoid_bool_literals_in_conditional_expressions
         _getStorage.read('isDoc').toString() == 'true' ? true : false;
     name = user.displayName!;
+
+    // * Get local cards
+    cardList = _getStorage.read('localCards') as List<String>;
   }
 
   // * Vars for checkbox

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:health_app/src/functions.dart';
 
 class CreateAppointmentPage extends StatefulWidget {
@@ -12,16 +13,22 @@ class CreateAppointmentPage extends StatefulWidget {
 
 class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
   TextEditingController hospital = TextEditingController();
+
+  // * Firebase hook
   final CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('appointments');
 
-  List<String> cardList = [
-    'Abhijit | xxxx xxxx 0002',
-    'Abhishek | xxxx xxxx 0003',
-    'Amogh | xxxx xxxx 0009',
-    'Dhruv | xxxx xxxx 0015',
-  ];
+  // * Shared prefs
+  final _getStorage = GetStorage();
+
+  List<String> cardList = [];
   int _selectedCard = 0;
+  @override
+  void initState() {
+    super.initState();
+    // * Get local cards
+    cardList = _getStorage.read('localCards') as List<String>;
+  }
 
   List<String> fieldSpl = [
     'General Practitioner',

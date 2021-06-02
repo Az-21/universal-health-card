@@ -36,6 +36,7 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
   String description = '## Symptoms\n---\n* \n* \n\n## Notes\n---\n* \n* \n';
   final String _markdownURL = 'https://www.markdownguide.org/cheat-sheet/';
 
+  // * Shared prefs
   final _getStorage = GetStorage();
 
   // * Google hooks
@@ -43,12 +44,7 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
   final CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('notes');
 
-  List<String> cardList = [
-    'Abhijit | xxxx xxxx 0002',
-    'Abhishek | xxxx xxxx 0003',
-    'Amogh | xxxx xxxx 0009',
-    'Dhruv | xxxx xxxx 0015',
-  ];
+  List<String> cardList = [];
   int _selectedCard = 0;
 
   // * Details of submitter
@@ -58,6 +54,9 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
   @override
   void initState() {
     super.initState();
+    // * Get local cards
+    cardList = _getStorage.read('localCards') as List<String>;
+
     // * Get details about current user
     orgnization = _getStorage.read('orgnization').toString();
     isDoctor =
