@@ -1,6 +1,7 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,10 @@ class PrescriptionCardAdder extends StatefulWidget {
 
 class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   final _getStorage = GetStorage();
-  // * Google auth hook
+  // * Google hooks
   final user = FirebaseAuth.instance.currentUser!;
+  final CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('prescriptions');
 
   // * List of cards
   List<String> cardList = [
@@ -31,6 +34,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
     'Amogh | xxxx xxxx 0009',
     'Dhruv | xxxx xxxx 0015',
   ];
+  int _selectedCard = 0;
 
   // * Details of submitter
   String name = 'ERR: Unknown User';
@@ -147,7 +151,9 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                     itemExtent: 36,
                     looping: true,
                     diameterRatio: 2,
-                    onSelectedItemChanged: (index) {},
+                    onSelectedItemChanged: (index) {
+                      _selectedCard = index;
+                    },
                     children: [
                       for (String cardNumber in cardList)
                         Center(child: Text(cardNumber)),
@@ -314,12 +320,51 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
               ),
               icon: const Icon(Icons.post_add),
               label: const Text('Create Prescription'),
-              onPressed: () {},
+              onPressed: () async {
+                await collectionReference
+                    .add({
+                      'forUser': cardList[_selectedCard],
+                      'dateTime': DateTime.now(),
+                      'byUser': user.displayName!,
+                      'orgnization': orgnization,
+                      'isDoctor': isDoctor,
+                      'medicines': processedMedicineList(medicineList),
+                      'dosage': processedMedicineStats(medicineStats),
+                    })
+                    .then((value) => infoSnackbar(
+                        'Success', 'Prescription added to the database', true))
+                    .catchError((error) => infoSnackbar(
+                        'Failed to add prescription', '$error', false));
+              },
             ),
           ),
           const SizedBox(height: 64),
         ],
       ),
     );
+  }
+
+  // * TextEditingController List -> String List
+  List<String> processedMedicineList(List<TextEditingController> medicineList) {
+    final List<String> meds = [];
+    for (var i = 0; i < medicineList.length; i++) {
+      meds.add(medicineList[i].text);
+    }
+    return meds;
+  }
+
+  // * Flatten the List<List<bool>> -> 1s and 0s
+  String processedMedicineStats(List<List<bool>> medicineStats) {
+    final buffer = StringBuffer();
+    for (var i = 0; i < medicineStats.length; i++) {
+      for (var j = 0; j < 4; j++) {
+        if (medicineStats[i][j] == true) {
+          buffer.write('1 ');
+        } else {
+          buffer.write('0 ');
+        }
+      }
+    }
+    return buffer.toString();
   }
 }
