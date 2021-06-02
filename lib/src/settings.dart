@@ -32,6 +32,22 @@ class _SettingsPageState extends State<SettingsPage> {
   // * Shared prefs
   final _getStorage = GetStorage();
 
+  // Default value
+  @override
+  void initState() {
+    super.initState();
+    if (_getStorage.read('orgnization') == null) {
+      _getStorage.write('orgnization', 'Self');
+    }
+    if (_getStorage.read('isDoc') == null) {
+      _getStorage.write('isDoc', false);
+    }
+    orgnization.text = _getStorage.read('orgnization').toString();
+    isDoctor =
+        // ignore: avoid_bool_literals_in_conditional_expressions
+        _getStorage.read('isDoc').toString() == 'true' ? true : false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +171,7 @@ class _SettingsPageState extends State<SettingsPage> {
               onChanged: (isDoctor) => setState(
                 () {
                   this.isDoctor = isDoctor;
-                  _getStorage.write('isDoctor', isDoctor);
+                  _getStorage.write('isDoc', isDoctor);
                 },
               ),
             ),
