@@ -1,8 +1,10 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 // Pub Dev Imports
 import 'package:health_app/src/functions.dart';
@@ -18,6 +20,10 @@ class PrescriptionCardAdder extends StatefulWidget {
 }
 
 class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
+  final _getStorage = GetStorage();
+  // * Google auth hook
+  final user = FirebaseAuth.instance.currentUser!;
+
   // * List of cards
   List<String> cardList = [
     'Abhijit | xxxx xxxx 0002',
@@ -26,12 +32,30 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
     'Dhruv | xxxx xxxx 0015',
   ];
 
-  //* Details of submitter
-  String nameOfSubmitter = 'Dr. XYZ';
-  String orgOfSubmitter = 'ABC Hospital';
-  bool isSubmitterDoctor = true;
+  // * Details of submitter
+  String name = 'ERR: Unknown User';
+  String orgnization = 'Self';
+  bool isDoctor = false;
 
-  //* Vars for checkbox
+  @override
+  void initState() {
+    super.initState();
+    if (_getStorage.read('orgnization') == null) {
+      _getStorage.write('orgnization', 'Self');
+    }
+    if (_getStorage.read('isDoc') == null) {
+      _getStorage.write('isDoc', false);
+    }
+
+    // * Get details about current user
+    orgnization = _getStorage.read('orgnization').toString();
+    isDoctor =
+        // ignore: avoid_bool_literals_in_conditional_expressions
+        _getStorage.read('isDoc').toString() == 'true' ? true : false;
+    name = user.displayName!;
+  }
+
+  // * Vars for checkbox
   List<List<bool>> medicineStats = [
     [true, true, true, true]
   ]; // [before and after food toggle, morning, afternoon, night] :: [[0,1,2,3]]
@@ -71,6 +95,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            foregroundColor: Colors.white,
             backgroundColor: Colors.red,
             onPressed: () {
               if (_countMedicine == 1) {
@@ -86,6 +111,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
             width: 10,
           ),
           FloatingActionButton(
+            foregroundColor: Colors.white,
             backgroundColor: Colors.green,
             onPressed: () {
               _addItem();
@@ -168,18 +194,26 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                   // * Date
                   Text(
                     formattedDate(),
-                    style: const TextStyle(fontSize: 12),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w200),
+                  ),
+
+                  // * Prescribed by
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Prescribed by',
+                    style: TextStyle(fontSize: 12),
                   ),
 
                   // * Name of submitter + icon
                   Row(
                     children: [
                       Text(
-                        nameOfSubmitter,
-                        style: const TextStyle(fontSize: 24),
+                        name,
+                        style: const TextStyle(fontSize: 20),
                       ),
                       const Spacer(),
-                      if (isSubmitterDoctor)
+                      if (isDoctor)
                         const Icon(
                           Icons.verified,
                           size: 40,
@@ -195,7 +229,7 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
                   ),
                   // * Orgnization of submitter
                   Text(
-                    orgOfSubmitter,
+                    'Orgnization: $orgnization',
                     style: const TextStyle(fontSize: 12),
                   ),
 
