@@ -1,9 +1,12 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Imports
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:health_app/src/functions.dart';
 
 // Pub Dev Imports
@@ -24,7 +27,7 @@ class CreateNotesPage extends StatefulWidget {
 
 class _CreateNotesPageState extends State<CreateNotesPage> {
   // * Variables
-  double temp = 36.5;
+  double temp = 97.7;
   TextEditingController textTemp = TextEditingController();
   TextEditingController weight = TextEditingController();
   TextEditingController height = TextEditingController();
@@ -33,6 +36,13 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
   String description = '## Symptoms\n---\n* \n* \n\n## Notes\n---\n* \n* \n';
   final String _markdownURL = 'https://www.markdownguide.org/cheat-sheet/';
 
+  final _getStorage = GetStorage();
+
+  // * Google hooks
+  final user = FirebaseAuth.instance.currentUser!;
+  final CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('notes');
+
   List<String> cardList = [
     'Abhijit | xxxx xxxx 0002',
     'Abhishek | xxxx xxxx 0003',
@@ -40,6 +50,21 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
     'Dhruv | xxxx xxxx 0015',
   ];
   int _selectedCard = 0;
+
+  // * Details of submitter
+  String name = 'ERR: Unknown User';
+  String orgnization = 'Self';
+  bool isDoctor = false;
+  @override
+  void initState() {
+    super.initState();
+    // * Get details about current user
+    orgnization = _getStorage.read('orgnization').toString();
+    isDoctor =
+        // ignore: avoid_bool_literals_in_conditional_expressions
+        _getStorage.read('isDoc').toString() == 'true' ? true : false;
+    name = user.displayName!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,8 +174,8 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                               flex: 9,
                               child: SfLinearGauge(
                                 // * Range
-                                minimum: 35,
-                                maximum: 39,
+                                minimum: 95,
+                                maximum: 103,
 
                                 // * Triangle Marker + Text Display
                                 markerPointers: [
@@ -178,13 +203,13 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                                       height: 60,
                                       child: Center(
                                         child: Text(
-                                          '${temp.toStringAsFixed(1)} °C',
+                                          '${temp.toStringAsFixed(1)} °F',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 11,
-                                              color: temp < 36.1
+                                              color: temp < 97
                                                   ? Colors.blue
-                                                  : temp < 37.2
+                                                  : temp < 98.7
                                                       ? Colors.green
                                                       : Colors.red),
                                         ),
@@ -194,9 +219,9 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                                 ],
 
                                 // * Gradient Axis
-                                axisTrackStyle: LinearAxisTrackStyle(
+                                axisTrackStyle: const LinearAxisTrackStyle(
                                   thickness: 18,
-                                  gradient: const LinearGradient(
+                                  gradient: LinearGradient(
                                     colors: [
                                       Colors.blue,
                                       Colors.green,
@@ -221,13 +246,13 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                                 controller: textTemp,
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelText: '°C',
-                                  hintText: '36.5',
+                                  labelText: '°F',
+                                  hintText: '97.7',
                                 ),
                                 onSubmitted: (value) {
                                   if (value == '' || value == '-') {
-                                    textTemp.text = '36.0';
-                                    setState(() => temp = 36.0);
+                                    textTemp.text = '97.7';
+                                    setState(() => temp = 97.7);
                                   } else {
                                     temp = double.parse(value);
                                     setState(() {});
@@ -612,7 +637,30 @@ class _CreateNotesPageState extends State<CreateNotesPage> {
                             ),
                             icon: const Icon(Icons.post_add),
                             label: const Text('Create Health Note'),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await collectionReference
+                                  .add({
+                                    'dateTime': DateTime.now(),
+                                    'forUser': cardList[_selectedCard],
+                                    'byUser': name,
+                                    'orgnization': orgnization,
+                                    'isDoctor': isDoctor,
+                                    'temperature': textTemp.text,
+                                    'height': height.text,
+                                    'weight': weight.text,
+                                    'bpS': bpS.text,
+                                    'bpD': bpD.text,
+                                    'note': description,
+                                  })
+                                  .then((value) => infoSnackbar(
+                                      'Success',
+                                      'Your medical note has been added to the database',
+                                      true))
+                                  .catchError((error) => infoSnackbar(
+                                      'Failed to add medical note',
+                                      '$error',
+                                      false));
+                            },
                           ),
                         ),
                       ],
