@@ -44,13 +44,6 @@ class _PrescriptionCardAdderState extends State<PrescriptionCardAdder> {
   @override
   void initState() {
     super.initState();
-    if (_getStorage.read('orgnization') == null) {
-      _getStorage.write('orgnization', 'Self');
-    }
-    if (_getStorage.read('isDoc') == null) {
-      _getStorage.write('isDoc', false);
-    }
-
     // * Get details about current user
     orgnization = _getStorage.read('orgnization').toString();
     isDoctor =

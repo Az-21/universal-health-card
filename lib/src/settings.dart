@@ -36,12 +36,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    if (_getStorage.read('orgnization') == null) {
-      _getStorage.write('orgnization', 'Self');
-    }
-    if (_getStorage.read('isDoc') == null) {
-      _getStorage.write('isDoc', false);
-    }
     orgnization.text = _getStorage.read('orgnization').toString();
     isDoctor =
         // ignore: avoid_bool_literals_in_conditional_expressions
