@@ -156,8 +156,9 @@ class PrescriptionList extends StatefulWidget {
 
 class _PrescriptionListState extends State<PrescriptionList> {
   // * Firestore hook
-  CollectionReference prescriptions =
-      FirebaseFirestore.instance.collection('prescriptions');
+  Query<Map<String, dynamic>> prescriptions = FirebaseFirestore.instance
+      .collection('prescriptions')
+      .orderBy('dateTime', descending: true);
 
   @override
   Widget build(BuildContext context) {
