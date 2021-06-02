@@ -46,13 +46,13 @@ class FetchHealthCardForm extends StatelessWidget {
                   children: [
                     const SizedBox(width: 20),
                     const Icon(
-                      Icons.system_update_alt,
+                      Icons.bluetooth_connected_sharp,
                       color: Colors.white,
                       size: 32,
                     ),
                     const SizedBox(width: 10),
                     const Text(
-                      'Fetch Health Card',
+                      'Scan RFID Health Card',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -67,7 +67,7 @@ class FetchHealthCardForm extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: const Text(
-                    'Add an existing health card to your device.',
+                    'Add an existing health card to your device using RFID health card via Arduino-BT relay.',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -155,9 +155,8 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
             icon: const Icon(Icons.cloud_download),
             label: const Text('Fetch Health Card'),
             onPressed: () {
-              // TODO: validator here -> 4 digit key, 12 digit aadhar...
               // TODO: firebase push here
-              isFirebaseSuccess = true;
+              isFirebaseSuccess = false;
               if (isFirebaseSuccess) {
                 infoSnackbar('Success',
                     'Health card has been added to your device', true);
@@ -167,7 +166,9 @@ class _HealthCardSyncFormState extends State<HealthCardSyncForm> {
                 formAadhar.text = '';
               } else {
                 infoSnackbar(
-                    'Failed', 'Please check your internet connection', false);
+                    'Failed',
+                    'This sub-module is dependant on the Bluetooth relay from the Arduino-BT interface. Without the actual hardware, it is not possible to code and debug this section.\n\nSo, unfortunately, we weren\'t able to implement this functionality.',
+                    false);
               }
             },
           ),
