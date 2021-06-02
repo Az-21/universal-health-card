@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 // Pub Dev Imports
 import 'package:awesome_card/awesome_card.dart';
+import 'package:get_storage/get_storage.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  * Health Card List
@@ -23,6 +24,9 @@ class _HealthCardPageState extends State<HealthCardPage> {
       .collection('cards')
       .orderBy('name', descending: false);
 
+  // * Shared prefs
+  final _getStorage = GetStorage();
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   //  * Health Card Data
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -36,7 +40,7 @@ class _HealthCardPageState extends State<HealthCardPage> {
   void initState() {
     super.initState();
 
-    // * Default placeholders
+    // * Default placeholders (fallback in case of inactive internet)
     cardNumbers = [
       'xxxx xxxx 0002',
       'xxxx xxxx 0003',
@@ -69,6 +73,21 @@ class _HealthCardPageState extends State<HealthCardPage> {
         List<bool>.filled(cardNumbers.length, false, growable: true);
 
     showBack = showBackInit;
+
+    // * Update local cards cache
+    FirebaseFirestore.instance
+        .collection("cards")
+        .orderBy('name', descending: false)
+        .get()
+        .then((querySnapshot) {
+      final List<String> localCards = [];
+      querySnapshot.docs.forEach((result) {
+        String firstname = result.data()['name'].toString().split(' ')[0];
+        String aadhar = result.data()['aadhar'].toString();
+        localCards.add('$firstname | $aadhar');
+      });
+      _getStorage.write('localCards', localCards);
+    });
   }
 
   @override
