@@ -26,7 +26,7 @@ String formattedDateTime(DateTime time) {
   // MMMM dives the month
   // yyyy gives the year
 
-  return DateFormat('MMMM dd  | ').add_jm().format(time);
+  return DateFormat('MMMM dd, yyyy | ').add_jm().format(time);
 }
 
 // ⸻⸻⸻⸻⸻⸻⸻⸻
