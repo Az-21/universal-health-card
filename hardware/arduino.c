@@ -44,7 +44,7 @@ void loop()
   
   for(i=0;i=100;i++)
   {
-  if (content.substring(1) == rfidtagno[i]) //change here the UID of the card/cards that you want to give access
+  if (content.substring(1) == rfidtag[i]) //change here the UID of the card/cards that you want to give access
   {
     Serial.println("Card Recognized !");
     Serial.println();
