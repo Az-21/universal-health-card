@@ -120,7 +120,7 @@ class NotesCard extends StatelessWidget {
                     children: [
                       MarkdownBody(
                         data:
-                            '## Vitals\n---\n* Temperature: $temp °C\n* Height: $height cm\n* Weight: $weight kg\n* Blood pressure: $bpS / $bpD mmH',
+                            '## Vitals\n---\n* Temperature: $temp °F\n* Height: $height cm\n* Weight: $weight kg\n* Blood pressure: $bpS / $bpD mmH',
                       ),
                     ],
                   ),
