@@ -21,17 +21,6 @@ void loop()
   if (text.length() > 0)
   {
     Serial.println(text);
-
-    if (text == "on")
-    {
-      digitalWrite(13, HIGH);
-      Serial.println("PORT is on");
-    }
-    if (text == "off")
-    {
-      digitalWrite(13, LOW);
-      Serial.println("PORT is off");
-    }
     text = "";
   }
 }
