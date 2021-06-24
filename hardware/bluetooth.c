@@ -1,4 +1,4 @@
-//program for bluetooth controlled led
+//program for sharing data through bluetooth
 
 String text;
 
