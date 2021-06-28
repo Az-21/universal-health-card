@@ -1,10 +1,10 @@
-//program for sharing data through bluetooth
+//program to send data via bluetooth
 
 String text;
 
 void setup()
 {
-  // put your setup code here, to run once:
+  // initial setup code to initialize the pinMode and begin serial 
   pinMode(13, OUTPUT);
   Serial.begin(9600);
 }

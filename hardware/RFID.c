@@ -5,9 +5,8 @@
 #define RST_PIN 9
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 int rfidtag['123456789', '123456654', '1234586723'] #Added the authorized cards here
-
-    void
-    setup()
+    
+void setup()
 {
   Serial.begin(9600); // Initiate a serial communication
   SPI.begin();        // Initiate  SPI bus
