@@ -194,7 +194,7 @@ class _NotesListState extends State<NotesList> {
                 height: MediaQuery.of(context).size.height * 0.9,
                 margin: const EdgeInsets.symmetric(horizontal: 5),
                 child: Swiper(
-                  itemCount: 3,
+                  itemCount: snapshot.data!.docs.length,
                   control: SwiperControl(
                     color: ThemeServie().isSavedDarkMode()
                         ? Colors.white
