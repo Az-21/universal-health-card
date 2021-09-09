@@ -19,6 +19,7 @@
         <img src="https://img.shields.io/badge/Powered%20By-Firebase-%23FFCB2B?style=for-the-badge&logo=firebase" /></a>
 
 ## Try it yourself
+[Testing Duration] The DB is configured to automatically become dormant on September 10, 2021. This means many features will not work after this date.
 
 * [🚀 Launch Website](https://health-card-app.web.app/)
 * [📱 Download Android preview build](https://github.com/Az-21/healthApp/releases)
