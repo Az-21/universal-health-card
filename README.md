@@ -23,3 +23,6 @@
 
 * [🚀 Launch WebApp](https://health-card-app.web.app/) (Firebase takes some time to load on first launch, please be patient)
 * [📱 Download Android App](https://github.com/Az-21/healthApp/releases)
+
+## Known Bug
+You need to open 'Health Cards' module on first launch to enable app to sync users.
