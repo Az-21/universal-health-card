@@ -21,5 +21,5 @@
 ## Try it yourself
 [Testing Duration] The DB is configured to automatically become **dormant on March 1, 2022**. This means many features will not work after this date.
 
-* [🚀 Launch Website](https://health-card-app.web.app/) (Firebase takes some time to load on first launch, please be patient)
-* [📱 Download Android preview build](https://github.com/Az-21/healthApp/releases)
+* [🚀 Launch WebApp](https://health-card-app.web.app/) (Firebase takes some time to load on first launch, please be patient)
+* [📱 Download Android App](https://github.com/Az-21/healthApp/releases)
